@@ -1,0 +1,603 @@
+[
+    {
+        "inputs": [
+            {
+                "internalType": "bytes32",
+                "name": "key",
+                "type": "bytes32"
+            }
+        ],
+        "name": "EnumerableMapNonexistentKey",
+        "type": "error"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "LSP8Address",
+                "type": "address"
+            },
+            {
+                "internalType": "bytes32",
+                "name": "tokenId",
+                "type": "bytes32"
+            },
+            {
+                "internalType": "address",
+                "name": "LSP7Address",
+                "type": "address"
+            },
+            {
+                "internalType": "address",
+                "name": "offerCreator",
+                "type": "address"
+            }
+        ],
+        "name": "_returnLSP7OfferAmount",
+        "outputs": [
+            {
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "LSP8Address",
+                "type": "address"
+            },
+            {
+                "internalType": "bytes32",
+                "name": "tokenId",
+                "type": "bytes32"
+            }
+        ],
+        "name": "_returnLSP7OfferCreators",
+        "outputs": [
+            {
+                "internalType": "address[]",
+                "name": "",
+                "type": "address[]"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "LSP8Address",
+                "type": "address"
+            },
+            {
+                "internalType": "bytes32",
+                "name": "tokenId",
+                "type": "bytes32"
+            },
+            {
+                "internalType": "address",
+                "name": "offersCreator",
+                "type": "address"
+            }
+        ],
+        "name": "_returnLSP7OffersByCreators",
+        "outputs": [
+            {
+                "internalType": "address[]",
+                "name": "",
+                "type": "address[]"
+            },
+            {
+                "internalType": "uint256[]",
+                "name": "",
+                "type": "uint256[]"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "LSP8Address",
+                "type": "address"
+            },
+            {
+                "internalType": "bytes32",
+                "name": "tokenId",
+                "type": "bytes32"
+            }
+        ],
+        "name": "_returnLSP7Prices",
+        "outputs": [
+            {
+                "internalType": "address[]",
+                "name": "",
+                "type": "address[]"
+            },
+            {
+                "internalType": "uint256[]",
+                "name": "",
+                "type": "uint256[]"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "LSP8Address",
+                "type": "address"
+            },
+            {
+                "internalType": "bytes32",
+                "name": "tokenId",
+                "type": "bytes32"
+            }
+        ],
+        "name": "_returnLSP8OfferAddresses",
+        "outputs": [
+            {
+                "internalType": "address[]",
+                "name": "",
+                "type": "address[]"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "LSP8Address",
+                "type": "address"
+            },
+            {
+                "internalType": "bytes32",
+                "name": "tokenId",
+                "type": "bytes32"
+            },
+            {
+                "internalType": "address",
+                "name": "offerLSP8Address",
+                "type": "address"
+            }
+        ],
+        "name": "_returnLSP8OfferTokenIdsByAddress",
+        "outputs": [
+            {
+                "internalType": "bytes32[]",
+                "name": "",
+                "type": "bytes32[]"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "LSP8Address",
+                "type": "address"
+            },
+            {
+                "internalType": "bytes32",
+                "name": "tokenId",
+                "type": "bytes32"
+            }
+        ],
+        "name": "_returnLYXOffers",
+        "outputs": [
+            {
+                "internalType": "address[]",
+                "name": "",
+                "type": "address[]"
+            },
+            {
+                "internalType": "uint256[]",
+                "name": "",
+                "type": "uint256[]"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "LSP8Address",
+                "type": "address"
+            },
+            {
+                "internalType": "bytes32",
+                "name": "tokenId",
+                "type": "bytes32"
+            }
+        ],
+        "name": "_returnLYXPrice",
+        "outputs": [
+            {
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "LSP8Address",
+                "type": "address"
+            },
+            {
+                "internalType": "bytes32",
+                "name": "tokenId",
+                "type": "bytes32"
+            }
+        ],
+        "name": "_returnOfferAlowance",
+        "outputs": [
+            {
+                "internalType": "bool",
+                "name": "",
+                "type": "bool"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "LSP8Address",
+                "type": "address"
+            },
+            {
+                "internalType": "bytes32",
+                "name": "tokenId",
+                "type": "bytes32"
+            },
+            {
+                "internalType": "address",
+                "name": "LSP7Address",
+                "type": "address"
+            },
+            {
+                "internalType": "address",
+                "name": "offerCreator",
+                "type": "address"
+            }
+        ],
+        "name": "acceptLSP7Offer",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "LSP8Address",
+                "type": "address"
+            },
+            {
+                "internalType": "bytes32",
+                "name": "tokenId",
+                "type": "bytes32"
+            },
+            {
+                "internalType": "address",
+                "name": "offerLSP8Address",
+                "type": "address"
+            },
+            {
+                "internalType": "bytes32",
+                "name": "offerTokenId",
+                "type": "bytes32"
+            }
+        ],
+        "name": "acceptLSP8OfferForLSP8",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "LSP8Address",
+                "type": "address"
+            },
+            {
+                "internalType": "bytes32",
+                "name": "tokenId",
+                "type": "bytes32"
+            },
+            {
+                "internalType": "address",
+                "name": "LSP7Address",
+                "type": "address"
+            },
+            {
+                "internalType": "uint256",
+                "name": "LSP7Amount",
+                "type": "uint256"
+            }
+        ],
+        "name": "addLSP7Price",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "LSP8Address",
+                "type": "address"
+            },
+            {
+                "internalType": "bytes32",
+                "name": "tokenId",
+                "type": "bytes32"
+            },
+            {
+                "internalType": "address",
+                "name": "LSP7Address",
+                "type": "address"
+            }
+        ],
+        "name": "buyLSP8WithLSP7",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "LSP8Address",
+                "type": "address"
+            },
+            {
+                "internalType": "bytes32",
+                "name": "tokenId",
+                "type": "bytes32"
+            }
+        ],
+        "name": "buyLSP8WithLYX",
+        "outputs": [],
+        "stateMutability": "payable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "LSP8Address",
+                "type": "address"
+            },
+            {
+                "internalType": "bytes32",
+                "name": "tokenId",
+                "type": "bytes32"
+            },
+            {
+                "internalType": "address",
+                "name": "LSP7Address",
+                "type": "address"
+            },
+            {
+                "internalType": "uint256",
+                "name": "LSP7Amount",
+                "type": "uint256"
+            }
+        ],
+        "name": "changeLSP7Price",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "LSP8Address",
+                "type": "address"
+            },
+            {
+                "internalType": "bytes32",
+                "name": "tokenId",
+                "type": "bytes32"
+            },
+            {
+                "internalType": "uint256",
+                "name": "LYXAmount",
+                "type": "uint256"
+            }
+        ],
+        "name": "changeLYXPrice",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "LSP8Address",
+                "type": "address"
+            },
+            {
+                "internalType": "bytes32",
+                "name": "tokenId",
+                "type": "bytes32"
+            },
+            {
+                "internalType": "address",
+                "name": "LSP7Address",
+                "type": "address"
+            },
+            {
+                "internalType": "uint256",
+                "name": "LSP7Amount",
+                "type": "uint256"
+            }
+        ],
+        "name": "makeLSP7Offer",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "LSP8Address",
+                "type": "address"
+            },
+            {
+                "internalType": "bytes32",
+                "name": "tokenId",
+                "type": "bytes32"
+            },
+            {
+                "internalType": "address",
+                "name": "offerLSP8Address",
+                "type": "address"
+            },
+            {
+                "internalType": "bytes32",
+                "name": "offerTokenId",
+                "type": "bytes32"
+            }
+        ],
+        "name": "offerLSP8ForLSP8",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "LSP8Address",
+                "type": "address"
+            },
+            {
+                "internalType": "bytes32",
+                "name": "tokenId",
+                "type": "bytes32"
+            },
+            {
+                "internalType": "uint256",
+                "name": "LYXAmount",
+                "type": "uint256"
+            },
+            {
+                "internalType": "address[]",
+                "name": "LSP7Addresses",
+                "type": "address[]"
+            },
+            {
+                "internalType": "uint256[]",
+                "name": "LSP7Amounts",
+                "type": "uint256[]"
+            },
+            {
+                "internalType": "bool",
+                "name": "allowedOffers",
+                "type": "bool"
+            }
+        ],
+        "name": "putLSP8OnSale",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "LSP8Address",
+                "type": "address"
+            },
+            {
+                "internalType": "bytes32",
+                "name": "tokenId",
+                "type": "bytes32"
+            },
+            {
+                "internalType": "address",
+                "name": "LSP7Address",
+                "type": "address"
+            }
+        ],
+        "name": "removeLSP7Offer",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "LSP8Address",
+                "type": "address"
+            },
+            {
+                "internalType": "bytes32",
+                "name": "tokenId",
+                "type": "bytes32"
+            }
+        ],
+        "name": "removeLSP8FromSale",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "LSP8Address",
+                "type": "address"
+            },
+            {
+                "internalType": "bytes32",
+                "name": "tokenId",
+                "type": "bytes32"
+            },
+            {
+                "internalType": "address",
+                "name": "offerLSP8Address",
+                "type": "address"
+            },
+            {
+                "internalType": "bytes32",
+                "name": "offerTokenId",
+                "type": "bytes32"
+            }
+        ],
+        "name": "removeLSP8OfferForLSP8",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    }
+]

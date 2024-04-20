@@ -1,0 +1,96 @@
+.button-style{
+    /* background: linear-gradient(45deg, rgba(35, 35, 35, 0.6), rgba(83, 98, 35, 1)); */
+    /* box-shadow: 1px 4px #DBFF00; */
+    border: solid 1px #DBFF00;
+    border-bottom: solid 4px #DBFF00;
+    border-radius: 10px;
+    padding: 6px;
+    
+}
+
+
+
+@media only screen and (max-width: 800px) {
+    .nav-items{
+      display: flex;
+      gap: 1.5rem;
+      
+
+    }
+    .nav-items h1{
+        font-size: small;
+    }
+
+    .nav-btn button{
+
+        font-size: 1rem;
+        padding: 4px;
+    }
+  }
+
+
+
+/* active border navigation  */
+  /* .nav-items a {
+    text-decoration: none;
+    position: relative;
+  }
+
+  .nav-items video{
+    position: absolute;
+  } */
+  
+/* .nav-items a.active::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -2px; 
+  width: 100%;
+  height: 3px;  */
+  /* background: url('../../assets/background/activeBar.mp4'); Replace with your background image */
+  /* background-repeat: repeat-x;
+  
+  }  */
+
+
+  /* .nav-glob a.active::after{
+    content: "";
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 3px; 
+    background-image: url('../../assets/background/activeBargif.gif'); 
+    background-repeat: repeat-x; 
+    
+  } */
+
+
+
+
+
+/* logo animation  */
+
+.logo-mask {
+  background: url("../../assets/background/video.webp");
+  background-size: cover;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: slideBackground 5s steps(1) infinite;
+}
+
+@keyframes slideBackground {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 100% 0;
+  }
+}
+
+
+
+/* 
+.clipped-video {
+  -webkit-clip-path: url(#text-overlay);
+  clip-path: url(#text-overlay);
+} */

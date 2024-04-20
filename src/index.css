@@ -1,0 +1,45 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+@layer base {
+    @font-face {
+      font-family: "SuperLegendBoy";
+      src: url(./assets/fonts/SuperLegendBoy-4w8Y.ttf);
+    }
+  }
+  
+  @font-face {
+    font-family: "twisted";
+    src: url(./assets/fonts/Twisttwist.ttf);
+  }
+
+.container {
+    @apply mx-auto max-w-[1200px] px-2;
+  }  
+
+  
+
+
+.text-gradient-bg {
+    background: -webkit-linear-gradient(120deg, #eff6af,#c8df55f1, #caf00cf1 50%);
+    
+    -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -webkit-text-fill-color: transparent;
+  background-size: 500% auto;
+  animation: textShine 1s ease-in-out infinite alternate;
+  }
+
+  @keyframes textShine {
+    0% {
+      background-position: 0% 50%;
+    }
+    100% {
+      background-position: 100% 50%;
+    }
+  }
+  
+
