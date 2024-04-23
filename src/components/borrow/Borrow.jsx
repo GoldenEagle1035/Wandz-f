@@ -162,7 +162,6 @@ function Borrow() {
                       <th></th>
                     </tr>
                   </thead>
-
                   <tbody>
                     {loans.loans.map((item, index) => (
                       item.amount != 0 && !item.accepted && !item.paid && !item.liquidated &&

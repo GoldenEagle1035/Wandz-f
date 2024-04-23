@@ -7,6 +7,7 @@ import { publicProvider } from "wagmi/providers/public";
 import wandzConfig from "../../wandz.config";
 import { luksoUpWallet } from "./luksoUpWallet/luksoUpWallet";
 import { getTargetNetwork } from "../../utils/wandz-eth/network";
+import luksoModule from "@lukso/web3-onboard-config";
 
 const configuredNetwork = getTargetNetwork();
 
@@ -15,6 +16,7 @@ const enabledChains = configuredNetwork.id === 1 ? [configuredNetwork] : [config
 /**
  * Chains for the app
  */
+
 export const appChains = configureChains(
   enabledChains,
   [
@@ -22,6 +24,7 @@ export const appChains = configureChains(
       apiKey: wandzConfig.alchemyApiKey,
     }),
     publicProvider(),
+    // luksoModule()
   ],
   {
     // We might not need this checkout https://github.com/scaffold-eth/scaffold-eth-2/pull/45#discussion_r1024496359, will test and remove this before merging

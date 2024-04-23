@@ -57,7 +57,7 @@ function Offers() {
             <p className="font-superLagendBoy text-xl max-sm:text-lg text-[#FFFFFF]">
               Once your offer is accepted by a borrower, a secure contract is created, freezing the NFT in their wallet. When the loan ends, you will get paid the total LYX (loan with interest). In the event of a default, you can foreclose, which transfers the collateral NFT to your wallet.
             </p>
-            {loans.loans.filter((loan) => loan.amount != 0).length == 0 && <h1 className="mt-24 font-superLagendBoy text-4xl max-sm:text-lg text-[#FFFFFF]">No active or completed loans.</h1>}
+            {loans.loans.filter((loan) => loan.lender == account.address && loan.amount != 0 && !loan.accepted && !loan.paid && !loan.liquidated).length == 0 && <h1 className="mt-24 font-superLagendBoy text-4xl max-sm:text-lg text-[#FFFFFF]">No active or completed loans.</h1>}
           </div>
           <div className="second-sec py-16 flex flex-col gap-24">
             <div>

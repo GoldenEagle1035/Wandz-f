@@ -10,13 +10,13 @@ export const luksoUpWallet = ({ chains, ...options }) => ({
     chrome: "https://chromewebstore.google.com/detail/universal-profiles/abpickdkkbnbcoepogfhkhennhfhehfn",
     browserExtension: "https://lukso.network",
   },
-  installed: window["lukso"] ? true : undefined,
+  installed: typeof window !== "undefined" && typeof window.lukso !== "undefined" && window["lukso"] ? true : undefined,
   createConnector: () => ({
     connector: new InjectedConnector({
       chains,
       options: {
         name: "Lukso UP",
-        getProvider: () => (window.lukso),
+        getProvider: () => (typeof window !== "undefined" ? window.lukso : undefined),
       },
     }),
   }),
