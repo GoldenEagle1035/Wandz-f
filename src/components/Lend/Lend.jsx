@@ -224,7 +224,7 @@ function Lend() {
         </div>
       }
       {selectedLend != -1 &&
-        <div className={`fixed top-0 left-0 w-[100vw] h-[100vh] flex justify-center items-center bg-[#00000030] backdrop-blur-md p-[20px] z-10`}>
+        <div className={`font-superLagendBoy fixed top-0 left-0 w-[100vw] h-[100vh] flex justify-center items-center bg-[#00000030] backdrop-blur-md p-[20px] z-10`}>
           <div
             className="fixed inset-0 transition-opacity"
             onClick={() => { if (!placeOfferPending) setSelectedLend(-1) }}
