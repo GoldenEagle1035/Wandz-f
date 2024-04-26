@@ -203,7 +203,7 @@ function Borrow() {
         </div>
       </div>
       {selectedLend != -1 &&
-        <div className={`fixed top-0 left-0 w-[100vw] h-[100vh] flex justify-center items-center bg-[#00000030] backdrop-blur-md p-[20px] z-10`}>
+        <div className={`font-superLagendBoy fixed top-0 left-0 w-[100vw] h-[100vh] flex justify-center items-center bg-[#00000030] backdrop-blur-md p-[20px] z-10`}>
           <div
             className="fixed inset-0 transition-opacity"
             onClick={() => { if (!acceptPending && !approvePending) setSelectedLend(-1) }}
@@ -213,21 +213,21 @@ function Borrow() {
               <img className="w-[65px] h-[65px] object-contain rounded-full" src={collections.find((collection) => collection.address == loans.loans[selectedLend].nftAddress).avatar} alt="avatar" />
               <span className="text-[14px] font-[400] text-white">{collections.find((collection) => collection.address == loans.loans[selectedLend].nftAddress).name}</span>
               <div className="flex flex-col items-center bg-[#D9D9D930] border border-[#DBFF0030] rounded-[10px] px-[20px] py-[5px]">
-                <span className="text-[6px] font-[400] text-white">FLOOR</span>
+                <span className="text-[10px] font-[400] text-white">FLOOR</span>
                 <span className="text-[14px] font-[400] text-white">{formatUnits(loans.loans[selectedLend].amount, 18)}</span>
               </div>
             </div>
             <div className="w-full flex gap-[20px] justify-between">
               <div className="flex flex-col items-center">
-                <span className="text-[6px] font-[400] text-white">INTEREST</span>
+                <span className="text-[10px] font-[400] text-white">INTEREST</span>
                 <span className="text-[14px] font-[400] text-[#DBFF00]">{formatUnits(loans.loans[selectedLend].amount * (collections.find((collection) => collection.address == loans.loans[selectedLend].nftAddress).royalty) / 100, 18)}</span>
               </div>
               <div className="flex flex-col items-center">
-                <span className="text-[6px] font-[400] text-white">DURATION</span>
+                <span className="text-[10px] font-[400] text-white">DURATION</span>
                 <span className="text-[14px] font-[400] text-white">{(loans.loans[selectedLend].duration / 86400).toFixed(2)}d</span>
               </div>
               <div className="flex flex-col items-center">
-                <span className="text-[6px] font-[400] text-white">Available to Borrow</span>
+                <span className="text-[10px] font-[400] text-white">Available to Borrow</span>
                 <span className="text-[14px] font-[400] text-white">{formatUnits(loans.loans[selectedLend].amount, 18)}</span>
               </div>
             </div>
@@ -236,8 +236,8 @@ function Borrow() {
                 return (
                   <div onClick={(e) => { onSelectToken(tokenId) }} className={`h-[180px] w-[130px] flex flex-col gap-[5px] items-center bg-[#D9D9D930] border ${Number(selectedTokenId) == Number(tokenId) ? "border-[#DBFF00]" : "border-[#DBFF0030]"}  rounded-[10px] p-[5px] cursor-pointer`}>
                     <img className="flex-1 w-full object-cover object-center" src={LendDlgBanner} alt="" />
-                    <span className="text-[6px] text-white">{collections.find((collection) => collection.address == loans.loans[selectedLend].nftAddress).name}</span>
-                    <span className="text-[6px] text-white">#{Number(tokenId)}</span>
+                    <span className="text-[10px] text-white">{collections.find((collection) => collection.address == loans.loans[selectedLend].nftAddress).name}</span>
+                    <span className="text-[10px] text-white">#{Number(tokenId)}</span>
                   </div>
                 )
               })}
