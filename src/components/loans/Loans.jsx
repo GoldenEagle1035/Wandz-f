@@ -151,7 +151,7 @@ function Loans() {
                   </h1>
                   <div className="flex flex-col justify-between mt-4">
                     <h1 className="flex gap-1">
-                      <span className="text-4xl">{loans.loans.filter((loan) => loan.borrower == account.address && loan.accepted && !loan.paid && !loan.liquidated).length} loans</span>
+                      <span className="text-3xl">{loans.loans.filter((loan) => loan.borrower == account.address && loan.accepted && !loan.paid && !loan.liquidated).length} loans</span>
                       {/* <span>{item.price}</span> */}
                     </h1>
                     {/* <span className="text-[10px]">{item.statusValue} {item.status}</span> */}
@@ -164,10 +164,10 @@ function Loans() {
                   <div className="flex flex-col justify-between mt-6">
                     <h1 className="flex flex-col gap-1">
                       <p className="flex gap-3 items-center">
-                        <span className="text-4xl">Ŀ </span>
-                        <span className="text-2xl">{formatUnits(loans.loans.filter((loan) => loan.borrower == account.address && loan.accepted && !loan.paid && !loan.liquidated).reduce((total, loan) => total + loan.amount, 0), 18)}</span>
+                        <span className="text-xl">{formatUnits(loans.loans.filter((loan) => loan.borrower == account.address && loan.accepted && !loan.paid && !loan.liquidated).reduce((total, loan) => total + loan.amount, 0), 18)}</span>
+                        <span className="text-3xl">LYX</span>
                       </p>
-                      <span className="text-sm">Ŀ {!account.address || isLoading || isError || balance == null ? 0 : balance.toFixed(2)} in wallet</span>
+                      <span className="text-sm">{!account.address || isLoading || isError || balance == null ? 0 : balance.toFixed(2)} LYX in wallet</span>
                     </h1>
                     {/* <span className="text-[10px]">{item.statusValue} {item.status}</span> */}
                   </div>
@@ -179,8 +179,8 @@ function Loans() {
                   </h1>
                   <div className="flex flex-col justify-between mt-4">
                     <p className="flex gap-3 items-center">
-                      <span className="text-4xl">Ŀ </span>
-                      <span className="text-2xl">{formatUnits(loans.loans.filter((loan) => loan.borrower == account.address && loan.accepted && !loan.paid && !loan.liquidated).reduce((total, loan) => total + loan.amount * (loan.interest - 100) / 100, 0), 18)}</span>
+                      <span className="text-xl">{formatUnits(loans.loans.filter((loan) => loan.borrower == account.address && loan.accepted && !loan.paid && !loan.liquidated).reduce((total, loan) => total + loan.amount * (loan.interest - 100) / 100, 0), 18)}</span>
+                      <span className="text-3xl">LYX</span>
                     </p>
                   </div>
                 </div>
@@ -188,7 +188,7 @@ function Loans() {
             </div>
           </div>
           {loans.loans.filter((loan) => loan.borrower == account.address && loan.accepted && !loan.paid && !loan.liquidated).length != 0 &&
-            <div className="font-superLagendBoy flex flex-col gap-[20px] rounded-[30px] bg-[#383D7257] backdrop-blur-sm p-[30px]">
+            <div className="font-superLagendBoy flex flex-col gap-[20px] rounded-[30px] bg-[#383D7257] bg-[#45291D50] backdrop-blur-xl p-[30px]">
               <div className="flex items-center gap-[10px]">
                 <span className="w-1/6 text-[16px] font-bold text-white">COLLECTION</span>
                 <span className="w-1/6 text-[16px] font-bold text-white">BORROWED</span>

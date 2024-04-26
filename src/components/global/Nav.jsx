@@ -84,7 +84,7 @@ function Nav({ btnText }) {
                       >{link}</a>
                     </NavLink>
                     {location.pathname === `/${link}` && (
-                      <img src={Bg} className="h-[4px] w-full object-cover"></img>
+                      <div className="h-[4px] w-full bg-[#DBFF00]" />
                       // <video
                       //   className="h-[4px] w-full object-cover"
                       //   src={Bg}

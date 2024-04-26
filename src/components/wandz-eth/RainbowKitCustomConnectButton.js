@@ -42,7 +42,7 @@ export const RainbowKitCustomConnectButton = () => {
                 return (
                   <button className="relative button-style bg-gradient-to-t from-[#c6e3076e] to-[#ddff0000] border border-[#DBFF00] px-4 py-2 bor"
                     style={{ position: "relative", overflow: "hidden" }} onClick={openConnectModal} type="button">
-                    CONNECT WALLET
+                    Select Profile
                   </button>
                 );
               }

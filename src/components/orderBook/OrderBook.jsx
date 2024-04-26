@@ -75,8 +75,8 @@ function OrderBook() {
                   </h1>
                   <div className="flex flex-col justify-between mt-4">
                     <h1 className="flex gap-2 items-center">
-                      <span className="text-3xl">Ŀ</span>
                       <span className="text-xl">{loans.loans.filter((loan) => loan.amount != 0 && !loan.accepted && loan.paid && !loan.liquidated).reduce((total, loan) => total + loan.amount * (loan.interest - 100), 0)}</span>
+                      <span className="text-3xl">LYX</span>
                     </h1>
                     <span className="text-[10px]">{loans.loans.filter((loan) => loan.amount != 0 && !loan.accepted && loan.paid && !loan.liquidated).length} completed loans</span>
                   </div>
@@ -87,8 +87,8 @@ function OrderBook() {
                   </h1>
                   <div className="flex flex-col justify-between mt-4">
                     <h1 className="flex gap-2 items-center">
-                      <span className="text-3xl">Ŀ</span>
                       <span className="text-xl">{formatUnits(loans.loans.filter((loan) => loan.amount != 0 && loan.accepted && !loan.paid && !loan.liquidated).reduce((total, loan) => total + loan.amount, 0), 18)}</span>
+                      <span className="text-3xl">LYX</span>
                     </h1>
                     <span className="text-[10px]">{loans.loans.filter((loan) => loan.amount != 0 && loan.accepted && !loan.paid && !loan.liquidated).length} active loans</span>
                   </div>
@@ -99,8 +99,8 @@ function OrderBook() {
                   </h1>
                   <div className="flex flex-col justify-between mt-4">
                     <h1 className="flex gap-2 items-center">
-                      <span className="text-3xl">Ŀ</span>
                       <span className="text-xl">{formatUnits(loans.loans.filter((loan) => loan.accepted).reduce((total, loan) => total + loan.amount, 0), 18)}</span>
+                      <span className="text-3xl">LYX</span>
                     </h1>
                     <span className="text-[10px]">{loans.loans.filter((loan) => loan.accepted).length} accepted loans</span>
                   </div>

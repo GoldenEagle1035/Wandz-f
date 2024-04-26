@@ -108,8 +108,8 @@ function Offers() {
                   </h1>
                   <div className="flex flex-col justify-between mt-4">
                     <h1 className="flex gap-2 items-center">
-                      <span className="text-3xl">Ŀ</span>
                       <span className="text-xl">{loans.loans.filter((loan) => loan.amount != 0 && !loan.accepted && loan.paid && !loan.liquidated).reduce((total, loan) => total + loan.amount * (loan.interest - 100), 0)}</span>
+                      <span className="text-3xl">LYX</span>
                     </h1>
                     <span className="text-[10px]">{loans.loans.filter((loan) => loan.amount != 0 && !loan.accepted && loan.paid && !loan.liquidated).length} completed loans</span>
                   </div>
@@ -121,21 +121,21 @@ function Offers() {
                   </h1>
                   <div className="flex flex-col justify-between mt-4">
                     <h1 className="flex gap-2 items-center">
-                      <span className="text-3xl">Ŀ</span>
                       <span className="text-xl">{formatUnits(loans.loans.filter((loan) => loan.amount != 0 && loan.accepted && !loan.paid && !loan.liquidated).reduce((total, loan) => total + loan.amount, 0), 18)}</span>
+                      <span className="text-3xl">LYX</span>
                     </h1>
                     <span className="text-[10px]">{loans.loans.filter((loan) => loan.amount != 0 && loan.accepted && !loan.paid && !loan.liquidated).length} active loans</span>
                   </div>
                 </div>
 
-                <div className="text-[#FFFFFF] rounded-lg border border-[#DBFF00] border-b-[6px] font-superLagendBoy backdrop-blur-3xl p-6 py-6 pr-10 flex flex-col">
+                <div className="text-[#FFFFFF] rounded-lg border border-[#DBFF00] border-b-[6px] font-superLagendBoy bg-[#45291D50] backdrop-blur-xl p-6 py-6 pr-10 flex flex-col">
                   <h1 className="text-[10px]">
                     TOTAL OFFER VALUE
                   </h1>
                   <div className="flex flex-col justify-between mt-4">
                     <h1 className="flex gap-2 items-center">
-                      <span className="text-3xl">Ŀ</span>
                       <span className="text-xl">{formatUnits(loans.loans.filter((loan) => loan.amount != 0 && !loan.accepted && !loan.paid && !loan.liquidated).reduce((total, loan) => total + loan.amount, 0), 18)}</span>
+                      <span className="text-3xl">LYX</span>
                     </h1>
                     <span className="text-[10px]">{loans.loans.filter((loan) => loan.amount != 0 && !loan.accepted && !loan.paid && !loan.liquidated).length} offers</span>
                   </div>
