@@ -193,7 +193,7 @@ function Lend() {
         </div>
       </div>
       {showAddDlg &&
-        <div className={`fixed top-0 left-0 w-[100vw] h-[100vh] flex justify-center items-center bg-[#00000030] backdrop-blur-md p-[20px] z-10`}>
+        <div className={`font-superLagendBoy fixed top-0 left-0 w-[100vw] h-[100vh] flex justify-center items-center bg-[#00000030] backdrop-blur-md p-[20px] z-10`}>
           <div
             className="fixed inset-0 transition-opacity"
             onClick={() => { if (!addLoanPending) setShowAddDlg(false) }}
@@ -237,34 +237,34 @@ function Lend() {
             </div>
             <div className="w-full flex gap-[20px] justify-between">
               <div className="flex flex-col items-center">
-                <span className="text-[6px] font-[400] text-white">APY</span>
+                <span className="text-[10px] font-[400] text-white">APY</span>
                 <span className="text-[14px] font-[400] text-[#DBFF00]">{collections[selectedLend].interest}%</span>
               </div>
               <div className="flex flex-col items-center">
-                <span className="text-[6px] font-[400] text-white">DURATION</span>
+                <span className="text-[10px] font-[400] text-white">DURATION</span>
                 <span className="text-[14px] font-[400] text-white">{(collections[selectedLend].duration / 86400).toFixed(2)}d</span>
               </div>
               <div className="flex flex-col items-center">
-                <span className="text-[6px] font-[400] text-white">FLOOR</span>
+                <span className="text-[10px] font-[400] text-white">FLOOR</span>
                 <span className="text-[14px] font-[400] text-white">{collections[selectedLend].bestOffer}</span>
               </div>
             </div>
             <div className="w-full flex gap-[10px] justify-between">
               <div className="flex flex-col">
-                <span className="text-[20px] font-bold text-white">Offer Amount</span>
-                <input value={offerAmount} onChange={(e) => { setOfferAmount(e.target.value); setTotalInvest((Number(e.target.value) * numberOffers).toString()) }} placeholder="0" className="w-[120px] text-[20px] text-white bg-[#D9D9D930] border border-[#DBFF0030] rounded-[10px] focus:outline-none px-[20px] py-[5px]" />
+                <span className="text-[14px] font-bold text-white">Offer Amount</span>
+                <input value={offerAmount} onChange={(e) => { setOfferAmount(e.target.value); setTotalInvest((Number(e.target.value) * numberOffers).toString()) }} placeholder="0" className="w-[120px] text-[14px] text-white bg-[#D9D9D930] border border-[#DBFF0030] rounded-[10px] focus:outline-none px-[20px] py-[5px]" />
               </div>
               <div className="flex flex-col">
-                <span className="text-[20px] font-bold text-white">Total Invest</span>
-                <input disabled={true} value={totalInvest} placeholder="0" className="w-[120px] text-[20px] text-white bg-[#D9D9D930] border border-[#DBFF0030] rounded-[10px] focus:outline-none px-[20px] py-[5px]" />
+                <span className="text-[14px] font-bold text-white">Total Invest</span>
+                <input disabled={true} value={totalInvest} placeholder="0" className="w-[120px] text-[14px] text-white bg-[#D9D9D930] border border-[#DBFF0030] rounded-[10px] focus:outline-none px-[20px] py-[5px]" />
               </div>
             </div>
             <div className="w-full flex flex-col">
-              <span className="text-[20px] font-bold text-white">Number of offers</span>
+              <span className="text-[14px] font-bold text-white">Number of offers</span>
               <div className="flex gap-[10px] justify-between">
-                <button onClick={(e) => { setNumberOffers(1); setTotalInvest((Number(offerAmount)).toString()); }} className={`text-[20px] ${numberOffers == 1 ? "text-[#DBFF00]" : "text-white"} bg-[#D9D9D930] border ${numberOffers == 1 ? "border-[#DBFF00]" : "border-[#DBFF0030]"} rounded-[10px] focus:outline-none px-[20px] py-[5px]`}>1</button>
-                <button onClick={(e) => { setNumberOffers(2); setTotalInvest((Number(offerAmount) * 2).toString()); }} className={`text-[20px] ${numberOffers == 2 ? "text-[#DBFF00]" : "text-white"} bg-[#D9D9D930] border ${numberOffers == 2 ? "border-[#DBFF00]" : "border-[#DBFF0030]"} rounded-[10px] focus:outline-none px-[20px] py-[5px]`}>2</button>
-                <button onClick={(e) => { setNumberOffers(4); setTotalInvest((Number(offerAmount) * 4).toString()); }} className={`text-[20px] ${numberOffers == 4 ? "text-[#DBFF00]" : "text-white"} bg-[#D9D9D930] border ${numberOffers == 4 ? "border-[#DBFF00]" : "border-[#DBFF0030]"} rounded-[10px] focus:outline-none px-[20px] py-[5px]`}>4</button>
+                <button onClick={(e) => { setNumberOffers(1); setTotalInvest((Number(offerAmount)).toString()); }} className={`text-[14px] ${numberOffers == 1 ? "text-[#DBFF00]" : "text-white"} bg-[#D9D9D930] border ${numberOffers == 1 ? "border-[#DBFF00]" : "border-[#DBFF0030]"} rounded-[10px] focus:outline-none px-[20px] py-[5px]`}>1</button>
+                <button onClick={(e) => { setNumberOffers(2); setTotalInvest((Number(offerAmount) * 2).toString()); }} className={`text-[14px] ${numberOffers == 2 ? "text-[#DBFF00]" : "text-white"} bg-[#D9D9D930] border ${numberOffers == 2 ? "border-[#DBFF00]" : "border-[#DBFF0030]"} rounded-[10px] focus:outline-none px-[20px] py-[5px]`}>2</button>
+                <button onClick={(e) => { setNumberOffers(4); setTotalInvest((Number(offerAmount) * 4).toString()); }} className={`text-[14px] ${numberOffers == 4 ? "text-[#DBFF00]" : "text-white"} bg-[#D9D9D930] border ${numberOffers == 4 ? "border-[#DBFF00]" : "border-[#DBFF0030]"} rounded-[10px] focus:outline-none px-[20px] py-[5px]`}>4</button>
               </div>
             </div>
             <div className="w-full flex justify-center">
