@@ -152,7 +152,7 @@ function Loans() {
                   <div className="flex flex-col justify-between mt-4">
                     <p className="flex gap-3 items-center">
                       <span className="text-4xl">Ŀ </span>
-                      <span className="text-2xl">{loans.loans.filter((loan) => loan.borrower == account.address && loan.accepted && !loan.paid && !loan.liquidated).reduce((total, loan) => total + loan.amount * (loan.interest - 100), 0)}</span>
+                      <span className="text-2xl">{formatUnits(loans.loans.filter((loan) => loan.borrower == account.address && loan.accepted && !loan.paid && !loan.liquidated).reduce((total, loan) => total + loan.amount * (loan.interest - 100), 0), 18)}</span>
                     </p>
                   </div>
                 </div>
