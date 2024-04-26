@@ -32,6 +32,7 @@ function Loans() {
   const { balance, isError, isLoading } = useAccountBalance(account.address);
 
   const onExtendOffer = (lendIndex) => {
+    setExtendDays('');
     setIsRepay(false);
     setSelectedLend(lendIndex);
   }
@@ -42,7 +43,7 @@ function Loans() {
       try {
         const result = await loans.extendLoan({
           args: [loans.loans[selectedLend].loanId, 86400 * Number(extendDays)],
-          value: parseEther(formatUnits(loans.loans[selectedLend].amount * (86400 * Number(extendDays)), 18)),
+          value: parseEther(formatUnits(loans.loans[selectedLend].amount * loans.loans[selectedLend].interest / 100 * (86400 * Number(extendDays) / loans.loans[selectedLend].duration), 18)),
           from: account.address
         })
         console.log("extendLoan:", result);
@@ -299,7 +300,7 @@ function Loans() {
             </div>
             <div className="w-full flex flex-col items-center">
                 <span className="text-[14px] font-bold text-white">Extend Days</span>
-                <input value={extendDays} onChange={(e) => { setExtendDays(e.target.value) }} placeholder="0" className="w-[120px] text-[14px] text-white bg-[#D9D9D930] border border-[#DBFF0030] rounded-[10px] focus:outline-none px-[20px] py-[5px]" />
+                <input type='number' value={extendDays} onChange={(e) => { setExtendDays(e.target.value) }} placeholder="0" className="w-[120px] text-[14px] text-white bg-[#D9D9D930] border border-[#DBFF0030] rounded-[10px] focus:outline-none px-[20px] py-[5px]" />
               </div>
             <div className="w-full flex justify-center">
               <button disabled={extendPending} onClick={(e) => { extendOffer() }} className="bg-gradient-to-r from-[#159F2C] text-black px-6 py-2 max-sm:text-[11px] max-sm:px-4 rounded-lg to-[#DBFF00]">
