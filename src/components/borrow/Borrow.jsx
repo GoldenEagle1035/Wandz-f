@@ -29,6 +29,8 @@ function Borrow() {
   const [acceptPending, setAcceptPending] = useState(false);
   const [approvePending, setApprovePending] = useState(false);
 
+  const [searchValue, setSearchValue] = useState('');
+
   const account = useAccount();
 
   const loans = useLoans();
@@ -131,11 +133,13 @@ function Borrow() {
               </p>
             </div>
             <div className="table-sec">
-              <div className="sf flex justify-between items-center max-sm:flex max-sm:flex-col max-sm:gap-2 max-sm:items-start">
+              <div className="sf flex justify-start items-center max-sm:flex max-sm:flex-col max-sm:gap-2 max-sm:items-start">
                 <div className="relative">
                   <input
                     type="text"
                     placeholder="Search here"
+                    value={searchValue}
+                    onChange={(e) => setSearchValue(e.target.value)}
                     className="font-superLagendBoy bg-transparent placeholder-white text-white border border-[#DBFF00] rounded-lg py-1 pl-10"
                   />
                   <FiSearch
@@ -143,12 +147,12 @@ function Borrow() {
                     size={20}
                   />
                 </div>
-                <div className="filters">
+                {/* <div className="filters">
                   <button className="flex font-superLagendBoy text-white  gap-2 justify-center border border-[#DBFF00] rounded-lg p-1 px-2">
                     <img src={Filter} alt="filter-option" />
                     <h1 className="text-sm">Filter</h1>
                   </button>
-                </div>
+                </div> */}
               </div>
               <div className="px-6 overflow-x-auto backdrop-blur-xl text-left font-superLagendBoy text-[#FFFFFF] my-12 rounded-xl border-none">
                 <table className="w-full p-10">
@@ -164,7 +168,7 @@ function Borrow() {
                   </thead>
                   <tbody>
                     {loans.loans.map((item, index) => (
-                      item.amount != 0 && !item.accepted && !item.paid && !item.liquidated &&
+                      item.amount != 0 && !item.accepted && !item.paid && !item.liquidated && collections.find((collection) => collection.address == item.nftAddress).name.includes(searchValue) &&
                       <tr className=" py-10 border-b-[1px] border-[#a9a9a9d8] max-sm:px-4  ">
                         <td className="p-4 pl-4 flex gap-2 items-center max-sm:text-[11px] max-sm:px-4">
                           <span className="max-sm:w-6 ">

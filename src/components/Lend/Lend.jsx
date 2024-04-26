@@ -30,6 +30,8 @@ function Lend() {
   const [numberOffers, setNumberOffers] = useState(1);
   const [placeOfferPending, setPlaceOfferPending] = useState(false);
 
+  const [searchValue, setSearchValue] = useState('');
+
   const account = useAccount();
 
   const loans = useLoans();
@@ -84,7 +86,7 @@ function Lend() {
             collections[selectedLend].address,
             collections[selectedLend].duration,
             parseEther(offerAmount, "wei"),
-            collections[selectedLend].interest,            
+            collections[selectedLend].interest,
             numberOffers
           ],
           value: parseEther(totalInvest),
@@ -118,11 +120,13 @@ function Lend() {
               </p>
             </div>
             <div className="table-sec">
-              <div className="sf flex justify-between items-center max-sm:flex max-sm:flex-col max-sm:gap-2 max-sm:items-start">
+              <div className="sf flex justify-start items-center max-sm:flex max-sm:flex-col max-sm:gap-2 max-sm:items-start">
                 <div className="relative">
                   <input
                     type="text"
                     placeholder="Search here"
+                    value={searchValue}
+                    onChange={(e) => setSearchValue(e.target.value)}
                     className="font-superLagendBoy bg-transparent placeholder-white text-white border border-[#DBFF00] rounded-lg py-1 pl-10"
                   />
                   <FiSearch
@@ -130,13 +134,12 @@ function Lend() {
                     size={20}
                   />
                 </div>
-                <div className="filters flex gap-[20px] items-center">
-                  {/*account.address == loans.adminAddress && <button onClick={(e) => { onAddLend() }} className="bg-gradient-to-r from-[#159F2C] text-black px-6 py-2 max-sm:text-[11px] max-sm:px-4 rounded-lg to-[#DBFF00]">ADD</button> */}
+                {/* <div className="filters flex gap-[20px] items-center">
                   <button className="flex font-superLagendBoy text-white  gap-2 justify-center border border-[#DBFF00] rounded-lg p-1 px-2">
                     <img src={Filter} alt="filter-option" />
                     <h1 className="text-sm">Filter</h1>
                   </button>
-                </div>
+                </div> */}
               </div>
               <div className="px-6 overflow-x-auto backdrop-blur-xl text-left font-superLagendBoy text-[#FFFFFF] my-12 rounded-xl border-none">
                 <table className="w-full p-10">
@@ -152,34 +155,36 @@ function Lend() {
                   </thead>
 
                   <tbody>
-                    {collections.map((item, index) => (
-                      <tr className=" py-10 border-b-[1px] max-sm:px-4 border-[#a9a9a9d8]  ">
-                        <td className="p-4 pl-4 max-sm:px-4 flex gap-2 items-center max-sm:text-[11px]">
-                          <span className="max-sm:w-6">
-                            <img src={item.avatar} alt="" />
-                          </span>
-                          {item.name}
-                        </td>
-                        <td className=" pl-4 max-sm:text-[11px] max-sm:px-4">
-                          <span className="text-lg mr-1">Ŀ</span>0
+                    {collections.map((item, index) => {
+                      return (
+                        item.name.includes(searchValue) && <tr className=" py-10 border-b-[1px] max-sm:px-4 border-[#a9a9a9d8]  ">
+                          <td className="p-4 pl-4 max-sm:px-4 flex gap-2 items-center max-sm:text-[11px]">
+                            <span className="max-sm:w-6">
+                              <img src={item.avatar} alt="" />
+                            </span>
+                            {item.name}
+                          </td>
+                          <td className=" pl-4 max-sm:text-[11px] max-sm:px-4">
+                            <span className="text-lg mr-1">Ŀ</span>0
+                            <br />
+                            <span className="text-[9px]  max-sm:text-[8px] text-[#B5B5B5]">
+                              0 of 0 offers taken
+                            </span>
+                          </td>
+                          <td className="max-sm:text-[11px] pl-4 max-sm:px-4">
+                            <span className="text-lg mr-1">Ŀ</span>{formatUnits(item.bestOffer, 18)} <br />
+                            <span className="text-[9px] max-sm:text-[8px] text-[#B5B5B5]">
+                              Ŀ 0 last loan taken
+                            </span>{" "}
+                          </td>
+                          <td className="max-sm:text-[11px] pl-4 max-sm:px-4">{item.interest}%</td>
+                          <td className="ml-6 max-sm:text-[11px] pl-4 max-sm:px-4">{(item.duration / 86400).toFixed(2)}d</td>
+                          <td><button onClick={(e) => { onPlaceOffer(index) }} className="bg-gradient-to-r from-[#159F2C] text-black px-6 py-2 max-sm:text-[11px] max-sm:px-4 rounded-lg to-[#DBFF00]">LEND</button></td>
                           <br />
-                          <span className="text-[9px]  max-sm:text-[8px] text-[#B5B5B5]">
-                            0 of 0 offers taken
-                          </span>
-                        </td>
-                        <td className="max-sm:text-[11px] pl-4 max-sm:px-4">
-                          <span className="text-lg mr-1">Ŀ</span>{formatUnits(item.bestOffer, 18)} <br />
-                          <span className="text-[9px] max-sm:text-[8px] text-[#B5B5B5]">
-                            Ŀ 0 last loan taken
-                          </span>{" "}
-                        </td>
-                        <td className="max-sm:text-[11px] pl-4 max-sm:px-4">{item.interest}%</td>
-                        <td className="ml-6 max-sm:text-[11px] pl-4 max-sm:px-4">{(item.duration / 86400).toFixed(2)}d</td>
-                        <td><button onClick={(e) => { onPlaceOffer(index) }} className="bg-gradient-to-r from-[#159F2C] text-black px-6 py-2 max-sm:text-[11px] max-sm:px-4 rounded-lg to-[#DBFF00]">LEND</button></td>
-                        <br />
 
-                      </tr>
-                    ))}
+                        </tr>
+                      )
+                    })}
                   </tbody>
                 </table>
               </div>
