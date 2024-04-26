@@ -30,6 +30,12 @@ export const useLoans = () => {
         args: [
         ],
     })
+
+    const { writeAsync: extendLoan } = useContractWrite({
+        address: lendAddress,
+        abi: lendAbi,
+        functionName: 'extendLoan',
+    })
     
     const { writeAsync: liquidateLoan } = useContractWrite({
         address: lendAddress,
@@ -114,5 +120,5 @@ export const useLoans = () => {
         }
     }, [loanIdCounter, refetch])
 
-    return { adminAddress, loans, loanIdCounter, offerLoan, revokeLoan, acceptLoan, repayLoan, liquidateLoan };
+    return { adminAddress, loans, loanIdCounter, offerLoan, revokeLoan, acceptLoan, repayLoan, liquidateLoan, extendLoan };
 };
