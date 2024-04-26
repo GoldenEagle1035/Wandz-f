@@ -4,7 +4,7 @@ export const collections = [
     {
         name: "LSP8Token",
         avatar: Av,
-        address: "0xB64a1A593830De953Cf0f7D1EE18f02C47b54481",
+        address: "0xE6eBC5BE0f3Ed9f1fbE5a9CcE1CF20059AaFb6cc",
         interest: 120,
         duration: 3600,
         royalty: 12,

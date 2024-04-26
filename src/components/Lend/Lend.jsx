@@ -3,7 +3,7 @@ import VideoBG from "../global/VideoBG";
 import Nav from "../global/Nav";
 import { FiSearch, FiFilter } from "react-icons/fi";
 import Filter from "../../assets/icons/Filter.png";
-import { tableData } from "../data/data";
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 import LendDlgBanner from "../../assets/background/lendDlgBanner.png";
@@ -13,7 +13,6 @@ import { parseEther, formatUnits } from 'viem';
 import { useLoans } from "../../hooks/wandz-eth";
 
 import { collections } from "../../data/collections";
-import Av from "../../assets/background/avatar.png"
 
 function Lend() {
 
@@ -35,10 +34,6 @@ function Lend() {
   const account = useAccount();
 
   const loans = useLoans();
-
-  useEffect(() => {
-    console.log("collections:", collections);
-  }, [])
 
   const onAddLend = () => {
     setAddCollectionAddress('');
@@ -165,16 +160,16 @@ function Lend() {
                             {item.name}
                           </td>
                           <td className=" pl-4 max-sm:text-[11px] max-sm:px-4">
-                            <span className="text-lg mr-1">Ŀ</span>0
+                            <span className="text-lg mr-1">Ŀ {formatUnits(loans.loans.filter((loan) => loan.nftAddress == item.address && loan.amount != 0 && !loan.accepted && !loan.paid && !loan.liquidated).reduce((total, loan) => total + loan.amount, 0), 18)}</span>
                             <br />
                             <span className="text-[9px]  max-sm:text-[8px] text-[#B5B5B5]">
-                              0 of 0 offers taken
+                              {loans.loans.filter((loan) => loan.nftAddress == item.address && loan.accepted).length} of {loans.loans.filter((loan) => loan.nftAddress == item.address).length} offer(s) taken
                             </span>
                           </td>
                           <td className="max-sm:text-[11px] pl-4 max-sm:px-4">
-                            <span className="text-lg mr-1">Ŀ</span>{formatUnits(item.bestOffer, 18)} <br />
+                            <span className="text-lg mr-1">Ŀ</span>{loans.loans.filter((loan) => loan.nftAddress == item.address && loan.amount != 0 && !loan.accepted && !loan.paid && !loan.liquidated).length == 0 ? 0 : formatUnits(loans.loans.filter((loan) => loan.nftAddress == item.address && loan.amount != 0 && !loan.accepted && !loan.paid && !loan.liquidated).sort((a, b) => a.amount - b.amount).at(0).amount, 18)} <br />
                             <span className="text-[9px] max-sm:text-[8px] text-[#B5B5B5]">
-                              Ŀ 0 last loan taken
+                              Ŀ {loans.loans.filter((loan) => loan.nftAddress == item.address && loan.amount != 0 && !loan.accepted && !loan.paid && !loan.liquidated).length == 0 ? 0 :formatUnits(loans.loans.filter((loan) => loan.nftAddress == item.address && loan.amount != 0 && !loan.accepted && !loan.paid && !loan.liquidated).at(loans.loans.filter((loan) => loan.nftAddress == item.address && loan.amount != 0 && !loan.accepted && !loan.paid && !loan.liquidated).length - 1).amount, 18)} last loan
                             </span>{" "}
                           </td>
                           <td className="max-sm:text-[11px] pl-4 max-sm:px-4">{item.interest}%</td>
@@ -232,7 +227,7 @@ function Lend() {
           <div className="min-w-[300px] bg-[#D9D9D930] backdrop-blur-sm flex gap-[20px] flex-col rounded-[10px] p-[10px]" >
             <img className="w-full h-[125px] object-center" src={LendDlgBanner} alt="LendDlgBanner" />
             <div className="w-full flex flex-col gap-[10px] items-center">
-              <img className="w-[65px] h-[65px] object-contain rounded-full -mt-[53px]" src={Av} alt="avatar" />
+              <img className="w-[65px] h-[65px] object-contain rounded-full -mt-[53px]" src={collections[selectedLend].avatar} alt="avatar" />
               <span className="text-[14px] font-[400] text-white">{collections[selectedLend].name}</span>
             </div>
             <div className="w-full flex gap-[20px] justify-between">
@@ -246,7 +241,7 @@ function Lend() {
               </div>
               <div className="flex flex-col items-center">
                 <span className="text-[10px] font-[400] text-white">FLOOR</span>
-                <span className="text-[14px] font-[400] text-white">{collections[selectedLend].bestOffer}</span>
+                <span className="text-[14px] font-[400] text-white">Ŀ {loans.loans.filter((loan) => loan.nftAddress == collections[selectedLend].address && loan.amount != 0 && !loan.accepted && !loan.paid && !loan.liquidated).length == 0 ? 0 : formatUnits(loans.loans.filter((loan) => loan.nftAddress == collections[selectedLend].address && loan.amount != 0 && !loan.accepted && !loan.paid && !loan.liquidated).sort((a, b) => a.amount - b.amount).at(0).amount, 18)}</span>
               </div>
             </div>
             <div className="w-full flex gap-[10px] justify-between">

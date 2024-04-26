@@ -18,7 +18,7 @@ import { useLoans } from "../../hooks/wandz-eth";
 
 import lsp8Abi from '../../lukso/abis/lsp8_abi.json';
 
-const lendAddress = '0x52d74783C95c6CCBb9F80dCF1AC3dB4788AabB6b';
+const lendAddress = '0xa08a897A86Fc50C7b37719c0088C69Cb85ac7A16';
 
 function Borrow() {
 
@@ -214,13 +214,13 @@ function Borrow() {
               <span className="text-[14px] font-[400] text-white">{collections.find((collection) => collection.address == loans.loans[selectedLend].nftAddress).name}</span>
               <div className="flex flex-col items-center bg-[#D9D9D930] border border-[#DBFF0030] rounded-[10px] px-[20px] py-[5px]">
                 <span className="text-[10px] font-[400] text-white">FLOOR</span>
-                <span className="text-[14px] font-[400] text-white">{formatUnits(loans.loans[selectedLend].amount, 18)}</span>
+                <span className="text-[14px] font-[400] text-white">Ŀ {loans.loans.filter((loan) => loan.nftAddress == loans.loans[selectedLend].nftAddress && loan.amount != 0 && !loan.accepted && !loan.paid && !loan.liquidated).length == 0 ? 0 : formatUnits(loans.loans.filter((loan) => loan.nftAddress == loans.loans[selectedLend].nftAddress && loan.amount != 0 && !loan.accepted && !loan.paid && !loan.liquidated).sort((a, b) => a.amount - b.amount).at(0).amount, 18)}</span>
               </div>
             </div>
             <div className="w-full flex gap-[20px] justify-between">
               <div className="flex flex-col items-center">
                 <span className="text-[10px] font-[400] text-white">INTEREST</span>
-                <span className="text-[14px] font-[400] text-[#DBFF00]">{formatUnits(loans.loans[selectedLend].amount * (collections.find((collection) => collection.address == loans.loans[selectedLend].nftAddress).royalty) / 100, 18)}</span>
+                <span className="text-[14px] font-[400] text-[#DBFF00]">Ŀ {formatUnits(loans.loans[selectedLend].amount * (collections.find((collection) => collection.address == loans.loans[selectedLend].nftAddress).royalty) / 100, 18)}</span>
               </div>
               <div className="flex flex-col items-center">
                 <span className="text-[10px] font-[400] text-white">DURATION</span>
@@ -228,7 +228,7 @@ function Borrow() {
               </div>
               <div className="flex flex-col items-center">
                 <span className="text-[10px] font-[400] text-white">Available to Borrow</span>
-                <span className="text-[14px] font-[400] text-white">{formatUnits(loans.loans[selectedLend].amount, 18)}</span>
+                <span className="text-[14px] font-[400] text-white">Ŀ {formatUnits(loans.loans[selectedLend].amount, 18)}</span>
               </div>
             </div>
             <div className="w-full h-[200px] flex flex-wrap gap-[20px] justify-center items-center overflow-y-auto p-[10px]">

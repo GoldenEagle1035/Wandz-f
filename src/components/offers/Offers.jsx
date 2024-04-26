@@ -235,12 +235,12 @@ function Offers() {
               </div>
               <div className="flex flex-col items-center">
                 <span className="text-[10px] font-[400] text-white">FLOOR</span>
-                <span className="text-[14px] font-[400] text-white">{formatUnits(loans.loans[selectedLend].amount, 18)}</span>
+                <span className="text-[14px] font-[400] text-white"><span className="text-[14px] font-[400] text-white">Ŀ {loans.loans.filter((loan) => loan.nftAddress == loans.loans[selectedLend].nftAddress && loan.amount != 0 && !loan.accepted && !loan.paid && !loan.liquidated).length == 0 ? 0 : formatUnits(loans.loans.filter((loan) => loan.nftAddress == loans.loans[selectedLend].nftAddress && loan.amount != 0 && !loan.accepted && !loan.paid && !loan.liquidated).sort((a, b) => a.amount - b.amount).at(0).amount, 18)}</span></span>
               </div>
             </div>
             <div className="w-full flex flex-col gap-[10px]">
-              <span className="text-[14px] font-bold text-white">Status</span>
-              <span className="text-[16px] font-bold text-white">Seeking Borrower</span>
+              <span className="text-[10px] font-bold text-white">Status</span>
+              <span className="text-[14px] font-bold text-white">Seeking Borrower</span>
             </div>
             <div className="w-full flex justify-between items-center">
               <span className="text-[14px] font-bold text-white">Offer Amount</span>
