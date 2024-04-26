@@ -200,7 +200,7 @@ function Loans() {
                 {loans.loans.map((item, index) => (
                   item.borrower == account.address && item.accepted && !item.paid && !item.liquidated && <div className="flex items-center gap-[10px]">
                     <div className="w-1/6 flex gap-[20px] items-center">
-                      <img className="w-[35px] h-[35px] object-contain" src={collections.find((collection) => collection.address == item.nftAddress).avatar} alt="loan" />
+                      <img className="w-[40px] h-[40px] object-contain rounded-full" src={collections.find((collection) => collection.address == item.nftAddress).avatar} alt="loan" />
                       <span className="text-[11px] font-bold text-white">{collections.find((collection) => collection.address == item.nftAddress).name}</span>
                     </div>
                     <div className="w-1/6 flex gap-[5px] items-center">
@@ -272,7 +272,7 @@ function Loans() {
             onClick={() => { if (!extendPending) setSelectedLend(-1) }}
           />
           <div className="w-[300px] bg-[#D9D9D930] backdrop-blur-sm flex gap-[20px] flex-col rounded-[10px] p-[10px]" >
-            <img className="w-full h-[125px] object-center" src={LendDlgBanner} alt="LendDlgBanner" />
+            <img className="w-full h-[125px] object-center" src={collections.find((collection) => collection.address == loans.loans[selectedLend].nftAddress).banner} alt="banner" />
             <div className="w-full flex flex-col gap-[10px] items-center">
               <img className="w-[65px] h-[65px] object-contain rounded-full -mt-[53px]" src={collections.find((collection) => collection.address == loans.loans[selectedLend].nftAddress).avatar} alt="avatar" />
               <span className="text-[14px] font-[400] text-white">{collections.find((collection) => collection.address == loans.loans[selectedLend].nftAddress).name}</span>

@@ -155,7 +155,7 @@ function Lend() {
                         item.name.includes(searchValue) && <tr className=" py-10 border-b-[1px] max-sm:px-4 border-[#a9a9a9d8]  ">
                           <td className="p-4 pl-4 max-sm:px-4 flex gap-2 items-center max-sm:text-[11px]">
                             <span className="max-sm:w-6">
-                              <img src={item.avatar} alt="" />
+                              <img className="w-[40px] h-[40px] object-contain rounded-full" src={item.avatar} alt="" />
                             </span>
                             {item.name}
                           </td>
@@ -225,7 +225,7 @@ function Lend() {
             onClick={() => { if (!placeOfferPending) setSelectedLend(-1) }}
           />
           <div className="min-w-[300px] bg-[#D9D9D930] backdrop-blur-sm flex gap-[20px] flex-col rounded-[10px] p-[10px]" >
-            <img className="w-full h-[125px] object-center" src={LendDlgBanner} alt="LendDlgBanner" />
+            <img className="w-full h-[125px] object-center" src={collections[selectedLend].banner} alt="banner" />
             <div className="w-full flex flex-col gap-[10px] items-center">
               <img className="w-[65px] h-[65px] object-contain rounded-full -mt-[53px]" src={collections[selectedLend].avatar} alt="avatar" />
               <span className="text-[14px] font-[400] text-white">{collections[selectedLend].name}</span>

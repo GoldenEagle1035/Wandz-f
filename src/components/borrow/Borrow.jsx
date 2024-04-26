@@ -7,7 +7,7 @@ import { tableData } from "../data/data";
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSpinner } from "@fortawesome/free-solid-svg-icons";
-import LendDlgBanner from "../../assets/background/lendDlgBanner.png";
+import defaultBanner from "../../assets/banners/default.webp";
 
 import { collections } from "../../data/collections";
 
@@ -172,7 +172,7 @@ function Borrow() {
                       <tr className=" py-10 border-b-[1px] border-[#a9a9a9d8] max-sm:px-4  ">
                         <td className="p-4 pl-4 flex gap-2 items-center max-sm:text-[11px] max-sm:px-4">
                           <span className="max-sm:w-6 ">
-                            <img src={collections.find((collection) => collection.address == item.nftAddress).avatar} alt="" />
+                            <img className="w-[40px] h-[40px] object-contain rounded-full" src={collections.find((collection) => collection.address == item.nftAddress).avatar} alt="" />
                           </span>
                           {collections.find((collection) => collection.address == item.nftAddress).name}
                         </td>
@@ -220,7 +220,7 @@ function Borrow() {
             <div className="w-full flex gap-[20px] justify-between">
               <div className="flex flex-col items-center">
                 <span className="text-[10px] font-[400] text-white">INTEREST</span>
-                <span className="text-[14px] font-[400] text-[#DBFF00]">Ŀ {formatUnits(loans.loans[selectedLend].amount * (collections.find((collection) => collection.address == loans.loans[selectedLend].nftAddress).royalty) / 100, 18)}</span>
+                <span className="text-[14px] font-[400] text-[#DBFF00]">Ŀ {formatUnits(loans.loans[selectedLend].amount * (collections.find((collection) => collection.address == loans.loans[selectedLend].nftAddress).interest) / 100, 18)}</span>
               </div>
               <div className="flex flex-col items-center">
                 <span className="text-[10px] font-[400] text-white">DURATION</span>
@@ -235,7 +235,7 @@ function Borrow() {
               {tokenIds.map((tokenId) => {
                 return (
                   <div onClick={(e) => { onSelectToken(tokenId) }} className={`h-[180px] w-[130px] flex flex-col gap-[5px] items-center bg-[#D9D9D930] border ${Number(selectedTokenId) == Number(tokenId) ? "border-[#DBFF00]" : "border-[#DBFF0030]"}  rounded-[10px] p-[5px] cursor-pointer`}>
-                    <img className="flex-1 w-full object-cover object-center" src={LendDlgBanner} alt="" />
+                    <img className="flex-1 w-full object-cover object-center" src={defaultBanner} alt="" />
                     <span className="text-[10px] text-white">{collections.find((collection) => collection.address == loans.loans[selectedLend].nftAddress).name}</span>
                     <span className="text-[10px] text-white">#{Number(tokenId)}</span>
                   </div>
