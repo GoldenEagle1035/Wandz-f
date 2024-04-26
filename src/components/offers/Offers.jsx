@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import Nav from "../global/Nav";
 import VideoBG from "../global/VideoBG";
 import { MdArrowDownward } from "react-icons/md";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSpinner } from "@fortawesome/free-solid-svg-icons";
+import { CSVLink } from "react-csv";
 import LendDlgBanner from "../../assets/background/lendDlgBanner.png";
 
 import { collections } from "../../data/collections";
@@ -17,6 +18,9 @@ function Offers() {
 
   const [selectedLend, setSelectedLend] = useState(-1);
   const [revokePending, setRevokePending] = useState(false);
+  const [downloadData, setDownloadData] = useState([]);
+
+  const csvRef = useRef(null);
 
   const account = useAccount();
 
@@ -44,6 +48,24 @@ function Offers() {
     }
   }
 
+  const onDownloadCSV = () => {
+    csvRef.current.link.click();
+  }
+
+  useEffect(() => {
+    let data = [];
+    loans.loans.filter((loan) => loan.lender == account.address && loan.amount != 0 && !loan.accepted && !loan.paid && !loan.liquidated).map((loan) => {
+      data.push({
+        COLLECTION: collections.find((collection) => collection.address == loan.nftAddress).name, 
+        Offer: 'Ŀ' + formatUnits(loan.amount, 18),
+        Reward: 'Ŀ' + formatUnits(loan.amount * loan.interest / 100, 18),
+        APY: loan.interest,
+        Status: 'Seeking Borrower'
+      })
+    })
+    setDownloadData(data);
+  }, [loans.loans])
+
   return (
     <>
       <div className="offers-page pb-[30px]">
@@ -63,9 +85,16 @@ function Offers() {
             <div>
               <h1 className=" font-superLagendBoy flex gap-2 text-[#FFFFFF] items-center text-sm">
                 Download history (CSV){" "}
-                <span className="cursor-pointer">
+                <span onClick={(e) => { onDownloadCSV() }} className="cursor-pointer">
                   <MdArrowDownward color="#DBFF00" size={20} />
                 </span>
+                <CSVLink
+                  data={downloadData}
+                  filename="offers_history.csv"
+                  className="hidden"
+                  ref={csvRef}
+                  target="_blank"
+                />
               </h1>
             </div>
 

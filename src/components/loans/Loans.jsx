@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import Nav from "../global/Nav";
 import VideoBG from "../global/VideoBG";
 import { MdArrowDownward } from "react-icons/md";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSpinner } from "@fortawesome/free-solid-svg-icons";
+import { CSVLink } from "react-csv";
 import LendDlgBanner from "../../assets/background/lendDlgBanner.png";
 
 import { collections } from "../../data/collections";
@@ -17,6 +18,9 @@ function Loans() {
 
   const [selectedLend, setSelectedLend] = useState(-1);
   const [repayPending, setRepayPending] = useState(false);
+  const [downloadData, setDownloadData] = useState([]);
+
+  const csvRef = useRef(null);
 
   const account = useAccount();
 
@@ -63,6 +67,23 @@ function Loans() {
     }
   }
 
+  const onDownloadCSV = () => {
+    csvRef.current.link.click();
+  }
+
+  useEffect(() => {
+    let data = [];
+    loans.loans.filter((loan) => loan.borrower == account.address && loan.accepted && !loan.paid && !loan.liquidated).map((loan) => {
+      data.push({
+        COLLECTION: collections.find((collection) => collection.address == loan.nftAddress).name,
+        BORROWED: 'Ŀ' + formatUnits(loan.amount, 18),
+        TERM: Math.abs((loan.durationCounter - Date.now() / 1000) / 86400).toFixed(2) + (loan.durationCounter - Date.now() / 1000) / 86400 >= 0 ? "d Remaining" : "d Passed",
+        REPAYMENT: 'Ŀ' + formatUnits(loan.amount * loan.interest / 100, 18),
+      })
+    })
+    setDownloadData(data);
+  }, [loans.loans])
+
   return (
     <>
       <div className="loans-page pb-[30px]">
@@ -82,9 +103,16 @@ function Loans() {
             <div>
               <h1 className=" font-superLagendBoy flex gap-2 text-[#FFFFFF] items-center text-sm">
                 Download history (CSV){" "}
-                <span className="cursor-pointer">
+                <span onClick={(e) => { onDownloadCSV() }} className="cursor-pointer">
                   <MdArrowDownward color="#DBFF00" size={20} />
                 </span>
+                <CSVLink
+                  data={downloadData}
+                  filename="loans_history.csv"
+                  className="hidden"
+                  ref={csvRef}
+                  target="_blank"
+                />
               </h1>
             </div>
             <div className="boxes max-sm:px-2">
