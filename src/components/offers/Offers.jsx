@@ -171,14 +171,14 @@ function Offers() {
             </div>
           </div>
           {loans.loans.filter((loan) => loan.lender == account.address && loan.amount != 0 && !loan.accepted && !loan.paid && !loan.liquidated).length != 0 &&
-            <div className="flex flex-col gap-[20px] rounded-[30px] bg-[#383D7257] backdrop-blur-sm p-[30px]">
+            <div className="font-superLagendBoy flex flex-col gap-[20px] rounded-[30px] bg-[#383D7257] backdrop-blur-sm p-[30px]">
               <div className="flex items-center gap-[10px]">
                 <span className="w-3/12 text-[16px] font-bold text-white">COLLECTION</span>
                 <span className="w-2/12 text-[16px] font-bold text-white">Offer</span>
                 <span className="w-2/12 text-[16px] font-bold text-white">Reward</span>
-                <span className="w-2/12 text-[16px] font-bold text-white">APY</span>
+                <span className="w-1/12 text-[16px] font-bold text-white">APY</span>
                 <span className="w-2/12 text-[16px] font-bold text-white">Status</span>
-                <span className="w-1/12 text-[16px] font-bold text-white"></span>
+                <span className="w-2/12 text-[16px] font-bold text-white"></span>
               </div>
               <div className="flex flex-col gap-[10px]">
                 {loans.loans.map((item, index) => (
@@ -195,14 +195,14 @@ function Offers() {
                       <span className="text-[12px] font-bold text-white">Ŀ</span>
                       <span className="text-[12px] font-bold text-white">{formatUnits(item.amount * item.interest / 100, 18)}</span>
                     </div>
-                    <div className="w-2/12 flex gap-[5px] items-center">
+                    <div className="w-1/12 flex gap-[5px] items-center">
                       <span className="text-[12px] font-bold text-white">{item.interest}</span>
                       <span className="text-[12px] font-bold text-white">%</span>
                     </div>
                     <div className="w-2/12 flex gap-[5px] items-center">
                       <span className="text-[12px] font-bold text-white">Seeking Borrower</span>
                     </div>
-                    <div className="w-1/12 flex gap-[5px] items-center">
+                    <div className="w-2/12 flex gap-[5px] items-center">
                       <button onClick={(e) => { onRevokeOffer(index) }} className="bg-gradient-to-r from-[#159F2C] text-black px-6 py-2 max-sm:text-[11px] max-sm:px-4 rounded-lg to-[#DBFF00]">Revoke</button>
                     </div>
                   </div>
@@ -213,7 +213,7 @@ function Offers() {
         </div>
       </div>
       {selectedLend != -1 &&
-        <div className={`fixed top-0 left-0 w-[100vw] h-[100vh] flex justify-center items-center bg-[#00000030] backdrop-blur-md p-[20px] z-10`}>
+        <div className={`font-superLagendBoy fixed top-0 left-0 w-[100vw] h-[100vh] flex justify-center items-center bg-[#00000030] backdrop-blur-md p-[20px] z-10`}>
           <div
             className="fixed inset-0 transition-opacity"
             onClick={() => { if (!revokePending) setSelectedLend(-1) }}
@@ -226,26 +226,26 @@ function Offers() {
             </div>
             <div className="w-full flex gap-[20px] justify-between">
               <div className="flex flex-col items-center">
-                <span className="text-[6px] font-[400] text-white">APY</span>
+                <span className="text-[10px] font-[400] text-white">APY</span>
                 <span className="text-[14px] font-[400] text-[#DBFF00]">{collections.find((collection) => collection.address == loans.loans[selectedLend].nftAddress).interest}%</span>
               </div>
               <div className="flex flex-col items-center">
-                <span className="text-[6px] font-[400] text-white">DURATION</span>
+                <span className="text-[10px] font-[400] text-white">DURATION</span>
                 <span className="text-[14px] font-[400] text-white">{(collections.find((collection) => collection.address == loans.loans[selectedLend].nftAddress).duration / 86400).toFixed(2)}d</span>
               </div>
               <div className="flex flex-col items-center">
-                <span className="text-[6px] font-[400] text-white">FLOOR</span>
+                <span className="text-[10px] font-[400] text-white">FLOOR</span>
                 <span className="text-[14px] font-[400] text-white">{formatUnits(loans.loans[selectedLend].amount, 18)}</span>
               </div>
             </div>
             <div className="w-full flex flex-col gap-[10px]">
-              <span className="text-[16px] font-bold text-white">Status</span>
-              <span className="text-[20px] font-bold text-white">Seeking Borrower</span>
+              <span className="text-[14px] font-bold text-white">Status</span>
+              <span className="text-[16px] font-bold text-white">Seeking Borrower</span>
             </div>
             <div className="w-full flex justify-between items-center">
-              <span className="text-[16px] font-bold text-white">Offer Amount</span>
+              <span className="text-[14px] font-bold text-white">Offer Amount</span>
               <div className="flex flex-col items-center">
-                <span className="text-[20px] font-bold text-white">Ŀ {formatUnits(loans.loans[selectedLend].amount, 18)}</span>
+                <span className="text-[16px] font-bold text-white">Ŀ {formatUnits(loans.loans[selectedLend].amount, 18)}</span>
                 {/* <span className="text-[12px] text-white">{loans.lends[selectedLend].interest}%</span> */}
               </div>
             </div>
