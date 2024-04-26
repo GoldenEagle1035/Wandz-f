@@ -11,7 +11,7 @@ import { collections } from "../../data/collections";
 import { useAccount } from 'wagmi';
 import { readContract } from '@wagmi/core'
 import { parseEther, formatUnits } from 'viem';
-import { useLoans } from "../../hooks/wandz-eth";
+import { useLoans, useAccountBalance } from "../../hooks/wandz-eth";
 
 function Loans() {
 
@@ -21,6 +21,8 @@ function Loans() {
   const account = useAccount();
 
   const loans = useLoans();
+
+  const { balance, isError, isLoading } = useAccountBalance(account.address);
 
   const onRepayOffer = (lendIndex) => {
     setSelectedLend(lendIndex);
@@ -93,7 +95,7 @@ function Loans() {
                   </h1>
                   <div className="flex flex-col justify-between mt-4">
                     <h1 className="flex gap-1">
-                      <span className="text-4xl">0</span>
+                      <span className="text-4xl">{loans.loans.filter((loan) => loan.borrower == account.address && loan.accepted && !loan.paid && !loan.liquidated).length} loans</span>
                       {/* <span>{item.price}</span> */}
                     </h1>
                     {/* <span className="text-[10px]">{item.statusValue} {item.status}</span> */}
@@ -107,9 +109,9 @@ function Loans() {
                     <h1 className="flex flex-col gap-1">
                       <p className="flex gap-3 items-center">
                         <span className="text-4xl">Ŀ </span>
-                        <span className="text-2xl">0</span>
+                        <span className="text-2xl">{formatUnits(loans.loans.filter((loan) => loan.borrower == account.address && loan.accepted && !loan.paid && !loan.liquidated).reduce((total, loan) => total + loan.amount, 0), 18)}</span>
                       </p>
-                      <span className="text-sm">Ŀ 0 in wallet</span>
+                      <span className="text-sm">Ŀ {!account.address || isLoading || isError || balance == null ? 0 : balance.toFixed(2)} in wallet</span>
                     </h1>
                     {/* <span className="text-[10px]">{item.statusValue} {item.status}</span> */}
                   </div>
@@ -122,9 +124,8 @@ function Loans() {
                   <div className="flex flex-col justify-between mt-4">
                     <p className="flex gap-3 items-center">
                       <span className="text-4xl">Ŀ </span>
-                      <span className="text-2xl">0</span>
+                      <span className="text-2xl">{loans.loans.filter((loan) => loan.borrower == account.address && loan.accepted && !loan.paid && !loan.liquidated).reduce((total, loan) => total + loan.amount * (loan.interest - 100), 0)}</span>
                     </p>
-
                   </div>
                 </div>
               </div>

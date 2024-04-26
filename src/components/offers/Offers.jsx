@@ -57,7 +57,7 @@ function Offers() {
             <p className="font-superLagendBoy text-xl max-sm:text-lg text-[#FFFFFF]">
               Once your offer is accepted by a borrower, a secure contract is created, freezing the NFT in their wallet. When the loan ends, you will get paid the total LYX (loan with interest). In the event of a default, you can foreclose, which transfers the collateral NFT to your wallet.
             </p>
-            {loans.loans.filter((loan) => loan.lender == account.address && loan.amount != 0 && !loan.accepted && !loan.paid && !loan.liquidated).length == 0 && <h1 className="mt-24 font-superLagendBoy text-4xl max-sm:text-lg text-[#FFFFFF]">No active or completed loans.</h1>}
+            {loans.loans.filter((loan) => loan.lender == account.address && loan.amount != 0 && !loan.accepted && !loan.paid && !loan.liquidated).length == 0 && <h1 className="mt-24 font-superLagendBoy text-4xl max-sm:text-lg text-[#FFFFFF]">No active or completed offers.</h1>}
           </div>
           <div className="second-sec py-16 flex flex-col gap-24">
             <div>
@@ -80,9 +80,9 @@ function Offers() {
                   <div className="flex flex-col justify-between mt-4">
                     <h1 className="flex gap-2 items-center">
                       <span className="text-3xl">Ŀ</span>
-                      <span className="text-xl">0</span>
+                      <span className="text-xl">{loans.loans.filter((loan) => loan.amount != 0 && !loan.accepted && loan.paid && !loan.liquidated).reduce((total, loan) => total + loan.amount * (loan.interest - 100), 0)}</span>
                     </h1>
-                    <span className="text-[10px]">0 active loans</span>
+                    <span className="text-[10px]">{loans.loans.filter((loan) => loan.amount != 0 && !loan.accepted && loan.paid && !loan.liquidated).length} completed loans</span>
                   </div>
                 </div>
 
@@ -93,9 +93,9 @@ function Offers() {
                   <div className="flex flex-col justify-between mt-4">
                     <h1 className="flex gap-2 items-center">
                       <span className="text-3xl">Ŀ</span>
-                      <span className="text-xl">0</span>
+                      <span className="text-xl">{formatUnits(loans.loans.filter((loan) => loan.amount != 0 && loan.accepted && !loan.paid && !loan.liquidated).reduce((total, loan) => total + loan.amount, 0), 18)}</span>
                     </h1>
-                    <span className="text-[10px]">0 active loans</span>
+                    <span className="text-[10px]">{loans.loans.filter((loan) => loan.amount != 0 && loan.accepted && !loan.paid && !loan.liquidated).length} active loans</span>
                   </div>
                 </div>
 
@@ -106,13 +106,13 @@ function Offers() {
                   <div className="flex flex-col justify-between mt-4">
                     <h1 className="flex gap-2 items-center">
                       <span className="text-3xl">Ŀ</span>
-                      <span className="text-xl">0</span>
+                      <span className="text-xl">{formatUnits(loans.loans.filter((loan) => loan.amount != 0 && !loan.accepted && !loan.paid && !loan.liquidated).reduce((total, loan) => total + loan.amount, 0), 18)}</span>
                     </h1>
-                    <span className="text-[10px]">0 active loans</span>
+                    <span className="text-[10px]">{loans.loans.filter((loan) => loan.amount != 0 && !loan.accepted && !loan.paid && !loan.liquidated).length} offers</span>
                   </div>
                 </div>
 
-                <div className="text-[#FFFFFF] rounded-lg border border-[#DBFF00] border-b-[6px] font-superLagendBoy backdrop-blur-3xl p-6 py-6 pr-10 flex flex-col">
+                {/* <div className="text-[#FFFFFF] rounded-lg border border-[#DBFF00] border-b-[6px] font-superLagendBoy backdrop-blur-3xl p-6 py-6 pr-10 flex flex-col">
                   <h1 className="text-[10px]">
                     FACECLOSURE RATE
                   </h1>
@@ -123,7 +123,7 @@ function Offers() {
                     </h1>
                     <span className="text-[10px]">0 active loans</span>
                   </div>
-                </div>
+                </div> */}
 
                 <div className="text-[#FFFFFF] rounded-lg border border-[#DBFF00] border-b-[6px] font-superLagendBoy backdrop-blur-3xl p-6 py-6 pr-10 flex flex-col">
                   <h1 className="text-[10px]">
@@ -131,7 +131,7 @@ function Offers() {
                   </h1>
                   <div className="flex flex-col justify-between mt-4">
                     <h1 className="flex gap-2 items-center">
-                      <span className="text-3xl">0</span>
+                      <span className="text-3xl">{loans.loans.filter((loan) => loan.amount != 0 && loan.liquidated).length}</span>
                       <span className="text-xl">loans</span>
                     </h1>
                     {/* <span className="text-[10px]">0 active loans</span> */}

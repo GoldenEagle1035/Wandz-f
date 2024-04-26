@@ -7,10 +7,16 @@ import { NavLink, useLocation } from "react-router-dom";
 import Button from "./Button";
 import Bg from "../../assets/background/video.webp";
 import { RainbowKitCustomConnectButton } from "../wandz-eth";
+import { useAccount } from 'wagmi';
+import { useLoans } from "../../hooks/wandz-eth";
 
 function Nav({ btnText }) {
   const [showMenu, setShowMenu] = useState(false);
   const location = useLocation();
+
+  const account = useAccount();
+
+  const loans = useLoans();
 
   const toggleMenu = () => {
     setShowMenu(!showMenu);
@@ -73,7 +79,9 @@ function Nav({ btnText }) {
                       to={"/" + link}
                       duration={500}
                     >
-                      <a className="text-lg">{link}</a>
+                      <a 
+                      className={`text-lg ${(loans.loans.filter((loan) => loan.lender == account.address && loan.amount != 0 && !loan.accepted && !loan.paid && !loan.liquidated).length == 0 && link=="OFFERS") || (loans.loans.filter((loan) => loan.borrower == account.address && loan.accepted && !loan.paid && !loan.liquidated).length == 0 && link=="LOANS") ? "text-[#ffffff80]" : "text-white"}`}
+                      >{link}</a>
                     </NavLink>
                     {location.pathname === `/${link}` && (
                       <img src={Bg} className="h-[4px] w-full object-cover"></img>
@@ -94,10 +102,7 @@ function Nav({ btnText }) {
                   </div>
                 </div>
               </div>
-
-
             </div>
-
           </div>
         </div>
       </div>
