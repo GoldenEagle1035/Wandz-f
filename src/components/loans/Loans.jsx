@@ -189,31 +189,31 @@ function Loans() {
           {loans.loans.filter((loan) => loan.borrower == account.address && loan.accepted && !loan.paid && !loan.liquidated).length != 0 &&
             <div className="font-superLagendBoy flex flex-col gap-[20px] rounded-[30px] bg-[#383D7257] backdrop-blur-sm p-[30px]">
               <div className="flex items-center gap-[10px]">
-                <span className="w-1/5 text-[16px] font-bold text-white">COLLECTION</span>
-                <span className="w-1/5 text-[16px] font-bold text-white">BORROWED</span>
-                <span className="w-1/5 text-[16px] font-bold text-white">TERM</span>
-                <span className="w-1/5 text-[16px] font-bold text-white">REPAYMENT</span>
-                <span className="w-1/5 text-[16px] font-bold text-white"></span>
+                <span className="w-1/6 text-[16px] font-bold text-white">COLLECTION</span>
+                <span className="w-1/6 text-[16px] font-bold text-white">BORROWED</span>
+                <span className="w-1/6 text-[16px] font-bold text-white">TERM</span>
+                <span className="w-1/6 text-[16px] font-bold text-white">REPAYMENT</span>
+                <span className="w-2/6 text-[16px] font-bold text-white"></span>
               </div>
               <div className="flex flex-col gap-[10px]">
                 {loans.loans.map((item, index) => (
                   item.borrower == account.address && item.accepted && !item.paid && !item.liquidated && <div className="flex items-center gap-[10px]">
-                    <div className="w-1/5 flex gap-[20px] items-center">
+                    <div className="w-1/6 flex gap-[20px] items-center">
                       <img className="w-[35px] h-[35px] object-contain" src={collections.find((collection) => collection.address == item.nftAddress).avatar} alt="loan" />
                       <span className="text-[11px] font-bold text-white">{collections.find((collection) => collection.address == item.nftAddress).name}</span>
                     </div>
-                    <div className="w-1/5 flex gap-[5px] items-center">
+                    <div className="w-1/6 flex gap-[5px] items-center">
                       <span className="text-[12px] font-bold text-white">Ŀ</span>
                       <span className="text-[12px] font-bold text-[#DBFF00]">{formatUnits(item.amount, 18)}</span>
                     </div>
-                    <div className="w-1/5 flex gap-[5px] items-center">
+                    <div className="w-1/6 flex gap-[5px] items-center">
                       <span className="text-[12px] font-bold text-white">{Math.abs((item.durationCounter - Date.now() / 1000) / 86400).toFixed(2)} {(item.durationCounter - Date.now() / 1000) / 86400 >= 0 ? "d Remaining" : "d Passed"}</span>
                     </div>
-                    <div className="w-1/5 flex gap-[5px] items-center">
+                    <div className="w-1/6 flex gap-[5px] items-center">
                       <span className="text-[12px] font-bold text-white">Ŀ</span>
                       <span className="text-[12px] font-bold text-[#DBFF00]">{formatUnits(item.amount * item.interest / 100, 18)}</span>
                     </div>
-                    <div className="w-1/5 flex gap-[5px] items-center">
+                    <div className="w-2/6 flex gap-[5px] items-center">
                       <button onClick={(e) => { onRepayOffer(index) }} className="bg-gradient-to-r from-[#159F2C] text-black px-6 py-2 max-sm:text-[11px] max-sm:px-4 rounded-lg to-[#DBFF00]">{(item.durationCounter - Date.now() / 1000) / 86400 >= 0 ? "REPAY" : "LIQUIDATE"}</button>
                       <button onClick={(e) => { onExtendOffer(index) }} className="bg-gradient-to-r from-[#159F2C] text-black px-6 py-2 max-sm:text-[11px] max-sm:px-4 rounded-lg to-[#DBFF00]">EXTEND</button>
                     </div>
@@ -254,8 +254,8 @@ function Loans() {
               <span className="text-[10px] text-white">Here are the NFTs you borrowed against. You must pay these in full by the expiration date in order to keep your NFT.</span>
             </div>
             <div className="w-full flex flex-col items-center">
-              <span className="text-[16px] font-bold text-white">Amount Owed</span>
-              <span className="text-[20px] font-bold text-white">Ŀ {formatUnits(loans.loans[selectedLend].amount * loans.loans[selectedLend].interest / 100, 18)}</span>
+              <span className="text-[14px] font-bold text-white">Amount Owed</span>
+              <span className="text-[16px] font-bold text-white">Ŀ {formatUnits(loans.loans[selectedLend].amount * loans.loans[selectedLend].interest / 100, 18)}</span>
             </div>
             <div className="w-full flex justify-center">
               <button disabled={repayPending} onClick={(e) => { if ((loans.loans[selectedLend].durationCounter - Date.now() / 1000) / 86400 >= 0) { repayOffer(); } else { liquidateOffer(); } }} className="bg-gradient-to-r from-[#159F2C] text-black px-6 py-2 max-sm:text-[11px] max-sm:px-4 rounded-lg to-[#DBFF00]">
@@ -294,12 +294,12 @@ function Loans() {
               <span className="text-[10px] text-white">Here are the NFTs you borrowed against. You must pay these in full by the expiration date in order to keep your NFT.</span>
             </div>
             <div className="w-full flex flex-col items-center">
-              <span className="text-[16px] font-bold text-white">Amount Owed</span>
-              <span className="text-[20px] font-bold text-white">Ŀ {formatUnits(loans.loans[selectedLend].amount * loans.loans[selectedLend].interest / 100, 18)}</span>
+              <span className="text-[14px] font-bold text-white">Amount Owed</span>
+              <span className="text-[16px] font-bold text-white">Ŀ {formatUnits(loans.loans[selectedLend].amount * loans.loans[selectedLend].interest / 100, 18)}</span>
             </div>
             <div className="w-full flex flex-col items-center">
-                <span className="text-[20px] font-bold text-white">Extend Days</span>
-                <input value={extendDays} onChange={(e) => { setExtendDays(e.target.value) }} placeholder="0" className="w-[120px] text-[20px] text-white bg-[#D9D9D930] border border-[#DBFF0030] rounded-[10px] focus:outline-none px-[20px] py-[5px]" />
+                <span className="text-[14px] font-bold text-white">Extend Days</span>
+                <input value={extendDays} onChange={(e) => { setExtendDays(e.target.value) }} placeholder="0" className="w-[120px] text-[14px] text-white bg-[#D9D9D930] border border-[#DBFF0030] rounded-[10px] focus:outline-none px-[20px] py-[5px]" />
               </div>
             <div className="w-full flex justify-center">
               <button disabled={extendPending} onClick={(e) => { extendOffer() }} className="bg-gradient-to-r from-[#159F2C] text-black px-6 py-2 max-sm:text-[11px] max-sm:px-4 rounded-lg to-[#DBFF00]">

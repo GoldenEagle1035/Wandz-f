@@ -203,7 +203,7 @@ function Offers() {
                       <span className="text-[12px] font-bold text-white">Seeking Borrower</span>
                     </div>
                     <div className="w-2/12 flex gap-[5px] items-center">
-                      <button onClick={(e) => { onRevokeOffer(index) }} className="bg-gradient-to-r from-[#159F2C] text-black px-6 py-2 max-sm:text-[11px] max-sm:px-4 rounded-lg to-[#DBFF00]">Revoke</button>
+                      <button onClick={(e) => { onRevokeOffer(index) }} className="bg-gradient-to-r from-[#159F2C] text-black px-6 py-2 max-sm:text-[11px] max-sm:px-4 rounded-lg to-[#DBFF00]">REVOKE</button>
                     </div>
                   </div>
                 )
