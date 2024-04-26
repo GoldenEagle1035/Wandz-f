@@ -187,7 +187,7 @@ function Loans() {
             </div>
           </div>
           {loans.loans.filter((loan) => loan.borrower == account.address && loan.accepted && !loan.paid && !loan.liquidated).length != 0 &&
-            <div className="flex flex-col gap-[20px] rounded-[30px] bg-[#383D7257] backdrop-blur-sm p-[30px]">
+            <div className="font-superLagendBoy flex flex-col gap-[20px] rounded-[30px] bg-[#383D7257] backdrop-blur-sm p-[30px]">
               <div className="flex items-center gap-[10px]">
                 <span className="w-1/5 text-[16px] font-bold text-white">COLLECTION</span>
                 <span className="w-1/5 text-[16px] font-bold text-white">BORROWED</span>
@@ -225,12 +225,12 @@ function Loans() {
         </div>
       </div>
       {selectedLend != -1 && isRepay &&
-        <div className={`fixed top-0 left-0 w-[100vw] h-[100vh] flex justify-center items-center bg-[#00000030] backdrop-blur-md p-[20px] z-10`}>
+        <div className={`font-superLagendBoy fixed top-0 left-0 w-[100vw] h-[100vh] flex justify-center items-center bg-[#00000030] backdrop-blur-md p-[20px] z-10`}>
           <div
             className="fixed inset-0 transition-opacity"
             onClick={() => { if (!repayPending) setSelectedLend(-1) }}
           />
-          <div className="min-w-[300px] bg-[#D9D9D930] backdrop-blur-sm flex gap-[20px] flex-col rounded-[10px] p-[10px]" >
+          <div className="w-[300px] bg-[#D9D9D930] backdrop-blur-sm flex gap-[20px] flex-col rounded-[10px] p-[10px]" >
             <img className="w-full h-[125px] object-center" src={LendDlgBanner} alt="LendDlgBanner" />
             <div className="w-full flex flex-col gap-[10px] items-center">
               <img className="w-[65px] h-[65px] object-contain rounded-full -mt-[53px]" src={collections.find((collection) => collection.address == loans.loans[selectedLend].nftAddress).avatar} alt="avatar" />
@@ -238,20 +238,20 @@ function Loans() {
             </div>
             <div className="w-full flex gap-[20px] justify-between">
               <div className="flex flex-col items-center">
-                <span className="text-[6px] font-[400] text-white">DAYS</span>
+                <span className="text-[10px] font-[400] text-white">DAYS</span>
                 <span className="text-[14px] font-[400] text-[#DBFF00]">{((loans.loans[selectedLend].durationCounter - Date.now() / 1000) / 86400).toFixed(0)}</span>
               </div>
               <div className="flex flex-col items-center">
-                <span className="text-[6px] font-[400] text-white">HOURS</span>
+                <span className="text-[10px] font-[400] text-white">HOURS</span>
                 <span className="text-[14px] font-[400] text-white">{(((loans.loans[selectedLend].durationCounter - Date.now() / 1000) % 86400) / 3600).toFixed(0)}</span>
               </div>
               <div className="flex flex-col items-center">
-                <span className="text-[6px] font-[400] text-white">MINUTES</span>
+                <span className="text-[10px] font-[400] text-white">MINUTES</span>
                 <span className="text-[14px] font-[400] text-white">{(((loans.loans[selectedLend].durationCounter - Date.now() / 1000) % 3600) / 60).toFixed(0)}</span>
               </div>
             </div>
             <div className="w-full flex flex-col gap-[10px] px-[20px]">
-              <span className="text-[6px] text-white">Here are the NFTs you borrowed against. You must pay these in full by the expiration date in order to keep your NFT.</span>
+              <span className="text-[10px] text-white">Here are the NFTs you borrowed against. You must pay these in full by the expiration date in order to keep your NFT.</span>
             </div>
             <div className="w-full flex flex-col items-center">
               <span className="text-[16px] font-bold text-white">Amount Owed</span>
@@ -265,12 +265,12 @@ function Loans() {
         </div>
       }
       {selectedLend != -1 && !isRepay &&
-        <div className={`fixed top-0 left-0 w-[100vw] h-[100vh] flex justify-center items-center bg-[#00000030] backdrop-blur-md p-[20px] z-10`}>
+        <div className={`font-superLagendBoy fixed top-0 left-0 w-[100vw] h-[100vh] flex justify-center items-center bg-[#00000030] backdrop-blur-md p-[20px] z-10`}>
           <div
             className="fixed inset-0 transition-opacity"
             onClick={() => { if (!extendPending) setSelectedLend(-1) }}
           />
-          <div className="min-w-[300px] bg-[#D9D9D930] backdrop-blur-sm flex gap-[20px] flex-col rounded-[10px] p-[10px]" >
+          <div className="w-[300px] bg-[#D9D9D930] backdrop-blur-sm flex gap-[20px] flex-col rounded-[10px] p-[10px]" >
             <img className="w-full h-[125px] object-center" src={LendDlgBanner} alt="LendDlgBanner" />
             <div className="w-full flex flex-col gap-[10px] items-center">
               <img className="w-[65px] h-[65px] object-contain rounded-full -mt-[53px]" src={collections.find((collection) => collection.address == loans.loans[selectedLend].nftAddress).avatar} alt="avatar" />
@@ -278,20 +278,20 @@ function Loans() {
             </div>
             <div className="w-full flex gap-[20px] justify-between">
               <div className="flex flex-col items-center">
-                <span className="text-[6px] font-[400] text-white">DAYS</span>
+                <span className="text-[10px] font-[400] text-white">DAYS</span>
                 <span className="text-[14px] font-[400] text-[#DBFF00]">{((loans.loans[selectedLend].durationCounter - Date.now() / 1000) / 86400).toFixed(0)}</span>
               </div>
               <div className="flex flex-col items-center">
-                <span className="text-[6px] font-[400] text-white">HOURS</span>
+                <span className="text-[10px] font-[400] text-white">HOURS</span>
                 <span className="text-[14px] font-[400] text-white">{(((loans.loans[selectedLend].durationCounter - Date.now() / 1000) % 86400) / 3600).toFixed(0)}</span>
               </div>
               <div className="flex flex-col items-center">
-                <span className="text-[6px] font-[400] text-white">MINUTES</span>
+                <span className="text-[10px] font-[400] text-white">MINUTES</span>
                 <span className="text-[14px] font-[400] text-white">{(((loans.loans[selectedLend].durationCounter - Date.now() / 1000) % 3600) / 60).toFixed(0)}</span>
               </div>
             </div>
             <div className="w-full flex flex-col gap-[10px] px-[20px]">
-              <span className="text-[6px] text-white">Here are the NFTs you borrowed against. You must pay these in full by the expiration date in order to keep your NFT.</span>
+              <span className="text-[10px] text-white">Here are the NFTs you borrowed against. You must pay these in full by the expiration date in order to keep your NFT.</span>
             </div>
             <div className="w-full flex flex-col items-center">
               <span className="text-[16px] font-bold text-white">Amount Owed</span>
