@@ -151,7 +151,7 @@ function OrderBook() {
                   <tbody>
                     {collections.map((item, index) => {
                       return (
-                        item.name.includes(searchValue) && <tr className=" py-10 border-b-[1px] border-[#a9a9a9d8]  ">
+                        item.name.toLowerCase().includes(searchValue.toLowerCase()) && <tr className=" py-10 border-b-[1px] border-[#a9a9a9d8]  ">
                           <td className="p-4 px-4 flex gap-2 items-center">
                             <span>
                               <img className="w-[40px] h-[40px] object-contain rounded-full" src={item.avatar} alt="" />

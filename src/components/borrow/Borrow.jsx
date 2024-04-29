@@ -166,7 +166,7 @@ function Borrow() {
                   </thead>
                   <tbody>
                     {loans.loans.map((item, index) => (
-                      item.amount != 0 && !item.accepted && !item.paid && !item.liquidated && collections.find((collection) => collection.address == item.nftAddress).name.includes(searchValue) &&
+                      item.amount != 0 && !item.accepted && !item.paid && !item.liquidated && collections.find((collection) => collection.address == item.nftAddress).name.toLowerCase().includes(searchValue.toLowerCase()) &&
                       <tr className=" py-10 border-b-[1px] border-[#a9a9a9d8] max-sm:px-4  ">
                         <td className="p-4 pl-4 flex gap-2 items-center max-sm:text-[11px] max-sm:px-4">
                           <span className="max-sm:w-6 ">
