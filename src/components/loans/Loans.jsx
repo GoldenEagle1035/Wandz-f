@@ -43,7 +43,7 @@ function Loans() {
       try {
         const result = await loans.extendLoan({
           args: [loans.loans[selectedLend].loanId, 86400 * Number(extendDays)],
-          value: parseEther(formatUnits(loans.loans[selectedLend].amount * loans.loans[selectedLend].interest / 100 * (86400 * Number(extendDays) / loans.loans[selectedLend].duration), 18)),
+          value: parseEther(formatUnits(loans.loans[selectedLend].amount * loans.loans[selectedLend].interest / 1000 * (86400 * Number(extendDays) / loans.loans[selectedLend].duration), 18)),
           from: account.address
         })
         console.log("extendLoan:", result);
@@ -66,7 +66,7 @@ function Loans() {
       try {
         const result = await loans.repayLoan({
           args: [loans.loans[selectedLend].loanId],
-          value: parseEther(formatUnits(loans.loans[selectedLend].amount * loans.loans[selectedLend].interest / 100, 18)),
+          value: parseEther(formatUnits(loans.loans[selectedLend].amount * loans.loans[selectedLend].interest / 1000, 18)),
           from: account.address
         })
         console.log("repayLoan:", result);
@@ -106,7 +106,7 @@ function Loans() {
         COLLECTION: collections.find((collection) => collection.address == loan.nftAddress).name,
         BORROWED: 'Ŀ' + formatUnits(loan.amount, 18),
         TERM: Math.abs((loan.durationCounter - Date.now() / 1000) / 86400).toFixed(2) + (loan.durationCounter - Date.now() / 1000) / 86400 >= 0 ? "d Remaining" : "d Passed",
-        REPAYMENT: 'Ŀ' + formatUnits(loan.amount * loan.interest / 100, 18),
+        REPAYMENT: 'Ŀ' + formatUnits(loan.amount * loan.interest / 1000, 18),
       })
     })
     setDownloadData(data);
@@ -179,7 +179,7 @@ function Loans() {
                   </h1>
                   <div className="flex flex-col justify-between mt-4">
                     <p className="flex gap-3 items-center">
-                      <span className="text-xl">{formatUnits(loans.loans.filter((loan) => loan.borrower == account.address && loan.accepted && !loan.paid && !loan.liquidated).reduce((total, loan) => total + loan.amount * (loan.interest - 100) / 100, 0), 18)}</span>
+                      <span className="text-xl">{formatUnits(loans.loans.filter((loan) => loan.borrower == account.address && loan.accepted && !loan.paid && !loan.liquidated).reduce((total, loan) => total + loan.amount * (loan.interest / 10 - 100) / 100, 0), 18)}</span>
                       <span className="text-3xl">LYX</span>
                     </p>
                   </div>
@@ -212,7 +212,7 @@ function Loans() {
                     </div>
                     <div className="w-1/6 flex gap-[5px] items-center">
                       <span className="text-[12px] font-bold text-white">Ŀ</span>
-                      <span className="text-[12px] font-bold text-[#DBFF00]">{formatUnits(item.amount * item.interest / 100, 18)}</span>
+                      <span className="text-[12px] font-bold text-[#DBFF00]">{formatUnits(item.amount * item.interest / 1000, 18)}</span>
                     </div>
                     <div className="w-2/6 flex gap-[5px] items-center">
                       <button onClick={(e) => { onRepayOffer(index) }} className="bg-gradient-to-r from-[#159F2C] text-black px-6 py-2 max-sm:text-[11px] max-sm:px-4 rounded-lg to-[#DBFF00]">{(item.durationCounter - Date.now() / 1000) / 86400 >= 0 ? "REPAY" : "LIQUIDATE"}</button>
@@ -256,7 +256,7 @@ function Loans() {
             </div>
             <div className="w-full flex flex-col items-center">
               <span className="text-[14px] font-bold text-white">Amount Owed</span>
-              <span className="text-[16px] font-bold text-white">Ŀ {formatUnits(loans.loans[selectedLend].amount * loans.loans[selectedLend].interest / 100, 18)}</span>
+              <span className="text-[16px] font-bold text-white">Ŀ {formatUnits(loans.loans[selectedLend].amount * loans.loans[selectedLend].interest / 1000, 18)}</span>
             </div>
             <div className="w-full flex justify-center">
               <button disabled={repayPending} onClick={(e) => { if ((loans.loans[selectedLend].durationCounter - Date.now() / 1000) / 86400 >= 0) { repayOffer(); } else { liquidateOffer(); } }} className="bg-gradient-to-r from-[#159F2C] text-black px-6 py-2 max-sm:text-[11px] max-sm:px-4 rounded-lg to-[#DBFF00]">
@@ -296,7 +296,7 @@ function Loans() {
             </div>
             <div className="w-full flex flex-col items-center">
               <span className="text-[14px] font-bold text-white">Amount Owed</span>
-              <span className="text-[16px] font-bold text-white">Ŀ {formatUnits(loans.loans[selectedLend].amount * loans.loans[selectedLend].interest / 100, 18)}</span>
+              <span className="text-[16px] font-bold text-white">Ŀ {formatUnits(loans.loans[selectedLend].amount * loans.loans[selectedLend].interest / 1000, 18)}</span>
             </div>
             <div className="w-full flex flex-col items-center">
                 <span className="text-[14px] font-bold text-white">Extend Days</span>

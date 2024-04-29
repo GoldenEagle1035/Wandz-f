@@ -75,7 +75,7 @@ function OrderBook() {
                   </h1>
                   <div className="flex flex-col justify-between mt-4">
                     <h1 className="flex gap-2 items-center">
-                      <span className="text-xl">{loans.loans.filter((loan) => loan.amount != 0 && !loan.accepted && loan.paid && !loan.liquidated).reduce((total, loan) => total + loan.amount * (loan.interest - 100), 0)}</span>
+                      <span className="text-xl">{loans.loans.filter((loan) => loan.amount != 0 && !loan.accepted && loan.paid && !loan.liquidated).reduce((total, loan) => total + loan.amount * (loan.interest / 10 - 100) / 100, 0)}</span>
                       <span className="text-3xl">LYX</span>
                     </h1>
                     <span className="text-[10px]">{loans.loans.filter((loan) => loan.amount != 0 && !loan.accepted && loan.paid && !loan.liquidated).length} completed loans</span>
@@ -205,7 +205,7 @@ function OrderBook() {
                             {item.forResult}
                           </span> */}
                           </td>
-                          <td className="text-[12px] max-sm:text-[11px]">{item.interest} %</td>
+                          <td className="text-[12px] max-sm:text-[11px]">{item.interest / 10} %</td>
                           <td className="text-[12px] max-sm:text-[11px]">{item.duration}</td>
                           <td><button onClick={(e) => { onPlaceOffer(index) }} className="bg-gradient-to-r from-[#159F2C] text-black px-4 py-2 text-[12px] max-sm:text-[11px] rounded-lg to-[#DBFF00]">LEND</button></td>
                           <br />
@@ -234,7 +234,7 @@ function OrderBook() {
             <div className="w-full flex gap-[20px] justify-between">
               <div className="flex flex-col items-center">
                 <span className="text-[10px] font-[400] text-white">APY</span>
-                <span className="text-[14px] font-[400] text-[#DBFF00]">{collections[selectedLend].interest}%</span>
+                <span className="text-[14px] font-[400] text-[#DBFF00]">{collections[selectedLend].interest / 10}%</span>
               </div>
               <div className="flex flex-col items-center">
                 <span className="text-[10px] font-[400] text-white">DURATION</span>

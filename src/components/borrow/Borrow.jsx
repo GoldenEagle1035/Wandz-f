@@ -18,8 +18,6 @@ import { useLoans } from "../../hooks/wandz-eth";
 
 import lsp8Abi from '../../lukso/abis/lsp8_abi.json';
 
-const lendAddress = '0xa08a897A86Fc50C7b37719c0088C69Cb85ac7A16';
-
 function Borrow() {
 
   const [selectedLend, setSelectedLend] = useState(-1);
@@ -66,7 +64,7 @@ function Borrow() {
         address: loans.loans[selectedLend].nftAddress,
         abi: lsp8Abi,
         functionName: 'authorizeOperator',
-        args: [lendAddress, selectedTokenId, "0x0"]
+        args: [loans.lendAddress, selectedTokenId, "0x0"]
       })
       console.log("authorizeOperator:", result);
       setIsApproved(true);
@@ -85,7 +83,7 @@ function Borrow() {
         address: loans.loans[selectedLend].nftAddress,
         abi: lsp8Abi,
         functionName: 'isOperatorFor',
-        args: [lendAddress, tokenId]
+        args: [loans.lendAddress, tokenId]
       });
       console.log("isOperatorFor:", is_approved);
       setIsApproved(is_approved);
@@ -189,7 +187,7 @@ function Borrow() {
                             Ŀ {formatUnits(loans.loans.filter((t_item) => t_item.nftAddress == item.nftAddress && t_item.amount != 0 && !t_item.accepted && !t_item.paid && !t_item.liquidated).at(loans.loans.filter((t_item) => t_item.nftAddress == item.nftAddress && t_item.amount != 0 && !t_item.accepted && !t_item.paid && !t_item.liquidated).length - 1).amount, 18)} last loan taken
                           </span>{" "}
                         </td>
-                        <td className="max-sm:text-[11px] max-sm:px-4 pl-4">{item.interest} %</td>
+                        <td className="max-sm:text-[11px] max-sm:px-4 pl-4">{item.interest / 10} %</td>
                         <td className="pl-4 max-sm:px-4 max-sm:text-[11px]">{(item.duration / 86400).toFixed(2)}d</td>
                         <td><button onClick={(e) => onAcceptOffer(index)} className="bg-gradient-to-r from-[#159F2C] text-black px-6 py-2 max-sm:px-4 max-sm:py-2 rounded-lg to-[#DBFF00] max-sm:text-[10px]">BORROW</button></td>
                         <br />
@@ -220,7 +218,7 @@ function Borrow() {
             <div className="w-full flex gap-[20px] justify-between">
               <div className="flex flex-col items-center">
                 <span className="text-[10px] font-[400] text-white">INTEREST</span>
-                <span className="text-[14px] font-[400] text-[#DBFF00]">Ŀ {formatUnits(loans.loans[selectedLend].amount * (collections.find((collection) => collection.address == loans.loans[selectedLend].nftAddress).interest) / 100, 18)}</span>
+                <span className="text-[14px] font-[400] text-[#DBFF00]">Ŀ {formatUnits(loans.loans[selectedLend].amount * (collections.find((collection) => collection.address == loans.loans[selectedLend].nftAddress).interest) / 1000, 18)}</span>
               </div>
               <div className="flex flex-col items-center">
                 <span className="text-[10px] font-[400] text-white">DURATION</span>

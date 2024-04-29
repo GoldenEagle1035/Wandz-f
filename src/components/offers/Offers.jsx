@@ -58,8 +58,8 @@ function Offers() {
       data.push({
         COLLECTION: collections.find((collection) => collection.address == loan.nftAddress).name, 
         Offer: 'Ŀ' + formatUnits(loan.amount, 18),
-        Reward: 'Ŀ' + formatUnits(loan.amount * loan.interest / 100, 18),
-        APY: loan.interest,
+        Reward: 'Ŀ' + formatUnits(loan.amount * loan.interest / 1000, 18),
+        APY: loan.interest / 10 + "%",
         Status: 'Seeking Borrower'
       })
     })
@@ -108,7 +108,7 @@ function Offers() {
                   </h1>
                   <div className="flex flex-col justify-between mt-4">
                     <h1 className="flex gap-2 items-center">
-                      <span className="text-xl">{loans.loans.filter((loan) => loan.amount != 0 && !loan.accepted && loan.paid && !loan.liquidated).reduce((total, loan) => total + loan.amount * (loan.interest - 100), 0)}</span>
+                      <span className="text-xl">{loans.loans.filter((loan) => loan.amount != 0 && !loan.accepted && loan.paid && !loan.liquidated).reduce((total, loan) => total + loan.amount * (loan.interest / 10 - 100) / 100, 0)}</span>
                       <span className="text-3xl">LYX</span>
                     </h1>
                     <span className="text-[10px]">{loans.loans.filter((loan) => loan.amount != 0 && !loan.accepted && loan.paid && !loan.liquidated).length} completed loans</span>
@@ -193,10 +193,10 @@ function Offers() {
                     </div>
                     <div className="w-2/12 flex gap-[5px] items-center">
                       <span className="text-[12px] font-bold text-white">Ŀ</span>
-                      <span className="text-[12px] font-bold text-white">{formatUnits(item.amount * item.interest / 100, 18)}</span>
+                      <span className="text-[12px] font-bold text-white">{formatUnits(item.amount * item.interest / 1000, 18)}</span>
                     </div>
                     <div className="w-1/12 flex gap-[5px] items-center">
-                      <span className="text-[12px] font-bold text-white">{item.interest}</span>
+                      <span className="text-[12px] font-bold text-white">{item.interest / 10}</span>
                       <span className="text-[12px] font-bold text-white">%</span>
                     </div>
                     <div className="w-2/12 flex gap-[5px] items-center">
@@ -227,7 +227,7 @@ function Offers() {
             <div className="w-full flex gap-[20px] justify-between">
               <div className="flex flex-col items-center">
                 <span className="text-[10px] font-[400] text-white">APY</span>
-                <span className="text-[14px] font-[400] text-[#DBFF00]">{collections.find((collection) => collection.address == loans.loans[selectedLend].nftAddress).interest}%</span>
+                <span className="text-[14px] font-[400] text-[#DBFF00]">{collections.find((collection) => collection.address == loans.loans[selectedLend].nftAddress).interest / 10}%</span>
               </div>
               <div className="flex flex-col items-center">
                 <span className="text-[10px] font-[400] text-white">DURATION</span>
@@ -246,7 +246,7 @@ function Offers() {
               <span className="text-[14px] font-bold text-white">Offer Amount</span>
               <div className="flex flex-col items-center">
                 <span className="text-[16px] font-bold text-white">Ŀ {formatUnits(loans.loans[selectedLend].amount, 18)}</span>
-                {/* <span className="text-[12px] text-white">{loans.lends[selectedLend].interest}%</span> */}
+                {/* <span className="text-[12px] text-white">{loans.lends[selectedLend].interest / 10}%</span> */}
               </div>
             </div>
             <div className="w-full flex justify-center">

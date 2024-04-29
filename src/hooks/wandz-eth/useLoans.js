@@ -4,18 +4,9 @@ import { useAccount, useContractRead, useContractWrite } from 'wagmi';
 import { readContracts } from '@wagmi/core'
 
 import lendAbi from "../../lukso/abis/lend_abi.json";
-import mpAbi from "../../lukso/abis/mp_abi.json";
-import lsp7Abi from "../../lukso/abis/lsp7_abi.json";
-import lsp8Abi from "../../lukso/abis/lsp8_abi.json";
-
-import Av from "../../assets/background/avatar.png"
 
 const lendAddress = '0xa08a897A86Fc50C7b37719c0088C69Cb85ac7A16';
 const adminAddress = '0xa842a38CD758f8dE8537C5CBcB2006DB0250eC7C';
-
-const mpAddress = '0x85598432f2287046785E7bC47Bb37135c2Decc8D';
-const lsp8Address = '0xE6eBC5BE0f3Ed9f1fbE5a9CcE1CF20059AaFb6cc';
-const lsp7Address = '0x151B5bD19373c16130f4F02488BE96bb36269298';
 
 export const useLoans = () => {
 
@@ -120,5 +111,5 @@ export const useLoans = () => {
         }
     }, [loanIdCounter, refetch])
 
-    return { adminAddress, loans, loanIdCounter, offerLoan, revokeLoan, acceptLoan, repayLoan, liquidateLoan, extendLoan };
+    return { lendAddress, adminAddress, loans, loanIdCounter, offerLoan, revokeLoan, acceptLoan, repayLoan, liquidateLoan, extendLoan };
 };
