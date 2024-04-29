@@ -5,7 +5,7 @@ import { readContracts } from '@wagmi/core'
 
 import lendAbi from "../../lukso/abis/lend_abi.json";
 
-const lendAddress = '0xa08a897A86Fc50C7b37719c0088C69Cb85ac7A16';
+const lendAddress = '0x2fc0437A1B4D470D745c6896354EA88c48961fF2';
 const adminAddress = '0xa842a38CD758f8dE8537C5CBcB2006DB0250eC7C';
 
 export const useLoans = () => {

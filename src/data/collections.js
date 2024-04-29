@@ -1,4 +1,4 @@
-import Av_icon from "../assets/background/avatar.png";
+// import Av_icon from "../assets/background/avatar.png";
 import DWOOBz_icon from "../assets/icons/0x7c6118ba719a62d40ce6c9580f96306a558cda6f.webp";
 import ApexDeities_icon from "../assets/icons/0xb4e32a20aa27b5891bfa592c392c9858a1dd3945.webp";
 import Blok_icon from "../assets/icons/0x1f35651b7f36ec91804b6cc603652a12d7cb87c6.webp";
@@ -39,7 +39,7 @@ import burntwhales_icon from "../assets/icons/default.webp";
 import WOLVESOFLUKSO_icon from "../assets/icons/0x9f5368b8ecaaad715013654a6206003fcd38e3ba.webp";
 import UniversalSwapsV1_icon from "../assets/icons/0x855bb3e40261a73dd4fc691fc024cc7d60794d00.webp";
 
-import Av_banner from "../assets/banners/default.webp";
+// import Av_banner from "../assets/banners/default.webp";
 import DWOOBz_banner from "../assets/banners/0x7c6118ba719a62d40ce6c9580f96306a558cda6f.webp";
 import ApexDeities_banner from "../assets/banners/0xb4e32a20aa27b5891bfa592c392c9858a1dd3945.webp";
 import Blok_banner from "../assets/banners/0x1f35651b7f36ec91804b6cc603652a12d7cb87c6.webp";
@@ -81,14 +81,14 @@ import WOLVESOFLUKSO_banner from "../assets/banners/0x9f5368b8ecaaad715013654a62
 import UniversalSwapsV1_banner from "../assets/banners/default.webp";
 
 export const collections = [
-    {
-        name: "TestLSP8",
-        avatar: Av_icon,
-        banner: Av_banner,
-        address: "0xE6eBC5BE0f3Ed9f1fbE5a9CcE1CF20059AaFb6cc",
-        interest: 1200,
-        duration: 3600
-    },
+    // {
+    //     name: "TestLSP8",
+    //     avatar: Av_icon,
+    //     banner: Av_banner,
+    //     address: "0xE6eBC5BE0f3Ed9f1fbE5a9CcE1CF20059AaFb6cc",
+    //     interest: 1200,
+    //     duration: 3600
+    // },
     {
         name: "DWOOBz",
         avatar: DWOOBz_icon,
