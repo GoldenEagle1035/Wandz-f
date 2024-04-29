@@ -218,7 +218,7 @@ function Offers() {
             className="fixed inset-0 transition-opacity"
             onClick={() => { if (!revokePending) setSelectedLend(-1) }}
           />
-          <div className="min-w-[300px] bg-[#D9D9D930] backdrop-blur-sm flex gap-[20px] flex-col rounded-[10px] p-[10px]" >
+          <div className="min-w-[300px] max-w-[400px] bg-[#D9D9D930] backdrop-blur-sm flex gap-[20px] flex-col rounded-[10px] p-[10px]" >
             <img className="w-full h-[125px] object-center" src={collections.find((collection) => collection.address == loans.loans[selectedLend].nftAddress).banner} alt="banner" />
             <div className="w-full flex flex-col gap-[10px] items-center">
               <img className="w-[65px] h-[65px] object-contain rounded-full -mt-[53px]" src={collections.find((collection) => collection.address == loans.loans[selectedLend].nftAddress).avatar} alt="avatar" />

@@ -206,7 +206,7 @@ function Borrow() {
             className="fixed inset-0 transition-opacity"
             onClick={() => { if (!acceptPending && !approvePending) setSelectedLend(-1) }}
           />
-          <div className="max-w-[400px] min-w-[300px] bg-[#D9D9D930] backdrop-blur-sm flex gap-[20px] flex-col rounded-[10px] p-[20px]" >
+          <div className="min-w-[300px] max-w-[400px] bg-[#D9D9D930] backdrop-blur-sm flex gap-[20px] flex-col rounded-[10px] p-[20px]" >
             <div className="w-full flex gap-[20px] justify-between items-center">
               <img className="w-[65px] h-[65px] object-contain rounded-full" src={collections.find((collection) => collection.address == loans.loans[selectedLend].nftAddress).avatar} alt="avatar" />
               <span className="text-[14px] font-[400] text-white">{collections.find((collection) => collection.address == loans.loans[selectedLend].nftAddress).name}</span>
