@@ -20,7 +20,7 @@ import LuksoCitizens_icon from "../assets/icons/0x754a5d007d5f1188ef0db892ee115a
 import LuksoCreators_icon from "../assets/icons/0x74654920356257981f6b63a65ad72d4d9bc21929.webp";
 import Luksouls_icon from "../assets/icons/0x719b36427c9868162df1b4c9e6ddc28f5c36d72d.webp";
 import LyxenDemons_icon from "../assets/icons/0x669c42149f9a54a0ee63b4527f8d066247f5dbd0.webp";
-import LyxoraAngels_icon from "../assets/icons/default.webp";
+import LyxoraAngels_icon from "../assets/icons/0xbc96cf101ab8fbd710b6ad35754492c543fa4166.webp";
 import Maisons_icon from "../assets/icons/0xec04f0585d72368e711419ab951d1a1bafc36081.webp";
 import MetaEars_icon from "../assets/icons/0xfecc2bcc7d406b0f66228eac24bca1e7cfce0b72.webp";
 import ONER_icon from "../assets/icons/0x156d7d4a7fdf5f5d4d7d3988b68057eda883b35f.webp";
@@ -35,7 +35,7 @@ import TriLines_icon from "../assets/icons/0xa46875d08187b7941d63162e6a8418b75a4
 import UniversalPageName_icon from "../assets/icons/0x39456bcd4d450e55f851f97c30df828a4e1f6c66.webp";
 import UniversalPagePro_icon from "../assets/icons/0x5599d0ae8576250db2b9a9975fd3db1f6399b4fd.webp";
 import chillwhales_icon from "../assets/icons/0x86e817172b5c07f7036bf8aa46e2db9063743a83.webp";
-import burntwhales_icon from "../assets/icons/default.webp";
+import burntwhales_icon from "../assets/icons/0x8bf5bf6c2f11643e75dc4199af2c7d39b1aefcd3.webp";
 import WOLVESOFLUKSO_icon from "../assets/icons/0x9f5368b8ecaaad715013654a6206003fcd38e3ba.webp";
 import UniversalSwapsV1_icon from "../assets/icons/0x855bb3e40261a73dd4fc691fc024cc7d60794d00.webp";
 
