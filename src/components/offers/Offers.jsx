@@ -11,6 +11,7 @@ import { collections } from "../../data/collections";
 
 import { useAccount } from 'wagmi';
 import { readContract } from '@wagmi/core'
+
 import { parseEther, formatUnits } from 'viem';
 import { useLoans } from "../../hooks/wandz-eth";
 
@@ -54,9 +55,9 @@ function Offers() {
 
   useEffect(() => {
     let data = [];
-    loans.loans.filter((loan) => loan.lender == account.address && loan.amount != 0 && !loan.accepted && !loan.paid && !loan.liquidated).map((loan) => {
+    loans.loans.filter((loan) => loan.lender.toLowerCase() == account.address.toLowerCase() && loan.amount != 0 && !loan.accepted && !loan.paid && !loan.liquidated).map((loan) => {
       data.push({
-        COLLECTION: collections.find((collection) => collection.address == loan.nftAddress).name, 
+        COLLECTION: collections.find((collection) => collection.address.toLowerCase() == loan.nftAddress.toLowerCase()).name, 
         Offer: 'Ŀ' + formatUnits(loan.amount, 18),
         Reward: 'Ŀ' + formatUnits(loan.amount * loan.interest / 1000, 18),
         APY: loan.interest / 10 + "%",
@@ -79,7 +80,7 @@ function Offers() {
             <p className="font-superLagendBoy text-xl max-sm:text-lg text-[#FFFFFF]">
               Once your offer is accepted by a borrower, a secure contract is created, freezing the NFT in their wallet. When the loan ends, you will get paid the total LYX (loan with interest). In the event of a default, you can foreclose, which transfers the collateral NFT to your wallet.
             </p>
-            {loans.loans.filter((loan) => loan.lender == account.address && loan.amount != 0 && !loan.accepted && !loan.paid && !loan.liquidated).length == 0 && <h1 className="mt-24 font-superLagendBoy text-4xl max-sm:text-lg text-[#FFFFFF]">No active or completed offers.</h1>}
+            {loans.loans.filter((loan) => loan.lender.toLowerCase() == account.address.toLowerCase() && loan.amount != 0 && !loan.accepted && !loan.paid && !loan.liquidated).length == 0 && <h1 className="mt-24 font-superLagendBoy text-4xl max-sm:text-lg text-[#FFFFFF]">No active or completed offers.</h1>}
           </div>
           <div className="second-sec py-16 flex flex-col gap-24">
             <div>
@@ -170,7 +171,7 @@ function Offers() {
               </div>
             </div>
           </div>
-          {loans.loans.filter((loan) => loan.lender == account.address && loan.amount != 0 && !loan.accepted && !loan.paid && !loan.liquidated).length != 0 &&
+          {loans.loans.filter((loan) => loan.lender.toLowerCase() == account.address.toLowerCase() && loan.amount != 0 && !loan.accepted && !loan.paid && !loan.liquidated).length != 0 &&
             <div className="font-superLagendBoy flex flex-col gap-[20px] rounded-[30px] bg-[#383D7257] backdrop-blur-sm p-[30px]">
               <div className="flex items-center gap-[10px]">
                 <span className="w-3/12 text-[16px] font-bold text-white">COLLECTION</span>
@@ -182,10 +183,10 @@ function Offers() {
               </div>
               <div className="flex flex-col gap-[10px]">
                 {loans.loans.map((item, index) => (
-                  item.lender == account.address && item.amount != 0 && !item.accepted && !item.paid && !item.liquidated && <div className="flex items-center gap-[10px]">
+                  item.lender.toLowerCase() == account.address.toLowerCase() && item.amount != 0 && !item.accepted && !item.paid && !item.liquidated && <div className="flex items-center gap-[10px]">
                     <div className="w-3/12 flex gap-[20px] items-center">
-                      <img className="w-[40px] h-[40px] object-contain rounded-full" src={collections.find((collection) => collection.address == item.nftAddress).avatar} alt="loan" />
-                      <span className="text-[11px] font-bold text-white">{collections.find((collection) => collection.address == item.nftAddress).name}</span>
+                      <img className="w-[40px] h-[40px] object-contain rounded-full" src={collections.find((collection) => collection.address.toLowerCase() == item.nftAddress.toLowerCase()).avatar} alt="loan" />
+                      <span className="text-[11px] font-bold text-white">{collections.find((collection) => collection.address.toLowerCase() == item.nftAddress.toLowerCase()).name}</span>
                     </div>
                     <div className="w-2/12 flex gap-[5px] items-center">
                       <span className="text-[12px] font-bold text-white">Ŀ</span>
@@ -219,23 +220,23 @@ function Offers() {
             onClick={() => { if (!revokePending) setSelectedLend(-1) }}
           />
           <div className="min-w-[300px] max-w-[400px] bg-[#D9D9D930] backdrop-blur-sm flex gap-[20px] flex-col rounded-[10px] p-[10px]" >
-            <img className="w-full h-[125px] object-center" src={collections.find((collection) => collection.address == loans.loans[selectedLend].nftAddress).banner} alt="banner" />
+            <img className="w-full h-[125px] object-center" src={collections.find((collection) => collection.address.toLowerCase() == loans.loans[selectedLend].nftAddress.toLowerCase()).banner} alt="banner" />
             <div className="w-full flex flex-col gap-[10px] items-center">
-              <img className="w-[65px] h-[65px] object-contain rounded-full -mt-[53px]" src={collections.find((collection) => collection.address == loans.loans[selectedLend].nftAddress).avatar} alt="avatar" />
-              <span className="text-[14px] font-[400] text-white">{collections.find((collection) => collection.address == loans.loans[selectedLend].nftAddress).name}</span>
+              <img className="w-[65px] h-[65px] object-contain rounded-full -mt-[53px]" src={collections.find((collection) => collection.address.toLowerCase() == loans.loans[selectedLend].nftAddress.toLowerCase()).avatar} alt="avatar" />
+              <span className="text-[14px] font-[400] text-white">{collections.find((collection) => collection.address.toLowerCase() == loans.loans[selectedLend].nftAddress.toLowerCase()).name}</span>
             </div>
             <div className="w-full flex gap-[20px] justify-between">
               <div className="flex flex-col items-center">
                 <span className="text-[10px] font-[400] text-white">APY</span>
-                <span className="text-[14px] font-[400] text-[#DBFF00]">{collections.find((collection) => collection.address == loans.loans[selectedLend].nftAddress).interest / 10}%</span>
+                <span className="text-[14px] font-[400] text-[#DBFF00]">{collections.find((collection) => collection.address.toLowerCase() == loans.loans[selectedLend].nftAddress.toLowerCase()).interest / 10}%</span>
               </div>
               <div className="flex flex-col items-center">
                 <span className="text-[10px] font-[400] text-white">DURATION</span>
-                <span className="text-[14px] font-[400] text-white">{(collections.find((collection) => collection.address == loans.loans[selectedLend].nftAddress).duration / 86400).toFixed(2)}d</span>
+                <span className="text-[14px] font-[400] text-white">{(collections.find((collection) => collection.address.toLowerCase() == loans.loans[selectedLend].nftAddress.toLowerCase()).duration / 86400).toFixed(2)}d</span>
               </div>
               <div className="flex flex-col items-center">
                 <span className="text-[10px] font-[400] text-white">FLOOR</span>
-                <span className="text-[14px] font-[400] text-white"><span className="text-[14px] font-[400] text-white">Ŀ {loans.loans.filter((loan) => loan.nftAddress == loans.loans[selectedLend].nftAddress && loan.amount != 0 && !loan.accepted && !loan.paid && !loan.liquidated).length == 0 ? 0 : formatUnits(loans.loans.filter((loan) => loan.nftAddress == loans.loans[selectedLend].nftAddress && loan.amount != 0 && !loan.accepted && !loan.paid && !loan.liquidated).sort((a, b) => a.amount - b.amount).at(0).amount, 18)}</span></span>
+                <span className="text-[14px] font-[400] text-white"><span className="text-[14px] font-[400] text-white">Ŀ {loans.loans.filter((loan) => loan.nftAddress.toLowerCase() == loans.loans[selectedLend].nftAddress.toLowerCase() && loan.amount != 0 && !loan.accepted && !loan.paid && !loan.liquidated).length == 0 ? 0 : formatUnits(loans.loans.filter((loan) => loan.nftAddress.toLowerCase() == loans.loans[selectedLend].nftAddress.toLowerCase() && loan.amount != 0 && !loan.accepted && !loan.paid && !loan.liquidated).sort((a, b) => a.amount - b.amount).at(0).amount, 18)}</span></span>
               </div>
             </div>
             <div className="w-full flex flex-col gap-[10px]">
