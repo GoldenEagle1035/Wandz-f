@@ -179,7 +179,7 @@ function OrderBook() {
                           </span>
                         </td> */}
                           <td className="px-4 text-[12px] max-sm:text-[11px]">
-                            {loans.loans.map((loan, index) => (
+                            {loans.loans.filter((loan, index) => (
                               loan.nftAddress.toLowerCase() == item.address.toLowerCase() && loan.amount != 0 && !loan.accepted && !loan.paid && !loan.liquidated)).length} offer(s)
                           </td>
                           <td className="px-4 text-[12px] max-sm:text-[11px]">
