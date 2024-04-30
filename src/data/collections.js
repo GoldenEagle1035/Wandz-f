@@ -44,7 +44,7 @@ import DWOOBz_banner from "../assets/banners/0x7c6118ba719a62d40ce6c9580f96306a5
 import ApexDeities_banner from "../assets/banners/0xb4e32a20aa27b5891bfa592c392c9858a1dd3945.webp";
 import Blok_banner from "../assets/banners/0x1f35651b7f36ec91804b6cc603652a12d7cb87c6.webp";
 import BurntPix_banner from "../assets/banners/default.webp";
-import BurntPunX_banner from "../assets/banners/0x66b738baea30243bfe4c168a11e79dd1f930e59c.webp";
+import BurntPunX_banner from "../assets/banners/default.webp";
 import CandyZap_banner from "../assets/banners/0xd1d18961ffeba233ba023e25e602f842d4a3d668.webp";
 import Confluence_banner from "../assets/banners/default.webp";
 import DJPigs_banner from "../assets/banners/0xa78a3611602ca3345b8dce25c38a784ab64300ff.webp";
@@ -58,7 +58,7 @@ import LYnX_banner from "../assets/banners/0x92f9210f1b5c542ee868f954f96a6790632
 import LastLight_banner from "../assets/banners/0x53f2e2d9effcb005a919ce9ba4ddcec1e981872c.webp";
 import LazyBuns_banner from "../assets/banners/0x23ab529af53405e15932b1d0452a61a3fa908393.webp";
 import LuksoCitizens_banner from "../assets/banners/0x754a5d007d5f1188ef0db892ee115a7c01b38fa3.webp";
-import LuksoCreators_banner from "../assets/banners/default.webp";
+import LuksoCreators_banner from "../assets/banners/0x74654920356257981f6b63a65ad72d4d9bc21929.webp";
 import Luksouls_banner from "../assets/banners/0x719b36427c9868162df1b4c9e6ddc28f5c36d72d.webp";
 import LyxenDemons_banner from "../assets/banners/0x669c42149f9a54a0ee63b4527f8d066247f5dbd0.webp";
 import LyxoraAngels_banner from "../assets/banners/0xbc96cf101ab8fbd710b6ad35754492c543fa4166.webp";
