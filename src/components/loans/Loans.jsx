@@ -232,7 +232,7 @@ function Loans() {
             onClick={() => { if (!repayPending) setSelectedLend(-1) }}
           />
           <div className="min-w-[300px] max-w-[400px] bg-[#D9D9D930] backdrop-blur-sm flex gap-[20px] flex-col rounded-[10px] p-[10px]" >
-            <img className="w-full h-[125px] object-center" src={LendDlgBanner} alt="LendDlgBanner" />
+            <img className="w-full h-[125px] object-center" src={collections.find((collection) => collection.address.toLowerCase() == loans.loans[selectedLend].nftAddress.toLowerCase()).banner} alt="banner" />
             <div className="w-full flex flex-col gap-[10px] items-center">
               <img className="w-[65px] h-[65px] object-contain rounded-full -mt-[53px]" src={collections.find((collection) => collection.address.toLowerCase() == loans.loans[selectedLend].nftAddress.toLowerCase()).avatar} alt="avatar" />
               <span className="text-[14px] font-[400] text-white">{collections.find((collection) => collection.address.toLowerCase() == loans.loans[selectedLend].nftAddress.toLowerCase()).name}</span>
@@ -299,9 +299,9 @@ function Loans() {
               <span className="text-[16px] font-bold text-white">Ŀ {formatUnits(loans.loans[selectedLend].amount * loans.loans[selectedLend].interest / 1000, 18)}</span>
             </div>
             <div className="w-full flex flex-col items-center">
-                <span className="text-[14px] font-bold text-white">Extend Days</span>
-                <input type='number' value={extendDays} onChange={(e) => { setExtendDays(e.target.value) }} placeholder="0" className="w-[120px] text-[14px] text-white bg-[#D9D9D930] border border-[#DBFF0030] rounded-[10px] focus:outline-none px-[20px] py-[5px]" />
-              </div>
+              <span className="text-[14px] font-bold text-white">Extend Days</span>
+              <input type='number' value={extendDays} onChange={(e) => { setExtendDays(e.target.value) }} placeholder="0" className="w-[120px] text-[14px] text-white bg-[#D9D9D930] border border-[#DBFF0030] rounded-[10px] focus:outline-none px-[20px] py-[5px]" />
+            </div>
             <div className="w-full flex justify-center">
               <button disabled={extendPending} onClick={(e) => { extendOffer() }} className="bg-gradient-to-r from-[#159F2C] text-black px-6 py-2 max-sm:text-[11px] max-sm:px-4 rounded-lg to-[#DBFF00]">
                 EXTEND {extendPending ? <FontAwesomeIcon icon={faSpinner} size="sm" className="animate-spin" /> : <></>}</button>
