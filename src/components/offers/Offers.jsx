@@ -55,7 +55,7 @@ function Offers() {
 
   useEffect(() => {
     let data = [];
-    loans.loans.filter((loan) => loan.lender.toLowerCase() == account.address.toLowerCase() && loan.amount != 0 && !loan.accepted && !loan.paid && !loan.liquidated).map((loan) => {
+    loans.loans.filter((loan) => account.address && loan.lender.toLowerCase() == account.address.toLowerCase() && loan.amount != 0 && !loan.accepted && !loan.paid && !loan.liquidated).map((loan) => {
       data.push({
         COLLECTION: collections.find((collection) => collection.address.toLowerCase() == loan.nftAddress.toLowerCase()).name, 
         Offer: 'Ŀ' + formatUnits(loan.amount, 18),
@@ -80,7 +80,7 @@ function Offers() {
             <p className="font-superLagendBoy text-xl max-sm:text-lg text-[#FFFFFF]">
               Once your offer is accepted by a borrower, a secure contract is created, freezing the NFT in their wallet. When the loan ends, you will get paid the total LYX (loan with interest). In the event of a default, you can foreclose, which transfers the collateral NFT to your wallet.
             </p>
-            {loans.loans.filter((loan) => loan.lender.toLowerCase() == account.address.toLowerCase() && loan.amount != 0 && !loan.accepted && !loan.paid && !loan.liquidated).length == 0 && <h1 className="mt-24 font-superLagendBoy text-4xl max-sm:text-lg text-[#FFFFFF]">No active or completed offers.</h1>}
+            {loans.loans.filter((loan) => account.address && loan.lender.toLowerCase() == account.address.toLowerCase() && loan.amount != 0 && !loan.accepted && !loan.paid && !loan.liquidated).length == 0 && <h1 className="mt-24 font-superLagendBoy text-4xl max-sm:text-lg text-[#FFFFFF]">No active or completed offers.</h1>}
           </div>
           <div className="second-sec py-16 flex flex-col gap-24">
             <div>
@@ -171,7 +171,7 @@ function Offers() {
               </div>
             </div>
           </div>
-          {loans.loans.filter((loan) => loan.lender.toLowerCase() == account.address.toLowerCase() && loan.amount != 0 && !loan.accepted && !loan.paid && !loan.liquidated).length != 0 &&
+          {loans.loans.filter((loan) => account.address && loan.lender.toLowerCase() == account.address.toLowerCase() && loan.amount != 0 && !loan.accepted && !loan.paid && !loan.liquidated).length != 0 &&
             <div className="font-superLagendBoy flex flex-col gap-[20px] rounded-[30px] bg-[#383D7257] backdrop-blur-sm p-[30px]">
               <div className="flex items-center gap-[10px]">
                 <span className="w-3/12 text-[16px] font-bold text-white">COLLECTION</span>
@@ -183,7 +183,7 @@ function Offers() {
               </div>
               <div className="flex flex-col gap-[10px]">
                 {loans.loans.map((item, index) => (
-                  item.lender.toLowerCase() == account.address.toLowerCase() && item.amount != 0 && !item.accepted && !item.paid && !item.liquidated && <div className="flex items-center gap-[10px]">
+                  account.address && item.lender.toLowerCase() == account.address.toLowerCase() && item.amount != 0 && !item.accepted && !item.paid && !item.liquidated && <div className="flex items-center gap-[10px]">
                     <div className="w-3/12 flex gap-[20px] items-center">
                       <img className="w-[40px] h-[40px] object-contain rounded-full" src={collections.find((collection) => collection.address.toLowerCase() == item.nftAddress.toLowerCase()).avatar} alt="loan" />
                       <span className="text-[11px] font-bold text-white">{collections.find((collection) => collection.address.toLowerCase() == item.nftAddress.toLowerCase()).name}</span>

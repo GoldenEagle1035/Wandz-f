@@ -80,7 +80,7 @@ function Nav({ btnText }) {
                       duration={500}
                     >
                       <a 
-                      className={`text-lg ${(loans.loans.filter((loan) => loan.lender.toLowerCase() == account.address.toLowerCase() && loan.amount != 0 && !loan.accepted && !loan.paid && !loan.liquidated).length == 0 && link=="OFFERS") || (loans.loans.filter((loan) => loan.borrower.toLowerCase() == account.address.toLowerCase() && loan.accepted && !loan.paid && !loan.liquidated).length == 0 && link=="LOANS") ? "text-[#ffffff80]" : "text-white"}`}
+                      className={`text-lg ${(loans.loans.filter((loan) => account.address && loan.lender.toLowerCase() == account.address.toLowerCase() && loan.amount != 0 && !loan.accepted && !loan.paid && !loan.liquidated).length == 0 && link=="OFFERS") || (loans.loans.filter((loan) => account.address && loan.borrower.toLowerCase() == account.address.toLowerCase() && loan.accepted && !loan.paid && !loan.liquidated).length == 0 && link=="LOANS") ? "text-[#ffffff80]" : "text-white"}`}
                       >{link}</a>
                     </NavLink>
                     {location.pathname === `/${link}` && (
