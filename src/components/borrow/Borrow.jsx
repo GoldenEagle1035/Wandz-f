@@ -255,7 +255,7 @@ function Borrow() {
               </> :
               <>
                 <div className="w-full flex justify-center">
-                  <span className="text-[20px] font-[400] text-[#f00]">No NFT of this collection were found</span>
+                  <span className="text-[20px] font-[400] text-[#f00] text-center">No NFT of this collection were found</span>
                 </div>
                 <div className="w-full flex justify-center">
                   <button onClick={(e) => { setSelectedLend(-1) }} className="bg-gradient-to-r from-[#159F2C] text-black px-6 py-2 max-sm:text-[11px] max-sm:px-4 rounded-lg to-[#DBFF00]">OK</button>
