@@ -174,7 +174,7 @@ function Lend() {
                           </td>
                           <td className="max-sm:text-[11px] pl-4 max-sm:px-4">{item.interest / 10}%</td>
                           <td className="ml-6 max-sm:text-[11px] pl-4 max-sm:px-4">{(item.duration / 86400).toFixed(2)}d</td>
-                          <td><button onClick={(e) => { onPlaceOffer(index) }} className="bg-gradient-to-r from-[#159F2C] text-black px-6 py-2 max-sm:text-[11px] max-sm:px-4 rounded-lg to-[#DBFF00]">LEND</button></td>
+                          <td><button disabled={!account.address} onClick={(e) => { onPlaceOffer(index) }} className="bg-gradient-to-r from-[#159F2C] text-black px-6 py-2 max-sm:text-[11px] max-sm:px-4 rounded-lg to-[#DBFF00]">LEND</button></td>
                           <br />
                         </tr>
                       )

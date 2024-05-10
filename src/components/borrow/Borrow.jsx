@@ -95,17 +95,19 @@ function Borrow() {
   }
 
   const fetchTokenIds = async () => {
-    try {
-      const tokenIds = await readContract({
-        address: loans.loans[selectedLend].nftAddress,
-        abi: lsp8Abi,
-        functionName: 'tokenIdsOf',
-        args: [account.address]
-      });
-      console.log("tokenIds:", tokenIds);
-      setTokenIds(tokenIds);
-    } catch (error) {
-      console.log(error);
+    if (account.address) {
+      try {
+        const tokenIds = await readContract({
+          address: loans.loans[selectedLend].nftAddress,
+          abi: lsp8Abi,
+          functionName: 'tokenIdsOf',
+          args: [account.address]
+        });
+        console.log("tokenIds:", tokenIds);
+        setTokenIds(tokenIds);
+      } catch (error) {
+        console.log(error);
+      }
     }
   }
 
@@ -113,7 +115,7 @@ function Borrow() {
     if (selectedLend != -1) {
       fetchTokenIds();
     }
-  }, [selectedLend])
+  }, [selectedLend, account.address])
 
   return (
     <>
@@ -189,7 +191,7 @@ function Borrow() {
                         </td>
                         <td className="max-sm:text-[11px] max-sm:px-4 pl-4">{item.interest / 10} %</td>
                         <td className="pl-4 max-sm:px-4 max-sm:text-[11px]">{(item.duration / 86400).toFixed(2)}d</td>
-                        <td><button onClick={(e) => onAcceptOffer(index)} className="bg-gradient-to-r from-[#159F2C] text-black px-6 py-2 max-sm:px-4 max-sm:py-2 rounded-lg to-[#DBFF00] max-sm:text-[10px]">BORROW</button></td>
+                        <td><button disabled={!account.address} onClick={(e) => onAcceptOffer(index)} className="bg-gradient-to-r from-[#159F2C] text-black px-6 py-2 max-sm:px-4 max-sm:py-2 rounded-lg to-[#DBFF00] max-sm:text-[10px]">BORROW</button></td>
                         <br />
                       </tr>
                     ))}

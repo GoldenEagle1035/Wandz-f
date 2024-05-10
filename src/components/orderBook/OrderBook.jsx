@@ -207,7 +207,7 @@ function OrderBook() {
                           </td>
                           <td className="text-[12px] max-sm:text-[11px]">{item.interest / 10} %</td>
                           <td className="text-[12px] max-sm:text-[11px]">{item.duration}</td>
-                          <td><button onClick={(e) => { onPlaceOffer(index) }} className="bg-gradient-to-r from-[#159F2C] text-black px-4 py-2 text-[12px] max-sm:text-[11px] rounded-lg to-[#DBFF00]">LEND</button></td>
+                          <td><button disabled={!account.address} onClick={(e) => { onPlaceOffer(index) }} className="bg-gradient-to-r from-[#159F2C] text-black px-4 py-2 text-[12px] max-sm:text-[11px] rounded-lg to-[#DBFF00]">LEND</button></td>
                           <br />
                         </tr>
                       )
