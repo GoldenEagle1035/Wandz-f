@@ -229,29 +229,41 @@ function Borrow() {
                 <span className="text-[14px] font-[400] text-white">Ŀ {formatUnits(loans.loans[selectedLend].amount, 18)}</span>
               </div>
             </div>
-            <div className="w-full h-[200px] flex flex-wrap gap-[20px] justify-center items-center overflow-y-auto p-[10px]">
-              {tokenIds.map((tokenId) => {
-                return (
-                  <div onClick={(e) => { onSelectToken(tokenId) }} className={`h-[180px] w-[130px] flex flex-col gap-[5px] items-center bg-[#D9D9D930] border ${Number(selectedTokenId) == Number(tokenId) ? "border-[#DBFF00]" : "border-[#DBFF0030]"}  rounded-[10px] p-[5px] cursor-pointer`}>
-                    <img className="flex-1 w-full object-cover object-center" src={defaultBanner} alt="" />
-                    <span className="text-[10px] text-white">{collections.find((collection) => collection.address.toLowerCase() == loans.loans[selectedLend].nftAddress.toLowerCase()).name}</span>
-                    <span className="text-[10px] text-white">#{Number(tokenId)}</span>
-                  </div>
-                )
-              })}
-            </div>
-            <div className="w-full flex justify-center">
-              <span className="text-[20px] font-[400] text-white">Ŀ {formatUnits(loans.loans[selectedLend].amount, 18)}</span>
-            </div>
-            <div className="w-full flex justify-center">
-              {isApproved ? <button disabled={acceptPending} onClick={(e) => { acceptOffer() }} className="bg-gradient-to-r from-[#159F2C] text-black px-6 py-2 max-sm:text-[11px] max-sm:px-4 rounded-lg to-[#DBFF00]">
-                BORROW {formatUnits(loans.loans[selectedLend].amount, 18)} {acceptPending ? <FontAwesomeIcon icon={faSpinner} size="sm" className="animate-spin" /> : <></>}</button> :
-                <button disabled={approvePending} onClick={(e) => { authorizeLSP8() }} className="bg-gradient-to-r from-[#159F2C] text-black px-6 py-2 max-sm:text-[11px] max-sm:px-4 rounded-lg to-[#DBFF00]">
-                  APPROVE {approvePending ? <FontAwesomeIcon icon={faSpinner} size="sm" className="animate-spin" /> : <></>}</button>
-              }
-            </div>
+            {tokenIds.length != 0 ?
+              <>
+                <div className="w-full h-[200px] flex flex-wrap gap-[20px] justify-center items-center overflow-y-auto p-[10px]">
+                  {tokenIds.map((tokenId) => {
+                    return (
+                      <div onClick={(e) => { onSelectToken(tokenId) }} className={`h-[180px] w-[130px] flex flex-col gap-[5px] items-center bg-[#D9D9D930] border ${Number(selectedTokenId) == Number(tokenId) ? "border-[#DBFF00]" : "border-[#DBFF0030]"}  rounded-[10px] p-[5px] cursor-pointer`}>
+                        <img className="flex-1 w-full object-cover object-center" src={defaultBanner} alt="" />
+                        <span className="text-[10px] text-white">{collections.find((collection) => collection.address.toLowerCase() == loans.loans[selectedLend].nftAddress.toLowerCase()).name}</span>
+                        <span className="text-[10px] text-white">#{Number(tokenId)}</span>
+                      </div>
+                    )
+                  })}
+                </div>
+                <div className="w-full flex justify-center">
+                  <span className="text-[20px] font-[400] text-white">Ŀ {formatUnits(loans.loans[selectedLend].amount, 18)}</span>
+                </div>
+                <div className="w-full flex justify-center">
+                  {isApproved ? <button disabled={acceptPending} onClick={(e) => { acceptOffer() }} className="bg-gradient-to-r from-[#159F2C] text-black px-6 py-2 max-sm:text-[11px] max-sm:px-4 rounded-lg to-[#DBFF00]">
+                    BORROW {formatUnits(loans.loans[selectedLend].amount, 18)} {acceptPending ? <FontAwesomeIcon icon={faSpinner} size="sm" className="animate-spin" /> : <></>}</button> :
+                    <button disabled={approvePending} onClick={(e) => { authorizeLSP8() }} className="bg-gradient-to-r from-[#159F2C] text-black px-6 py-2 max-sm:text-[11px] max-sm:px-4 rounded-lg to-[#DBFF00]">
+                      APPROVE {approvePending ? <FontAwesomeIcon icon={faSpinner} size="sm" className="animate-spin" /> : <></>}</button>
+                  }
+                </div>
+              </> :
+              <>
+                <div className="w-full flex justify-center">
+                  <span className="text-[20px] font-[400] text-[#f00]">No NFT of this collection were found</span>
+                </div>
+                <div className="w-full flex justify-center">
+                  <button onClick={(e) => { setSelectedLend(-1) }} className="bg-gradient-to-r from-[#159F2C] text-black px-6 py-2 max-sm:text-[11px] max-sm:px-4 rounded-lg to-[#DBFF00]">OK</button>
+                </div>
+              </>
+            }
           </div>
-        </div>
+        </div >
       }
     </>
   )
