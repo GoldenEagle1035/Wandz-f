@@ -56,6 +56,7 @@ export const useAutoConnect = () => {
     if (accountState.isConnected) {
       // user is connected, set walletName
       setWalletId(accountState.connector?.id ?? "");
+      localStorage.setItem(WANDZ_WALLET_STROAGE_KEY, accountState.connector?.id);
     } else {
       // user has disconnected, reset walletName
       localStorage.setItem(WAGMI_WALLET_STORAGE_KEY, JSON.stringify(""));
