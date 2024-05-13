@@ -34,7 +34,7 @@ function Lend() {
   const account = useAccount();
 
   const loans = useLoans();
-  const { collections } = useCollections();
+  const { collections, isLoading: isLoadingCollection } = useCollections();
 
   const onAddLend = () => {
     setAddCollectionAddress('');
@@ -151,7 +151,8 @@ function Lend() {
                   </thead>
 
                   <tbody>
-                    {collections.map((item, index) => {
+                    {isLoadingCollection && <FontAwesomeIcon icon={faSpinner} size="md" className="animate-spin" />}
+                    {!isLoadingCollection && collections.map((item, index) => {
                       return (
                         item.name.toLowerCase().includes(searchValue.toLowerCase()) && <tr className=" py-10 border-b-[1px] max-sm:px-4 border-[#a9a9a9d8]  ">
                           <td className="p-4 pl-4 max-sm:px-4 flex gap-2 items-center max-sm:text-[11px]">

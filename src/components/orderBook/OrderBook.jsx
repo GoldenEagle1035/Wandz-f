@@ -26,7 +26,7 @@ function OrderBook() {
   const account = useAccount();
 
   const loans = useLoans();
-  const { collections } = useCollections();
+  const { collections, isLoading: isLoadingCollection } = useCollections();
 
   const onPlaceOffer = (lendIndex) => {
     setOfferAmount('');
@@ -150,7 +150,8 @@ function OrderBook() {
                   </thead>
 
                   <tbody>
-                    {collections.map((item, index) => {
+                    {isLoadingCollection && <FontAwesomeIcon icon={faSpinner} size="md" className="animate-spin" />}
+                    {!isLoadingCollection && collections.map((item, index) => {
                       return (
                         item.name.toLowerCase().includes(searchValue.toLowerCase()) && <tr className=" py-10 border-b-[1px] border-[#a9a9a9d8]  ">
                           <td className="p-4 px-4 flex gap-2 items-center">

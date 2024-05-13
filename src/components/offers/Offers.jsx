@@ -26,7 +26,7 @@ function Offers() {
   const account = useAccount();
 
   const loans = useLoans();
-  const { collections } = useCollections();
+  const { collections, isLoading: isLoadingCollection } = useCollections();
 
   const onRevokeOffer = (lendIndex) => {
     setSelectedLend(lendIndex);
@@ -172,7 +172,8 @@ function Offers() {
               </div>
             </div>
           </div>
-          {loans.loans.filter((loan) => account.address && loan.lender.toLowerCase() == account.address.toLowerCase() && loan.amount != 0 && !loan.accepted && !loan.paid && !loan.liquidated).length != 0 &&
+          {isLoadingCollection && <FontAwesomeIcon icon={faSpinner} size="md" className="animate-spin" />}
+          {!isLoadingCollection && loans.loans.filter((loan) => account.address && loan.lender.toLowerCase() == account.address.toLowerCase() && loan.amount != 0 && !loan.accepted && !loan.paid && !loan.liquidated).length != 0 &&
             <div className="font-superLagendBoy flex flex-col gap-[20px] rounded-[30px] bg-[#383D7257] backdrop-blur-sm p-[30px]">
               <div className="flex items-center gap-[10px]">
                 <span className="w-3/12 text-[16px] font-bold text-white">COLLECTION</span>

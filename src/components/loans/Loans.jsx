@@ -28,7 +28,7 @@ function Loans() {
   const account = useAccount();
 
   const loans = useLoans();
-  const { collections } = useCollections();
+  const { collections, isLoading: isLoadingCollection } = useCollections();
 
   const { balance, isError, isLoading } = useAccountBalance(account.address);
 
@@ -188,7 +188,8 @@ function Loans() {
               </div>
             </div>
           </div>
-          {loans.loans.filter((loan) => account.address && loan.borrower.toLowerCase() == account.address.toLowerCase() && loan.accepted && !loan.paid && !loan.liquidated).length != 0 &&
+          {isLoadingCollection && <FontAwesomeIcon icon={faSpinner} size="md" className="animate-spin" />}
+          {!isLoadingCollection && loans.loans.filter((loan) => account.address && loan.borrower.toLowerCase() == account.address.toLowerCase() && loan.accepted && !loan.paid && !loan.liquidated).length != 0 &&
             <div className="font-superLagendBoy flex flex-col gap-[20px] rounded-[30px] bg-[#383D7257] bg-[#45291D50] backdrop-blur-xl p-[30px]">
               <div className="flex items-center gap-[10px]">
                 <span className="w-1/6 text-[16px] font-bold text-white">COLLECTION</span>
