@@ -47,20 +47,16 @@ const getInitialConnector = (
  */
 export const useAutoConnect = () => {
 
-  const [walletId, setWalletId] = useState();
-
   const connectState = useConnect();
   const accountState = useAccount();
 
   useEffect(() => {
     if (accountState.isConnected) {
       // user is connected, set walletName
-      setWalletId(accountState.connector?.id ?? "");
       localStorage.setItem(WANDZ_WALLET_STROAGE_KEY, accountState.connector?.id);
     } else {
       // user has disconnected, reset walletName
       localStorage.setItem(WAGMI_WALLET_STORAGE_KEY, JSON.stringify(""));
-      setWalletId("");
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [accountState.isConnected, accountState.connector?.name]);
@@ -75,12 +71,11 @@ export const useAutoConnect = () => {
     } else {
       walletId = wagmiWalletValue ?? "";
     }
-    setWalletId(walletId);
 
     const initialConnector = getInitialConnector(walletId, connectState.connectors);
 
-    if (initialConnector?.connector) {
+    if (initialConnector?.connector && !accountState.isConnected) {
       connectState.connect({ connector: initialConnector.connector, chainId: initialConnector.chainId });
     }
-  });
+  }, []);
 };

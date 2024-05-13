@@ -7,6 +7,8 @@ import { Route, Routes } from "react-router-dom"
 import Loans from "./components/loans/Loans";
 import VideoBG from "./components/global/VideoBG";
 
+window.Buffer = window.Buffer || require("buffer").Buffer;
+
 function App() {
   return (
     <div className="App">

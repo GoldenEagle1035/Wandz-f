@@ -9,9 +9,9 @@ import LendDlgBanner from "../../assets/background/lendDlgBanner.png";
 
 import { useAccount } from 'wagmi';
 import { parseEther, formatUnits } from 'viem';
-import { useLoans } from "../../hooks/wandz-eth";
+import { useLoans, useCollections } from "../../hooks/wandz-eth";
 
-import { collections } from "../../data/collections";
+// import { collections } from "../../data/collections";
 
 function OrderBook() {
 
@@ -26,6 +26,7 @@ function OrderBook() {
   const account = useAccount();
 
   const loans = useLoans();
+  const { collections } = useCollections();
 
   const onPlaceOffer = (lendIndex) => {
     setOfferAmount('');

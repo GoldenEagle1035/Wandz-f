@@ -9,14 +9,20 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 import defaultBanner from "../../assets/banners/default.webp";
 
-import { collections } from "../../data/collections";
+// import { collections } from "../../data/collections";
 
 import { useAccount } from 'wagmi';
 import { readContract, writeContract } from '@wagmi/core'
 import { parseEther, formatUnits } from 'viem';
-import { useLoans } from "../../hooks/wandz-eth";
+import { useLoans, useCollections } from "../../hooks/wandz-eth";
 
 import lsp8Abi from '../../lukso/abis/lsp8_abi.json';
+
+import { ERC725 } from '@erc725/erc725.js';
+import lsp4Schema from '@erc725/erc725.js/schemas/LSP4DigitalAsset.json';
+import { INTERFACE_IDS, ERC725YDataKeys } from '@lukso/lsp-smart-contracts';
+
+import axios from 'axios';
 
 function Borrow() {
 
@@ -27,11 +33,14 @@ function Borrow() {
   const [acceptPending, setAcceptPending] = useState(false);
   const [approvePending, setApprovePending] = useState(false);
 
+  const [tokenImages, setTokenImages] = useState([]);
+
   const [searchValue, setSearchValue] = useState('');
 
   const account = useAccount();
 
   const loans = useLoans();
+  const { collections } = useCollections();
 
   const onAcceptOffer = (lendIndex) => {
     setSelectedTokenId('-1');
@@ -94,6 +103,36 @@ function Borrow() {
     setApprovePending(false);
   }
 
+  const fetchTokenIdMetadata = async (nftAddress, tokenID) => {
+    try {
+      // Get the encoded asset metadata
+      const tokenIdMetadata = await readContract({
+        address: nftAddress,
+        abi: lsp8Abi,
+        functionName: 'getDataForTokenId',
+        args: [tokenID, ERC725YDataKeys.LSP4['LSP4Metadata']]
+      });
+      console.log(tokenIdMetadata);
+
+      const erc725js = new ERC725(lsp4Schema);
+
+      // Decode the metadata
+      const decodedMetadata = erc725js.decodeData([
+        {
+          keyName: 'LSP4Metadata',
+          value: tokenIdMetadata,
+        },
+      ]);
+
+      const metadataUrl = decodedMetadata[0].value.url.replace("ipfs://", "https://api.universalprofile.cloud/ipfs/");
+      const data = await axios.get(metadataUrl);
+      return data.data.LSP4Metadata.image[0][0].url.replace("ipfs://", "https://api.universalprofile.cloud/ipfs/");
+    } catch (error) {
+      return "";
+      console.log(error);
+    }
+  }
+
   const fetchTokenIds = async () => {
     if (account.address) {
       try {
@@ -103,7 +142,13 @@ function Borrow() {
           functionName: 'tokenIdsOf',
           args: [account.address]
         });
-        console.log("tokenIds:", tokenIds);
+
+        let tempUrls = [];
+        for (let i = 0; i < tokenIds.length; i++) {
+          const imgUrl = await fetchTokenIdMetadata(loans.loans[selectedLend].nftAddress, tokenIds[i]);
+          tempUrls.push(imgUrl);
+        }
+        setTokenImages(tempUrls);
         setTokenIds(tokenIds);
       } catch (error) {
         console.log(error);
@@ -112,6 +157,8 @@ function Borrow() {
   }
 
   useEffect(() => {
+    fetchTokenIdMetadata("0x7c6118ba719a62d40ce6c9580f96306a558cda6f", "0x0000000000000000000000000000000000000000000000000000000000000001")
+
     if (selectedLend != -1) {
       fetchTokenIds();
     }
@@ -168,7 +215,7 @@ function Borrow() {
                   </thead>
                   <tbody>
                     {loans.loans.map((item, index) => (
-                      item.amount != 0 && !item.accepted && !item.paid && !item.liquidated && collections.find((collection) => collection.address.toLowerCase() == item.nftAddress.toLowerCase()).name.toLowerCase().includes(searchValue.toLowerCase()) &&
+                      item.amount != 0 && !item.accepted && !item.paid && !item.liquidated && collections.find((collection) => collection.address.toLowerCase() == item.nftAddress.toLowerCase()) && collections.find((collection) => collection.address.toLowerCase() == item.nftAddress.toLowerCase()).name.toLowerCase().includes(searchValue.toLowerCase()) &&
                       <tr className=" py-10 border-b-[1px] border-[#a9a9a9d8] max-sm:px-4  ">
                         <td className="p-4 pl-4 flex gap-2 items-center max-sm:text-[11px] max-sm:px-4">
                           <span className="max-sm:w-6 ">
@@ -234,10 +281,13 @@ function Borrow() {
             {tokenIds.length != 0 ?
               <>
                 <div className="w-full h-[200px] flex flex-wrap gap-[20px] justify-center items-center overflow-y-auto p-[10px]">
-                  {tokenIds.map((tokenId) => {
+                  {tokenIds.map((tokenId, index) => {
                     return (
                       <div onClick={(e) => { onSelectToken(tokenId) }} className={`h-[180px] w-[130px] flex flex-col gap-[5px] items-center bg-[#D9D9D930] border ${Number(selectedTokenId) == Number(tokenId) ? "border-[#DBFF00]" : "border-[#DBFF0030]"}  rounded-[10px] p-[5px] cursor-pointer`}>
-                        <img className="flex-1 w-full object-cover object-center" src={defaultBanner} alt="" />
+                        {tokenImages[index] ?
+                          <img className="flex-1 w-full object-cover object-center" src={tokenImages[index]} alt="" /> :
+                          <img className="flex-1 w-full object-cover object-center" src={defaultBanner} alt="" />
+                        }
                         <span className="text-[10px] text-white">{collections.find((collection) => collection.address.toLowerCase() == loans.loans[selectedLend].nftAddress.toLowerCase()).name}</span>
                         <span className="text-[10px] text-white">#{Number(tokenId)}</span>
                       </div>

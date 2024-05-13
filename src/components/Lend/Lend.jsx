@@ -10,9 +10,9 @@ import LendDlgBanner from "../../assets/background/lendDlgBanner.png";
 
 import { useAccount } from 'wagmi';
 import { parseEther, formatUnits } from 'viem';
-import { useLoans } from "../../hooks/wandz-eth";
+import { useLoans, useCollections } from "../../hooks/wandz-eth";
 
-import { collections } from "../../data/collections";
+// import { collections } from "../../data/collections";
 
 function Lend() {
 
@@ -34,6 +34,7 @@ function Lend() {
   const account = useAccount();
 
   const loans = useLoans();
+  const { collections } = useCollections();
 
   const onAddLend = () => {
     setAddCollectionAddress('');
@@ -169,7 +170,7 @@ function Lend() {
                           <td className="max-sm:text-[11px] pl-4 max-sm:px-4">
                             <span className="text-lg mr-1">Ŀ</span>{loans.loans.filter((loan) => loan.nftAddress.toLowerCase() == item.address.toLowerCase() && loan.amount != 0 && !loan.accepted && !loan.paid && !loan.liquidated).length == 0 ? 0 : formatUnits(loans.loans.filter((loan) => loan.nftAddress.toLowerCase() == item.address.toLowerCase() && loan.amount != 0 && !loan.accepted && !loan.paid && !loan.liquidated).sort((a, b) => a.amount - b.amount).at(0).amount, 18)} <br />
                             <span className="text-[9px] max-sm:text-[8px] text-[#B5B5B5]">
-                              Ŀ {loans.loans.filter((loan) => loan.nftAddress.toLowerCase() == item.address.toLowerCase() && loan.amount != 0 && !loan.accepted && !loan.paid && !loan.liquidated).length == 0 ? 0 :formatUnits(loans.loans.filter((loan) => loan.nftAddress.toLowerCase() == item.address.toLowerCase() && loan.amount != 0 && !loan.accepted && !loan.paid && !loan.liquidated).at(loans.loans.filter((loan) => loan.nftAddress.toLowerCase() == item.address.toLowerCase() && loan.amount != 0 && !loan.accepted && !loan.paid && !loan.liquidated).length - 1).amount, 18)} last loan
+                              Ŀ {loans.loans.filter((loan) => loan.nftAddress.toLowerCase() == item.address.toLowerCase() && loan.amount != 0 && !loan.accepted && !loan.paid && !loan.liquidated).length == 0 ? 0 : formatUnits(loans.loans.filter((loan) => loan.nftAddress.toLowerCase() == item.address.toLowerCase() && loan.amount != 0 && !loan.accepted && !loan.paid && !loan.liquidated).at(loans.loans.filter((loan) => loan.nftAddress.toLowerCase() == item.address.toLowerCase() && loan.amount != 0 && !loan.accepted && !loan.paid && !loan.liquidated).length - 1).amount, 18)} last loan
                             </span>{" "}
                           </td>
                           <td className="max-sm:text-[11px] pl-4 max-sm:px-4">{item.interest / 10}%</td>

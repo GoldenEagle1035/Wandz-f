@@ -1,8 +1,8 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 import { QRCodeSVG } from "qrcode.react";
 import CopyToClipboard from "react-copy-to-clipboard";
-import { useDisconnect, useSwitchNetwork } from "wagmi";
+import { useAccount, useDisconnect, useSwitchNetwork } from "wagmi";
 import {
   ArrowLeftOnRectangleIcon,
   ArrowTopRightOnSquareIcon,
@@ -16,6 +16,9 @@ import { Address, Balance, BlockieAvatar } from "../../components/wandz-eth";
 import { useAutoConnect, useNetworkColor } from "../../hooks/wandz-eth";
 import { getBlockExplorerAddressLink, getTargetNetwork } from "../../utils/wandz-eth/network";
 
+import { ERC725 } from '@erc725/erc725.js';
+import lsp3ProfileSchema from '@erc725/erc725.js/schemas/LSP3ProfileMetadata.json';
+
 /**
  * Custom Wagmi Connect Button (watch balance + custom design)
  */
@@ -24,8 +27,50 @@ export const RainbowKitCustomConnectButton = () => {
   const networkColor = useNetworkColor();
   const configuredNetwork = getTargetNetwork();
   const { disconnect } = useDisconnect();
+  const account = useAccount();
   const { switchNetwork } = useSwitchNetwork();
   const [addressCopied, setAddressCopied] = useState(false);
+
+  const [profileInfo, setProfileInfo] = useState();
+  const [profileImage, setProfileImage] = useState("");
+
+  const fetchProfileMetadata = async () => {
+
+    try {
+      const erc725js = new ERC725(lsp3ProfileSchema, account.address, 'https://rpc.mainnet.lukso.network',
+        {
+          ipfsGateway: 'https://api.universalprofile.cloud/ipfs',
+        },
+      );
+
+      const profileMetaData = await erc725js.fetchData('LSP3Profile');
+      console.log(profileMetaData);
+
+      for(let i = 0; i < profileMetaData.value.LSP3Profile.profileImage.length; i++) {
+        const image = new Image();
+        const url = profileMetaData.value.LSP3Profile.profileImage[i].url.replace("ipfs://", "https://api.universalprofile.cloud/ipfs/");
+        image.src = url;
+        image.onload = () => {
+          setProfileImage(url);
+        }
+      }
+
+      setProfileInfo({
+        name: profileMetaData.value.LSP3Profile.name,
+        avatar: profileMetaData.value.LSP3Profile.profileImage
+      })
+
+    } catch (error) {
+      setProfileInfo();
+      console.log(error);
+    }
+  }
+
+  useEffect(() => {
+    if (account.address) {
+      fetchProfileMetadata();
+    }
+  }, [account.address])
 
   return (
     <ConnectButton.Custom>
@@ -78,8 +123,8 @@ export const RainbowKitCustomConnectButton = () => {
                     style={{ position: "relative", overflow: "hidden" }}
                     onClick={() => disconnect()}
                   >
-                    <BlockieAvatar address={account.address} size={30} ensImage={account.ensAvatar} />
-                    <span className="ml-2 mr-1">{account.displayName}</span>
+                    <BlockieAvatar address={account.address} size={30} ensImage={profileImage ? profileImage : account.ensAvatar} />
+                    <span className="ml-2 mr-1">{profileInfo ? profileInfo.name : account.displayName}</span>
                   </button>
                   {/* <CopyToClipboard
                     text={account.address}

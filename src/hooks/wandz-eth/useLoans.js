@@ -89,8 +89,6 @@ export const useLoans = () => {
             }
         })
         setLoans(tmpLoans);
-
-        console.log(tmpLoans);
     }
 
     useEffect(() => {

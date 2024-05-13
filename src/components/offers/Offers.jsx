@@ -7,13 +7,13 @@ import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 import { CSVLink } from "react-csv";
 import LendDlgBanner from "../../assets/background/lendDlgBanner.png";
 
-import { collections } from "../../data/collections";
-
 import { useAccount } from 'wagmi';
 import { readContract } from '@wagmi/core'
 
 import { parseEther, formatUnits } from 'viem';
-import { useLoans } from "../../hooks/wandz-eth";
+import { useLoans, useCollections } from "../../hooks/wandz-eth";
+
+// import { collections } from "../../data/collections";
 
 function Offers() {
 
@@ -26,6 +26,7 @@ function Offers() {
   const account = useAccount();
 
   const loans = useLoans();
+  const { collections } = useCollections();
 
   const onRevokeOffer = (lendIndex) => {
     setSelectedLend(lendIndex);
@@ -57,7 +58,7 @@ function Offers() {
     let data = [];
     loans.loans.filter((loan) => account.address && loan.lender.toLowerCase() == account.address.toLowerCase() && loan.amount != 0 && !loan.accepted && !loan.paid && !loan.liquidated).map((loan) => {
       data.push({
-        COLLECTION: collections.find((collection) => collection.address.toLowerCase() == loan.nftAddress.toLowerCase()).name, 
+        COLLECTION: collections.find((collection) => collection.address.toLowerCase() == loan.nftAddress.toLowerCase()).name,
         Offer: 'Ŀ' + formatUnits(loan.amount, 18),
         Reward: 'Ŀ' + formatUnits(loan.amount * loan.interest / 1000, 18),
         APY: loan.interest / 10 + "%",

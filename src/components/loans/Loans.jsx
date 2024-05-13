@@ -7,12 +7,12 @@ import { faLessThanEqual, faSpinner } from "@fortawesome/free-solid-svg-icons";
 import { CSVLink } from "react-csv";
 import LendDlgBanner from "../../assets/background/lendDlgBanner.png";
 
-import { collections } from "../../data/collections";
-
 import { useAccount } from 'wagmi';
 import { readContract } from '@wagmi/core'
 import { parseEther, formatUnits } from 'viem';
-import { useLoans, useAccountBalance } from "../../hooks/wandz-eth";
+import { useLoans, useCollections, useAccountBalance } from "../../hooks/wandz-eth";
+
+// import { collections } from "../../data/collections";
 
 function Loans() {
 
@@ -28,6 +28,7 @@ function Loans() {
   const account = useAccount();
 
   const loans = useLoans();
+  const { collections } = useCollections();
 
   const { balance, isError, isLoading } = useAccountBalance(account.address);
 

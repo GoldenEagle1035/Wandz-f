@@ -8,7 +8,7 @@ import Button from "./Button";
 import Bg from "../../assets/background/video.webp";
 import { RainbowKitCustomConnectButton } from "../wandz-eth";
 import { useAccount } from 'wagmi';
-import { useLoans } from "../../hooks/wandz-eth";
+import { useLoans, useCollections } from "../../hooks/wandz-eth";
 
 function Nav({ btnText }) {
   const [showMenu, setShowMenu] = useState(false);
@@ -17,6 +17,7 @@ function Nav({ btnText }) {
   const account = useAccount();
 
   const loans = useLoans();
+  const collections = useCollections();
 
   const toggleMenu = () => {
     setShowMenu(!showMenu);
