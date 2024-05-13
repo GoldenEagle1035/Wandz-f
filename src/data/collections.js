@@ -407,8 +407,14 @@ export const collection_preinfo = [
     {
         name: "DWOOBz",
         address: "0x7c6118ba719a62d40ce6c9580f96306a558cda6f",
-        interest: 2200,
-        duration: 604800
+        interest: 2600,
+        duration: 1382400
+    },
+    {
+        name: "DWOOBz",
+        address: "0x7c6118ba719a62d40ce6c9580f96306a558cda6f",
+        interest: 3200,
+        duration: 259200
     },
     {
         name: "Apex Deities",
