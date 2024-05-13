@@ -214,7 +214,7 @@ function OrderBook() {
                             {item.forResult}
                           </span> */}
                           </td>
-                          <td className="text-[12px] max-sm:text-[11px]">{item.interest / 10} %</td>
+                          <td className="text-[12px] max-sm:text-[11px]">{item.interest / 10 - 100} %</td>
                           <td className="text-[12px] max-sm:text-[11px]">{item.duration}</td>
                           <td><button disabled={!account.address} onClick={(e) => { onPlaceOffer(index) }} className="bg-gradient-to-r from-[#159F2C] text-black px-4 py-2 text-[12px] max-sm:text-[11px] rounded-lg to-[#DBFF00]">LEND</button></td>
                           <br />
@@ -243,7 +243,7 @@ function OrderBook() {
             <div className="w-full flex gap-[20px] justify-between">
               <div className="flex flex-col items-center">
                 <span className="text-[10px] font-[400] text-white">APY</span>
-                <span className="text-[14px] font-[400] text-[#DBFF00]">{collections[selectedLend].interest / 10}%</span>
+                <span className="text-[14px] font-[400] text-[#DBFF00]">{collections[selectedLend].interest / 10 - 100}%</span>
               </div>
               <div className="flex flex-col items-center">
                 <span className="text-[10px] font-[400] text-white">DURATION</span>

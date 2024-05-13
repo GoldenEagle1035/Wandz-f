@@ -244,7 +244,7 @@ function Borrow() {
                             Ŀ {formatUnits(loans.loans.filter((t_item) => t_item.nftAddress.toLowerCase() == item.nftAddress.toLowerCase() && t_item.amount != 0 && !t_item.accepted && !t_item.paid && !t_item.liquidated).at(loans.loans.filter((t_item) => t_item.nftAddress.toLowerCase() == item.nftAddress.toLowerCase() && t_item.amount != 0 && !t_item.accepted && !t_item.paid && !t_item.liquidated).length - 1).amount, 18)} last loan taken
                           </span>{" "}
                         </td>
-                        <td className="max-sm:text-[11px] max-sm:px-4 pl-4">{item.interest / 10} %</td>
+                        <td className="max-sm:text-[11px] max-sm:px-4 pl-4">{item.interest / 10 - 100} %</td>
                         <td className="pl-4 max-sm:px-4 max-sm:text-[11px]">{(item.duration / 86400).toFixed(2)}d</td>
                         <td><button disabled={!account.address} onClick={(e) => onAcceptOffer(index)} className="bg-gradient-to-r from-[#159F2C] text-black px-6 py-2 max-sm:px-4 max-sm:py-2 rounded-lg to-[#DBFF00] max-sm:text-[10px]">BORROW</button></td>
                         <br />

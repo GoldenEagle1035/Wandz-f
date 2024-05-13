@@ -181,7 +181,7 @@ function Lend() {
                               Ŀ {loans.loans.filter((loan) => loan.nftAddress.toLowerCase() == item.address.toLowerCase() && loan.amount != 0 && !loan.accepted && !loan.paid && !loan.liquidated).length == 0 ? 0 : formatUnits(loans.loans.filter((loan) => loan.nftAddress.toLowerCase() == item.address.toLowerCase() && loan.amount != 0 && !loan.accepted && !loan.paid && !loan.liquidated).at(loans.loans.filter((loan) => loan.nftAddress.toLowerCase() == item.address.toLowerCase() && loan.amount != 0 && !loan.accepted && !loan.paid && !loan.liquidated).length - 1).amount, 18)} last loan
                             </span>{" "}
                           </td>
-                          <td className="max-sm:text-[11px] pl-4 max-sm:px-4">{item.interest / 10}%</td>
+                          <td className="max-sm:text-[11px] pl-4 max-sm:px-4">{item.interest / 10 - 100}%</td>
                           <td className="ml-6 max-sm:text-[11px] pl-4 max-sm:px-4">{(item.duration / 86400).toFixed(2)}d</td>
                           <td><button disabled={!account.address} onClick={(e) => { onPlaceOffer(index) }} className="bg-gradient-to-r from-[#159F2C] text-black px-6 py-2 max-sm:text-[11px] max-sm:px-4 rounded-lg to-[#DBFF00]">LEND</button></td>
                           <br />
@@ -241,7 +241,7 @@ function Lend() {
             <div className="w-full flex gap-[20px] justify-between">
               <div className="flex flex-col items-center">
                 <span className="text-[10px] font-[400] text-white">APY</span>
-                <span className="text-[14px] font-[400] text-[#DBFF00]">{collections[selectedLend].interest / 10}%</span>
+                <span className="text-[14px] font-[400] text-[#DBFF00]">{collections[selectedLend].interest / 10 - 100}%</span>
               </div>
               <div className="flex flex-col items-center">
                 <span className="text-[10px] font-[400] text-white">DURATION</span>
