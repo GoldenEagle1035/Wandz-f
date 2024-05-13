@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import "./nav.css";
 import MobileNav from "./MobileNav";
 import { MdMenu } from "react-icons/md";
@@ -8,7 +8,8 @@ import Button from "./Button";
 import Bg from "../../assets/background/video.webp";
 import { RainbowKitCustomConnectButton } from "../wandz-eth";
 import { useAccount } from 'wagmi';
-import { useLoans, useCollections } from "../../hooks/wandz-eth";
+
+import { LoansContext } from "../../context/loan-context";
 
 function Nav({ btnText }) {
   const [showMenu, setShowMenu] = useState(false);
@@ -16,8 +17,7 @@ function Nav({ btnText }) {
 
   const account = useAccount();
 
-  const loans = useLoans();
-  const collections = useCollections();
+  const loans = useContext(LoansContext);
 
   const toggleMenu = () => {
     setShowMenu(!showMenu);

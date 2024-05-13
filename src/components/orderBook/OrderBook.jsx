@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import VideoBG from "../global/VideoBG";
 import Nav from "../global/Nav";
 import { FiSearch, FiFilter } from "react-icons/fi";
@@ -9,7 +9,9 @@ import LendDlgBanner from "../../assets/background/lendDlgBanner.png";
 
 import { useAccount } from 'wagmi';
 import { parseEther, formatUnits } from 'viem';
-import { useLoans, useCollections } from "../../hooks/wandz-eth";
+
+import { LoansContext } from "../../context/loan-context";
+import { CollectionsContext } from "../../context/collection-context";
 
 // import { collections } from "../../data/collections";
 
@@ -25,8 +27,8 @@ function OrderBook() {
 
   const account = useAccount();
 
-  const loans = useLoans();
-  const { collections, isLoading: isLoadingCollection } = useCollections();
+  const loans = useContext(LoansContext);
+  const { collections, isLoading: isLoadingCollection } = useContext(CollectionsContext);
 
   const onPlaceOffer = (lendIndex) => {
     setOfferAmount('');
@@ -150,7 +152,12 @@ function OrderBook() {
                   </thead>
 
                   <tbody>
-                    {isLoadingCollection && <FontAwesomeIcon icon={faSpinner} size="md" className="animate-spin" />}
+                    {isLoadingCollection &&
+                      <div className="flex gap-[20px] justify-center items-center text-white">
+                        <FontAwesomeIcon icon={faSpinner} size="md" className="animate-spin" />
+                        <span>Loading</span>
+                      </div>
+                    }
                     {!isLoadingCollection && collections.map((item, index) => {
                       return (
                         item.name.toLowerCase().includes(searchValue.toLowerCase()) && <tr className=" py-10 border-b-[1px] border-[#a9a9a9d8]  ">

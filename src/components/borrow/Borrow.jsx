@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import VideoBG from "../global/VideoBG";
 import Nav from "../global/Nav";
 import { FiSearch, FiFilter } from "react-icons/fi";
@@ -14,7 +14,9 @@ import defaultBanner from "../../assets/banners/default.webp";
 import { useAccount } from 'wagmi';
 import { readContract, writeContract } from '@wagmi/core'
 import { parseEther, formatUnits } from 'viem';
-import { useLoans, useCollections } from "../../hooks/wandz-eth";
+
+import { LoansContext } from "../../context/loan-context";
+import { CollectionsContext } from "../../context/collection-context";
 
 import lsp8Abi from '../../lukso/abis/lsp8_abi.json';
 
@@ -39,8 +41,8 @@ function Borrow() {
 
   const account = useAccount();
 
-  const loans = useLoans();
-  const { collections, isLoading: isLoadingCollection } = useCollections();
+  const loans = useContext(LoansContext);
+  const { collections, isLoading: isLoadingCollection } = useContext(CollectionsContext);
 
   const onAcceptOffer = (lendIndex) => {
     setSelectedTokenId('-1');
@@ -214,7 +216,12 @@ function Borrow() {
                     </tr>
                   </thead>
                   <tbody>
-                    {isLoadingCollection && <FontAwesomeIcon icon={faSpinner} size="md" className="animate-spin" />}
+                    {isLoadingCollection &&
+                      <div className="flex gap-[20px] justify-center items-center text-white">
+                        <FontAwesomeIcon icon={faSpinner} size="md" className="animate-spin" />
+                        <span>Loading</span>
+                      </div>
+                    }
                     {!isLoadingCollection && loans.loans.map((item, index) => (
                       item.amount != 0 && !item.accepted && !item.paid && !item.liquidated && collections.find((collection) => collection.address.toLowerCase() == item.nftAddress.toLowerCase()) && collections.find((collection) => collection.address.toLowerCase() == item.nftAddress.toLowerCase()).name.toLowerCase().includes(searchValue.toLowerCase()) &&
                       <tr className=" py-10 border-b-[1px] border-[#a9a9a9d8] max-sm:px-4  ">

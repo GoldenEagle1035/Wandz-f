@@ -1,15 +1,14 @@
-import { useEffect, useState } from "react";
+import React, { createContext, useEffect, useState, useContext } from "react";
 
 import { useAccount, useContractRead, useContractWrite } from 'wagmi';
 import { readContracts } from '@wagmi/core'
 
-import lendAbi from "../../lukso/abis/lend_abi.json";
+import lendAbi from "../lukso/abis/lend_abi.json";
 
 const lendAddress = '0x2fc0437A1B4D470D745c6896354EA88c48961fF2';
 const adminAddress = '0xa842a38CD758f8dE8537C5CBcB2006DB0250eC7C';
 
-export const useLoans = () => {
-
+function useLoansContext() {
     const [refetch, setRefetch] = useState(false);
 
     const [loans, setLoans] = useState([]);
@@ -59,6 +58,9 @@ export const useLoans = () => {
     })
 
     const fetchLoans = async () => {
+
+        console.log("fetch Loans ...");
+
         let tmpLoans = [];
         let contracts = [];
         for (let i = 0; i < loanIdCounter; i++) {
@@ -110,4 +112,17 @@ export const useLoans = () => {
     }, [loanIdCounter, refetch])
 
     return { lendAddress, adminAddress, loans, loanIdCounter, offerLoan, revokeLoan, acceptLoan, repayLoan, liquidateLoan, extendLoan };
+}
+export const LoansContext = createContext();
+
+export const LoansProvider = (props) => {
+    const loansContext = useLoansContext();
+
+    return (
+        <div>
+            <LoansContext.Provider value={{ ...loansContext }}>
+                {props.children}
+            </LoansContext.Provider>
+        </div>
+    );
 };

@@ -407,235 +407,235 @@ export const collection_preinfo = [
     {
         name: "DWOOBz",
         address: "0x7c6118ba719a62d40ce6c9580f96306a558cda6f",
-        interest: 1200,
+        interest: 2200,
         duration: 604800
     },
     {
         name: "Apex Deities",
         address: "0xb4e32a20aa27b5891bfa592c392c9858a1dd3945",
-        interest: 1200,
+        interest: 2200,
         duration: 604800
     },
     {
         name: "Blok",
         address: "0x1f35651b7f36ec91804b6cc603652a12d7cb87c6",
-        interest: 1200,
+        interest: 2200,
         duration: 604800
     },
     {
         name: "Burnt Pix",
         address: "0x3983151e0442906000dab83c8b1cf3f2d2535f82",
-        interest: 1200,
+        interest: 2200,
         duration: 604800
     },
     {
         name: "Burnt PunX",
         address: "0x66b738baea30243bfe4c168a11e79dd1f930e59c",
-        interest: 1200,
+        interest: 2200,
         duration: 604800
     },
     {
         name: "CandyZap",
         address: "0xd1d18961ffeba233ba023e25e602f842d4a3d668",
-        interest: 1200,
+        interest: 2200,
         duration: 604800
     },
     {
         name: "Confluence",
         address: "0x878b22245ee33456492e294fd265767c9a1b65e9",
-        interest: 1200,
+        interest: 2200,
         duration: 604800
     },
     {
         name: "DJ Pigs",
         address: "0xa78a3611602ca3345b8dce25c38a784ab64300ff",
-        interest: 1200,
+        interest: 2200,
         duration: 604800
     },
     {
         name: "Deep Jackin Lukso Fam",
         address: "0x81382873862adea987ed0a303c3abb33cf9a7867",
-        interest: 1200,
+        interest: 2200,
         duration: 604800
     },
     {
         name: "GM Beans",
         address: "0x33517e5fedec388da59125fbabea6e2f6395c510",
-        interest: 1200,
+        interest: 2200,
         duration: 604800
     },
     {
         name: "Genesis Perk",
         address: "0x9131820e8ecdc7e514f9d98567741744363e51d3",
-        interest: 1200,
+        interest: 2200,
         duration: 604800
     },
     {
         name: "Genesis Phygital",
         address: "0x74bfa75bd644d8f2a266041c5a7499fb6ca3acbb",
-        interest: 1200,
+        interest: 2200,
         duration: 604800
     },
     {
         name: "L.U.X Bots",
         address: "0xe4732d3ff9a85abb6fcb274108375994a14d972c",
-        interest: 1200,
+        interest: 2200,
         duration: 604800
     },
     {
         name: "LUKSO CITIES",
         address: "0xe776b6cdeb394f03ec86578f8544b8e34a69bb2c",
-        interest: 1200,
+        interest: 2200,
         duration: 604800
     },
     {
         name: "LY-n-X",
         address: "0x92f9210f1b5c542ee868f954f96a6790632b56a7",
-        interest: 1200,
+        interest: 2200,
         duration: 604800
     },
     {
         name: "Last Light",
         address: "0x53f2e2d9effcb005a919ce9ba4ddcec1e981872c",
-        interest: 1200,
+        interest: 2200,
         duration: 604800
     },
     {
         name: "Lazy Buns",
         address: "0x23ab529af53405e15932b1d0452a61a3fa908393",
-        interest: 1200,
+        interest: 2200,
         duration: 604800
     },
     {
         name: "Lukso Citizens",
         address: "0x754a5d007d5f1188ef0db892ee115a7c01b38fa3",
-        interest: 1200,
+        interest: 2200,
         duration: 604800
     },
     {
         name: "Lukso Creators",
         address: "0x74654920356257981f6b63a65ad72d4d9bc21929",
-        interest: 1200,
+        interest: 2200,
         duration: 604800
     },
     {
         name: "Luksouls",
         address: "0x719b36427c9868162df1b4c9e6ddc28f5c36d72d",
-        interest: 1200,
+        interest: 2200,
         duration: 604800
     },
     {
         name: "Lyxen Demons",
         address: "0x669c42149f9a54a0ee63b4527f8d066247f5dbd0",
-        interest: 1200,
+        interest: 2200,
         duration: 604800
     },
     {
         name: "Lyxora Angels",
         address: "0xbc96cf101ab8fbd710b6ad35754492c543fa4166",
-        interest: 1200,
+        interest: 2200,
         duration: 604800
     },
     {
         name: "Maisons",
         address: "0xec04f0585d72368e711419ab951d1a1bafc36081",
-        interest: 1200,
+        interest: 2200,
         duration: 604800
     },
     {
         name: "Meta Ears",
         address: "0xfecc2bcc7d406b0f66228eac24bca1e7cfce0b72",
-        interest: 1200,
+        interest: 2200,
         duration: 604800
     },
     {
         name: "ONER",
         address: "0x156d7d4a7fdf5f5d4d7d3988b68057eda883b35f",
-        interest: 1200,
+        interest: 2200,
         duration: 604800
     },
     {
         name: "ORBS",
         address: "0x4200690033c5ea89c936d247876f89f40a588b4d",
-        interest: 1200,
+        interest: 2200,
         duration: 604800
     },
     {
         name: "PXYLS",
         address: "0xf651b88925c0b6c81ad6f658a2f104226d837f60",
-        interest: 1200,
+        interest: 2200,
         duration: 604800
     },
     {
         name: "Pangolyx",
         address: "0xcdd480a4d3a9961be62ef40b01bf86175b341fbb",
-        interest: 1200,
+        interest: 2200,
         duration: 604800
     },
     {
         name: "Platties",
         address: "0x5021e9ed50d8c71e3d74c0de7964342aaa1a0f62",
-        interest: 1200,
+        interest: 2200,
         duration: 604800
     },
     {
         name: "Shadoos",
         address: "0xf6acd4cb17d50e1cdbb18822ad59187f2349f2d9",
-        interest: 1200,
+        interest: 2200,
         duration: 604800
     },
     {
         name: "Shattered Sigils",
         address: "0xf236c96898ca99c18fea7096436c8a0d062f56de",
-        interest: 1200,
+        interest: 2200,
         duration: 604800
     },
     {
         name: "THE KEEZ RING",
         address: "0xfd3bc42ab7c15b91dabba5966cbb6e519d798588",
-        interest: 1200,
+        interest: 2200,
         duration: 604800
     },
     {
         name: "Tri-Lines",
         address: "0xa46875d08187b7941d63162e6a8418b75a476f49",
-        interest: 1200,
+        interest: 2200,
         duration: 604800
     },
     {
         name: "Universal Page Name",
         address: "0x39456bcd4d450e55f851f97c30df828a4e1f6c66",
-        interest: 1200,
+        interest: 2200,
         duration: 604800
     },
     {
         name: "Universal Page Pro",
         address: "0x5599d0ae8576250db2b9a9975fd3db1f6399b4fd",
-        interest: 1200,
+        interest: 2200,
         duration: 604800
     },
     {
         name: "chillwhales",
         address: "0x86e817172b5c07f7036bf8aa46e2db9063743a83",
-        interest: 1200,
+        interest: 2200,
         duration: 604800
     },
     {
         name: "burntwhales",
         address: "0x8bf5bf6c2f11643e75dc4199af2c7d39b1aefcd3",
-        interest: 1200,
+        interest: 2200,
         duration: 604800
     },
     {
         name: "WOLVES OF LUKSO",
         address: "0x9f5368b8ecaaad715013654a6206003fcd38e3ba",
-        interest: 1200,
+        interest: 2200,
         duration: 604800
     },
     {
         name: "UniversalSwaps V1 Positions NFT-V1",
         address: "0x855bb3e40261a73dd4fc691fc024cc7d60794d00",
-        interest: 1200,
+        interest: 2200,
         duration: 604800
     }
 ]

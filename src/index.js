@@ -10,6 +10,9 @@ import { BlockieAvatar } from "./components/wandz-eth";
 import { wagmiConfig } from "./services/web3/wagmiConfig";
 import { appChains } from "./services/web3/wagmiConnectors";
 
+import { LoansProvider } from "./context/loan-context";
+import { CollectionsProvider } from './context/collection-context';
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
@@ -21,7 +24,11 @@ root.render(
         theme={darkTheme()}  // lightTheme()
       >
         <BrowserRouter>
-          <App />
+          <LoansProvider>
+            <CollectionsProvider>
+              <App />
+            </CollectionsProvider>
+          </LoansProvider>
         </BrowserRouter>
       </RainbowKitProvider>
     </WagmiConfig>

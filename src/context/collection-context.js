@@ -1,19 +1,20 @@
-import { useEffect, useState } from "react";
+import React, { createContext, useEffect, useState, useContext } from "react";
 
 import { ERC725 } from '@erc725/erc725.js';
 import lsp4Schema from '@erc725/erc725.js/schemas/LSP4DigitalAsset.json';
 
-import { collection_preinfo } from '../../data/collections';
+import { collection_preinfo } from '../data/collections';
 
-import default_avatar from "../../assets/icons/default.webp";
-import default_banner from "../../assets/banners/default.webp";
+import default_avatar from "../assets/icons/default.webp";
+import default_banner from "../assets/banners/default.webp";
 
-export const useCollections = () => {
-
+function useCollectionsContext() {
     const [collections, setCollections] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
 
     const fetchMetadata = async () => {
+
+        console.log("fetch LSP8 Metadata ...", isLoading, collections);
 
         setIsLoading(true);
 
@@ -52,5 +53,18 @@ export const useCollections = () => {
         }
     }, [])
 
-    return { collections, isLoading };
+    return { fetchMetadata, collections, isLoading };
+}
+export const CollectionsContext = createContext();
+
+export const CollectionsProvider = (props) => {
+    const collectionsContext = useCollectionsContext();
+
+    return (
+        <div>
+            <CollectionsContext.Provider value={{ ...collectionsContext }}>
+                {props.children}
+            </CollectionsContext.Provider>
+        </div>
+    );
 };

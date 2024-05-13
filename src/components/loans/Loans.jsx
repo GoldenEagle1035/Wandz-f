@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef, useContext } from "react";
 import Nav from "../global/Nav";
 import VideoBG from "../global/VideoBG";
 import { MdArrowDownward } from "react-icons/md";
@@ -10,7 +10,10 @@ import LendDlgBanner from "../../assets/background/lendDlgBanner.png";
 import { useAccount } from 'wagmi';
 import { readContract } from '@wagmi/core'
 import { parseEther, formatUnits } from 'viem';
-import { useLoans, useCollections, useAccountBalance } from "../../hooks/wandz-eth";
+import { useAccountBalance } from "../../hooks/wandz-eth";
+
+import { LoansContext } from "../../context/loan-context";
+import { CollectionsContext } from "../../context/collection-context";
 
 // import { collections } from "../../data/collections";
 
@@ -27,8 +30,8 @@ function Loans() {
 
   const account = useAccount();
 
-  const loans = useLoans();
-  const { collections, isLoading: isLoadingCollection } = useCollections();
+  const loans = useContext(LoansContext);
+  const { collections, isLoading: isLoadingCollection } = useContext(CollectionsContext);
 
   const { balance, isError, isLoading } = useAccountBalance(account.address);
 
@@ -188,7 +191,12 @@ function Loans() {
               </div>
             </div>
           </div>
-          {isLoadingCollection && <FontAwesomeIcon icon={faSpinner} size="md" className="animate-spin" />}
+          {isLoadingCollection &&
+            <div className="flex gap-[20px] justify-center items-center font-superLagendBoy text-white">
+              <FontAwesomeIcon icon={faSpinner} size="md" className="animate-spin" />
+              <span>Loading</span>
+            </div>
+          }
           {!isLoadingCollection && loans.loans.filter((loan) => account.address && loan.borrower.toLowerCase() == account.address.toLowerCase() && loan.accepted && !loan.paid && !loan.liquidated).length != 0 &&
             <div className="font-superLagendBoy flex flex-col gap-[20px] rounded-[30px] bg-[#383D7257] bg-[#45291D50] backdrop-blur-xl p-[30px]">
               <div className="flex items-center gap-[10px]">
