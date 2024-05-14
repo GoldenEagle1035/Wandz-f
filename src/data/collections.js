@@ -417,6 +417,12 @@ export const collection_preinfo = [
         duration: 259200
     },
     {
+        name: "Stones Kids On Lukso",
+        address: "0xc1ffa5f9f51da365d2ab6a0c9e12f6c7ef5c998f",
+        interest: 2200,
+        duration: 604800
+    },
+    {
         name: "Apex Deities",
         address: "0xb4e32a20aa27b5891bfa592c392c9858a1dd3945",
         interest: 2200,

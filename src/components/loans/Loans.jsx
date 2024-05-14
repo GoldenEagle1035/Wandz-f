@@ -226,7 +226,7 @@ function Loans() {
                     </div>
                     <div className="w-2/6 flex gap-[5px] items-center">
                       <button onClick={(e) => { onRepayOffer(index) }} className="bg-gradient-to-r from-[#159F2C] text-black px-6 py-2 max-sm:text-[11px] max-sm:px-4 rounded-lg to-[#DBFF00]">{(item.durationCounter - Date.now() / 1000) / 86400 >= 0 ? "REPAY" : "LIQUIDATE"}</button>
-                      <button onClick={(e) => { onExtendOffer(index) }} className="bg-gradient-to-r from-[#159F2C] text-black px-6 py-2 max-sm:text-[11px] max-sm:px-4 rounded-lg to-[#DBFF00]">EXTEND</button>
+                      {/* <button onClick={(e) => { onExtendOffer(index) }} className="bg-gradient-to-r from-[#159F2C] text-black px-6 py-2 max-sm:text-[11px] max-sm:px-4 rounded-lg to-[#DBFF00]">EXTEND</button> */}
                     </div>
                   </div>
                 )

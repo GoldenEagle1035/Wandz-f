@@ -69,6 +69,7 @@ function Lend() {
   }
 
   const onPlaceOffer = (lendIndex) => {
+    console.log("lendIndex", lendIndex);
     setOfferAmount('');
     setTotalInvest('');
     setNumberOffers(1);
@@ -161,7 +162,7 @@ function Lend() {
                     }
                     {!isLoadingCollection && collections.map((item, index) => {
                       return (
-                        item.name.toLowerCase().includes(searchValue.toLowerCase()) && <tr className=" py-10 border-b-[1px] max-sm:px-4 border-[#a9a9a9d8]  ">
+                        item.name.toLowerCase().includes(searchValue.toLowerCase()) && <tr className=" py-10 border-b-[1px] max-sm:px-4 border-[#a9a9a9d8]">
                           <td className="p-4 pl-4 max-sm:px-4 flex gap-2 items-center max-sm:text-[11px]">
                             <span className="max-sm:w-6">
                               <img className="w-[40px] h-[40px] object-contain rounded-full" src={item.avatar} alt="" />

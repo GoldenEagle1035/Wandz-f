@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import "./nav.css";
 import MobileNav from "./MobileNav";
 import { MdMenu } from "react-icons/md";
@@ -10,6 +10,7 @@ import { RainbowKitCustomConnectButton } from "../wandz-eth";
 import { useAccount } from 'wagmi';
 
 import { LoansContext } from "../../context/loan-context";
+import { CollectionsContext } from "../../context/collection-context";
 
 function Nav({ btnText }) {
   const [showMenu, setShowMenu] = useState(false);
@@ -18,6 +19,7 @@ function Nav({ btnText }) {
   const account = useAccount();
 
   const loans = useContext(LoansContext);
+  const { collections, isLoadingCollections } = useContext(CollectionsContext);
 
   const toggleMenu = () => {
     setShowMenu(!showMenu);
@@ -41,6 +43,12 @@ function Nav({ btnText }) {
       link: "LOANS",
     },
   ];
+
+  useEffect(() => {
+    if(!isLoadingCollections) {
+      collections.sort((a, b) => loans.loans.filter((loan) => loan.nftAddress.toLowerCase() == b.address.toLowerCase()).length - loans.loans.filter((loan) => loan.nftAddress.toLowerCase() == a.address.toLowerCase()).length);
+    }
+  }, [isLoadingCollections])
 
   return (
     <div className="">
@@ -80,8 +88,8 @@ function Nav({ btnText }) {
                       to={"/" + link}
                       duration={500}
                     >
-                      <a 
-                      className={`text-lg ${(loans.loans.filter((loan) => account.address && loan.lender.toLowerCase() == account.address.toLowerCase() && loan.amount != 0 && !loan.accepted && !loan.paid && !loan.liquidated).length == 0 && link=="OFFERS") || (loans.loans.filter((loan) => account.address && loan.borrower.toLowerCase() == account.address.toLowerCase() && loan.accepted && !loan.paid && !loan.liquidated).length == 0 && link=="LOANS") ? "text-[#ffffff80]" : "text-white"}`}
+                      <a
+                        className={`text-lg ${(loans.loans.filter((loan) => account.address && loan.lender.toLowerCase() == account.address.toLowerCase() && loan.amount != 0 && !loan.accepted && !loan.paid && !loan.liquidated).length == 0 && link == "OFFERS") || (loans.loans.filter((loan) => account.address && loan.borrower.toLowerCase() == account.address.toLowerCase() && loan.accepted && !loan.paid && !loan.liquidated).length == 0 && link == "LOANS") ? "text-[#ffffff80]" : "text-white"}`}
                       >{link}</a>
                     </NavLink>
                     {location.pathname === `/${link}` && (
