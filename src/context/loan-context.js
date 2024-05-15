@@ -71,8 +71,7 @@ function useLoansContext() {
                 args: [i]
             });
         }
-        const data = await readContracts({ contracts });
-        console.log("extendsInfo", data);
+        let data = await readContracts({ contracts });
         data.map((item) => {
             if (item.status == 'success') {
                 tmpExtendsInfo.push(item.result);
