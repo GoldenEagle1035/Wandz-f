@@ -5,7 +5,7 @@ import { readContracts } from '@wagmi/core'
 
 import lendAbi from "../lukso/abis/lend_abi.json";
 
-const lendAddress = '0x2fc0437A1B4D470D745c6896354EA88c48961fF2';
+const lendAddress = '0x2139c52Ae897F29689C73634Cf438e9C3BcC5e6E';
 const adminAddress = '0xa842a38CD758f8dE8537C5CBcB2006DB0250eC7C';
 
 function useLoansContext() {
@@ -61,8 +61,26 @@ function useLoansContext() {
 
         console.log("fetch Loans ...");
 
-        let tmpLoans = [];
+        let tmpExtendsInfo = [];
         let contracts = [];
+        for (let i = 0; i < loanIdCounter; i++) {
+            contracts.push({
+                address: lendAddress,
+                abi: lendAbi,
+                functionName: 'loanExtends',
+                args: [i]
+            });
+        }
+        const data = await readContracts({ contracts });
+        console.log("extendsInfo", data);
+        data.map((item) => {
+            if (item.status == 'success') {
+                tmpExtendsInfo.push(item.result);
+            }
+        })
+
+        let tmpLoans = [];
+        contracts = [];
         for (let i = 0; i < loanIdCounter; i++) {
             contracts.push({
                 address: lendAddress,
@@ -71,8 +89,8 @@ function useLoansContext() {
                 args: [i]
             });
         }
-        const data = await readContracts({ contracts });
-        data.map((item) => {
+        data = await readContracts({ contracts });
+        data.map((item, index) => {
             if (item.status == 'success') {
                 tmpLoans.push({
                     nftAddress: item.result[0],
@@ -86,7 +104,8 @@ function useLoansContext() {
                     tokenId: item.result[8],
                     accepted: item.result[9],
                     paid: item.result[10],
-                    liquidated: item.result[11]
+                    liquidated: item.result[11],
+                    extends: tmpExtendsInfo[index]
                 });
             }
         })

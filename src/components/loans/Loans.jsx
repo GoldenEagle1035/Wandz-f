@@ -207,26 +207,26 @@ function Loans() {
                 <span className="w-2/6 text-[16px] font-bold text-white"></span>
               </div>
               <div className="flex flex-col gap-[10px]">
-                {loans.loans.map((item, index) => (
-                  account.address && item.borrower.toLowerCase() == account.address.toLowerCase() && item.accepted && !item.paid && !item.liquidated && <div className="flex items-center gap-[10px]">
+                {loans.loans.map((loan, index) => (
+                  account.address && loan.borrower.toLowerCase() == account.address.toLowerCase() && loan.accepted && !loan.paid && !loan.liquidated && <div className="flex items-center gap-[10px]">
                     <div className="w-1/6 flex gap-[20px] items-center">
-                      <img className="w-[40px] h-[40px] object-contain rounded-full" src={collections.find((collection) => collection.address.toLowerCase() == item.nftAddress.toLowerCase()).avatar} alt="loan" />
-                      <span className="text-[11px] font-bold text-white">{collections.find((collection) => collection.address.toLowerCase() == item.nftAddress.toLowerCase()).name}</span>
+                      <img className="w-[40px] h-[40px] object-contain rounded-full" src={collections.find((collection) => collection.address.toLowerCase() == loan.nftAddress.toLowerCase()).avatar} alt="loan" />
+                      <span className="text-[11px] font-bold text-white">{collections.find((collection) => collection.address.toLowerCase() == loan.nftAddress.toLowerCase()).name}</span>
                     </div>
                     <div className="w-1/6 flex gap-[5px] items-center">
                       <span className="text-[12px] font-bold text-white">Ŀ</span>
-                      <span className="text-[12px] font-bold text-[#DBFF00]">{formatUnits(item.amount, 18)}</span>
+                      <span className="text-[12px] font-bold text-[#DBFF00]">{formatUnits(loan.amount, 18)}</span>
                     </div>
                     <div className="w-1/6 flex gap-[5px] items-center">
-                      <span className="text-[12px] font-bold text-white">{Math.abs((item.durationCounter - Date.now() / 1000) / 86400).toFixed(2)} {(item.durationCounter - Date.now() / 1000) / 86400 >= 0 ? "d Remaining" : "d Passed"}</span>
+                      <span className="text-[12px] font-bold text-white">{Math.abs((loan.durationCounter - Date.now() / 1000) / 86400).toFixed(2)} {(loan.durationCounter - Date.now() / 1000) / 86400 >= 0 ? "d Remaining" : "d Passed"}</span>
                     </div>
                     <div className="w-1/6 flex gap-[5px] items-center">
                       <span className="text-[12px] font-bold text-white">Ŀ</span>
-                      <span className="text-[12px] font-bold text-[#DBFF00]">{formatUnits(item.amount * item.interest / 1000, 18)}</span>
+                      <span className="text-[12px] font-bold text-[#DBFF00]">{formatUnits(loan.amount * loan.interest / 1000, 18)}</span>
                     </div>
                     <div className="w-2/6 flex gap-[5px] items-center">
-                      <button onClick={(e) => { onRepayOffer(index) }} className="bg-gradient-to-r from-[#159F2C] text-black px-6 py-2 max-sm:text-[11px] max-sm:px-4 rounded-lg to-[#DBFF00]">{(item.durationCounter - Date.now() / 1000) / 86400 >= 0 ? "REPAY" : "LIQUIDATE"}</button>
-                      {/* <button onClick={(e) => { onExtendOffer(index) }} className="bg-gradient-to-r from-[#159F2C] text-black px-6 py-2 max-sm:text-[11px] max-sm:px-4 rounded-lg to-[#DBFF00]">EXTEND</button> */}
+                      <button onClick={(e) => { onRepayOffer(index) }} className="bg-gradient-to-r from-[#159F2C] text-black px-6 py-2 max-sm:text-[11px] max-sm:px-4 rounded-lg to-[#DBFF00]">{(loan.durationCounter - Date.now() / 1000) / 86400 >= 0 ? "REPAY" : "LIQUIDATE"}</button>
+                      <button disabled={loan.extends > 2} onClick={(e) => { onExtendOffer(index) }} className={`bg-gradient-to-r from-[#159F2C] text-black px-6 py-2 max-sm:text-[11px] max-sm:px-4 rounded-lg to-[#DBFF00] disabled:opacity-50`}>EXTEND</button>
                     </div>
                   </div>
                 )
