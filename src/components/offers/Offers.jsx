@@ -238,11 +238,11 @@ function Offers() {
             <div className="w-full flex gap-[20px] justify-between">
               <div className="flex flex-col items-center">
                 <span className="text-[10px] font-[400] text-white">APY</span>
-                <span className="text-[14px] font-[400] text-[#DBFF00]">{collections.find((collection) => collection.address.toLowerCase() == loans.loans[selectedLend].nftAddress.toLowerCase()).interest / 10 - 100}%</span>
+                <span className="text-[14px] font-[400] text-[#DBFF00]">{loans.loans[selectedLend].interest / 10 - 100}%</span>
               </div>
               <div className="flex flex-col items-center">
                 <span className="text-[10px] font-[400] text-white">DURATION</span>
-                <span className="text-[14px] font-[400] text-white">{(collections.find((collection) => collection.address.toLowerCase() == loans.loans[selectedLend].nftAddress.toLowerCase()).duration / 86400).toFixed(2)}d</span>
+                <span className="text-[14px] font-[400] text-white">{(loans.loans[selectedLend].duration / 86400).toFixed(2)}d</span>
               </div>
               <div className="flex flex-col items-center">
                 <span className="text-[10px] font-[400] text-white">FLOOR</span>
