@@ -108,6 +108,7 @@ function useLoansContext() {
                 });
             }
         })
+        console.log(tmpLoans);
         setLoans(tmpLoans);
     }
 
