@@ -35,7 +35,7 @@ function VideoBG() {
       </div>
 
       {isLandpage && <div className="fixed z-10 bottom-[6rem] max-sm:bottom-[4rem] right-[6rem] max-sm:right-[4rem] flex justify-end">
-        <p className="font-superLagendBoy bg-[#45291D50] backdrop-blur-xl text-[#DBFF00] flex gap-1 text-md items-center cursor-pointer max-sm:p-2 p-4 rounded-lg">Read the litepaper <span><MdArrowOutward size={22} /></span></p>
+        <a href="https://docs.wandz.works"><p className="font-superLagendBoy bg-[#45291D50] backdrop-blur-xl text-[#DBFF00] flex gap-1 text-md items-center cursor-pointer max-sm:p-2 p-4 rounded-lg">Read the litepaper <span><MdArrowOutward size={22} /></span></p></a>
       </div>}
 
       <div className='nav-glob fixed z-10 bottom-10 max-sm:bottom-2 right-10 max-sm:right-2'>
