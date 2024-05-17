@@ -52,6 +52,7 @@ function Loans() {
           value: parseEther(formatUnits(loans.loans[selectedLend].amount * loans.loans[selectedLend].interest / 1000 * (86400 * Number(extendDays) / loans.loans[selectedLend].duration), 18)),
           from: account.address
         })
+        await loans.waitForTransaction(result);
         console.log("extendLoan:", result);
       } catch (error) {
         console.log(error);
@@ -76,6 +77,7 @@ function Loans() {
           value: parseEther(formatUnits(loans.loans[selectedLend].amount * loans.loans[selectedLend].interest / 1000, 18)),
           from: account.address
         })
+        await loans.waitForTransaction(result);
         console.log("repayLoan:", result);
       } catch (error) {
         console.log(error);

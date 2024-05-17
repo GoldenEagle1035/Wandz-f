@@ -45,6 +45,7 @@ function Offers() {
           args: [loans.loans[selectedLend].loanId],
           from: account.address
         })
+        await loans.waitForTransaction(result);
         console.log("revokeLoan:", result);
       } catch (error) {
         console.log(error);

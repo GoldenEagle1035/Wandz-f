@@ -61,6 +61,7 @@ function Borrow() {
           args: [loans.loans[selectedLend].loanId, selectedTokenId],
           from: account.address
         })
+        await loans.waitForTransaction(result);
         console.log("acceptLoan:", result);
       } catch (error) {
         console.log(error);

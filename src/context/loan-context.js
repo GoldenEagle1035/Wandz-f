@@ -1,7 +1,7 @@
 import React, { createContext, useEffect, useState, useContext } from "react";
 
 import { useAccount, useContractRead, useContractWrite } from 'wagmi';
-import { readContracts } from '@wagmi/core'
+import { readContracts, waitForTransaction } from '@wagmi/core'
 
 import lendAbi from "../lukso/abis/lend_abi.json";
 
@@ -130,7 +130,7 @@ function useLoansContext() {
         }
     }, [loanIdCounter, refetch])
 
-    return { lendAddress, adminAddress, loans, loanIdCounter, offerLoan, revokeLoan, acceptLoan, repayLoan, liquidateLoan, extendLoan };
+    return { lendAddress, adminAddress, loans, loanIdCounter, offerLoan, revokeLoan, acceptLoan, repayLoan, liquidateLoan, extendLoan, waitForTransaction };
 }
 export const LoansContext = createContext();
 

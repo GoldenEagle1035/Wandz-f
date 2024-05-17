@@ -93,6 +93,7 @@ function Lend() {
           value: parseEther(totalInvest),
           from: account.address
         })
+        await loans.waitForTransaction(result);
         console.log("offerLoan:", result);
       } catch (error) {
         console.log(error);
