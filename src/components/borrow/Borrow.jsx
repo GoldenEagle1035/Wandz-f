@@ -34,6 +34,7 @@ function Borrow() {
   const [isApproved, setIsApproved] = useState(false);
   const [acceptPending, setAcceptPending] = useState(false);
   const [approvePending, setApprovePending] = useState(false);
+  const [confirmed, setConfirmed] = useState(false);
 
   const [tokenImages, setTokenImages] = useState([]);
 
@@ -49,6 +50,7 @@ function Borrow() {
     setTokenIds([]);
     setIsApproved(false);
     setSelectedLend(lendIndex);
+    setConfirmed(false);
   }
 
   const acceptOffer = async () => {
@@ -64,7 +66,7 @@ function Borrow() {
         console.log(error);
       }
       setAcceptPending(false);
-      setSelectedLend(-1);
+      setConfirmed(true);
     }
   }
 
@@ -130,7 +132,6 @@ function Borrow() {
       const data = await axios.get(metadataUrl);
       return data.data.LSP4Metadata.image[0][0].url.replace("ipfs://", "https://api.universalprofile.cloud/ipfs/");
     } catch (error) {
-      return "";
       console.log(error);
     }
   }
@@ -257,7 +258,7 @@ function Borrow() {
           </div>
         </div>
       </div>
-      {selectedLend != -1 &&
+      {selectedLend != -1 && !confirmed &&
         <div className={`font-superLagendBoy fixed top-0 left-0 w-[100vw] h-[100vh] flex justify-center items-center bg-[#00000030] backdrop-blur-md p-[20px] z-10`}>
           <div
             className="fixed inset-0 transition-opacity"
@@ -322,6 +323,70 @@ function Borrow() {
                 </div>
               </>
             }
+          </div>
+        </div >
+      }
+      {selectedLend != -1 && confirmed &&
+        <div className={`font-superLagendBoy fixed top-0 left-0 w-[100vw] h-[100vh] flex justify-center items-center bg-[#00000030] backdrop-blur-md p-[20px] z-10`}>
+          <div
+            className="fixed inset-0 transition-opacity"
+            onClick={() => { setSelectedLend(-1) }}
+          />
+          <div className="min-w-[300px] max-w-[400px] bg-[#D9D9D930] backdrop-blur-sm flex gap-[20px] flex-col rounded-[10px] p-[20px]" >
+            <div className="w-full flex gap-[20px] justify-between items-center">
+              <div className="w-[65px] h-[65px] flex justify-center items-center rounded-full border-[0.25px] border-[#DBFF00] -mt-[53px]">
+                <svg width="37" height="28" viewBox="0 0 37 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M1 17.25L10.5212 27L36 1" stroke="#DBFF00" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+              </div>
+              <div className="flex flex-col gap-[5px]">
+                <span className="text-[14px] font-[400] text-white">You have Successfully</span>
+                <div className="flex gap-[10px] items-center">
+                  <span className="text-[14px] font-[400] text-white">Borrowed</span>
+                  <span className="text-[14px] font-[400] text-[#DBFF00]">Ŀ {formatUnits(loans.loans[selectedLend].amount, 18)}</span>
+                </div>
+              </div>
+            </div>
+            <div className="w-full flex gap-[20px] justify-between">
+              <div className="flex flex-col items-center">
+                <span className="text-[10px] font-[400] text-white">INTEREST</span>
+                <span className="text-[14px] font-[400] text-[#DBFF00]">Ŀ {formatUnits(loans.loans[selectedLend].amount * (collections.find((collection) => collection.address.toLowerCase() == loans.loans[selectedLend].nftAddress.toLowerCase()).interest) / 1000, 18)}</span>
+              </div>
+              <div className="flex flex-col items-center">
+                <span className="text-[10px] font-[400] text-white">DURATION</span>
+                <span className="text-[14px] font-[400] text-white">{(loans.loans[selectedLend].duration / 86400).toFixed(2)}d</span>
+              </div>
+              <div className="flex flex-col items-center">
+                <span className="text-[10px] font-[400] text-white">Available to Borrow</span>
+                <span className="text-[14px] font-[400] text-white">Ŀ {formatUnits(loans.loans[selectedLend].amount, 18)}</span>
+              </div>
+            </div>
+            <div className="w-full h-[200px] flex flex-wrap gap-[20px] justify-center items-center overflow-y-auto p-[10px]">
+              {tokenIds.map((tokenId, index) => {
+                if (Number(selectedTokenId) == Number(tokenId)) {
+                  return (
+                    <div onClick={(e) => { onSelectToken(tokenId) }} className={`h-[180px] w-[130px] flex flex-col gap-[5px] items-center bg-[#D9D9D930] border border-[#DBFF0030] rounded-[10px] p-[5px] cursor-pointer`}>
+                      {tokenImages[index] ?
+                        <img className="flex-1 w-full object-cover object-center" src={tokenImages[index]} alt="" /> :
+                        <img className="flex-1 w-full object-cover object-center" src={defaultBanner} alt="" />
+                      }
+                      <span className="text-[10px] text-white">{collections.find((collection) => collection.address.toLowerCase() == loans.loans[selectedLend].nftAddress.toLowerCase()).name}</span>
+                      <span className="text-[10px] text-white">#{Number(tokenId)}</span>
+                    </div>
+                  )
+                }
+              })}
+            </div>
+            <div className="w-full flex justify-center">
+              {isApproved ? <button disabled={acceptPending} onClick={(e) => { acceptOffer() }} className="bg-gradient-to-r from-[#159F2C] text-black px-6 py-2 max-sm:text-[11px] max-sm:px-4 rounded-lg to-[#DBFF00]">
+                BORROW {formatUnits(loans.loans[selectedLend].amount, 18)} {acceptPending ? <FontAwesomeIcon icon={faSpinner} size="sm" className="animate-spin" /> : <></>}</button> :
+                <button disabled={approvePending} onClick={(e) => { authorizeLSP8() }} className="bg-gradient-to-r from-[#159F2C] text-black px-6 py-2 max-sm:text-[11px] max-sm:px-4 rounded-lg to-[#DBFF00]">
+                  APPROVE {approvePending ? <FontAwesomeIcon icon={faSpinner} size="sm" className="animate-spin" /> : <></>}</button>
+              }
+            </div>
+            <div className="w-full flex justify-center">
+              <button onClick={(e) => { setSelectedLend(-1) }} className="bg-gradient-to-r from-[#159F2C] text-black px-6 py-2 max-sm:text-[11px] max-sm:px-4 rounded-lg to-[#DBFF00]">OK</button>
+            </div>
           </div>
         </div >
       }

@@ -30,6 +30,7 @@ function Lend() {
   const [totalInvest, setTotalInvest] = useState('');
   const [numberOffers, setNumberOffers] = useState(1);
   const [placeOfferPending, setPlaceOfferPending] = useState(false);
+  const [confirmed, setConfirmed] = useState(false);
 
   const [searchValue, setSearchValue] = useState('');
 
@@ -74,6 +75,7 @@ function Lend() {
     setTotalInvest('');
     setNumberOffers(1);
     setSelectedLend(lendIndex);
+    setConfirmed(false);
   }
 
   const placeOffer = async () => {
@@ -96,7 +98,7 @@ function Lend() {
         console.log(error);
       }
       setPlaceOfferPending(false);
-      setSelectedLend(-1);
+      setConfirmed(true);
     }
   }
 
@@ -227,7 +229,7 @@ function Lend() {
           </div>
         </div>
       }
-      {selectedLend != -1 &&
+      {selectedLend != -1 && !confirmed &&
         <div className={`font-superLagendBoy fixed top-0 left-0 w-[100vw] h-[100vh] flex justify-center items-center bg-[#00000030] backdrop-blur-md p-[20px] z-10`}>
           <div
             className="fixed inset-0 transition-opacity"
@@ -274,6 +276,46 @@ function Lend() {
             <div className="w-full flex justify-center">
               <button disabled={placeOfferPending} onClick={(e) => { placeOffer() }} className="bg-gradient-to-r from-[#159F2C] text-black px-6 py-2 max-sm:text-[11px] max-sm:px-4 rounded-lg to-[#DBFF00]">
                 PLACE OFFER {placeOfferPending ? <FontAwesomeIcon icon={faSpinner} size="sm" className="animate-spin" /> : <></>}</button>
+            </div>
+          </div>
+        </div>
+      }
+      {selectedLend != -1 && confirmed &&
+        <div className={`font-superLagendBoy fixed top-0 left-0 w-[100vw] h-[100vh] flex justify-center items-center bg-[#00000030] backdrop-blur-md p-[20px] z-10`}>
+          <div
+            className="fixed inset-0 transition-opacity"
+            onClick={() => { setSelectedLend(-1) }}
+          />
+          <div className="min-w-[300px] max-w-[400px] bg-[#D9D9D930] backdrop-blur-sm flex gap-[20px] flex-col rounded-[10px] p-[10px]" >
+            <img className="w-full h-[125px] object-center" src={collections[selectedLend].banner} alt="banner" />
+            <div className="w-full flex flex-col gap-[10px] items-center">
+              <div className="w-[65px] h-[65px] flex justify-center items-center rounded-full border-[0.25px] border-[#DBFF00] -mt-[53px]">
+                <svg width="37" height="28" viewBox="0 0 37 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M1 17.25L10.5212 27L36 1" stroke="#DBFF00" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+              </div>
+            </div>
+            <span className="text-[14px] font-[400] text-white text-center">You have Successfully Offered</span>
+            <div className="flex gap-[10px] justify-center items-center">
+              <span className="text-[14px] font-[400] text-white">{numberOffers} loan(s) for</span>
+              <span className="text-[14px] font-[400] text-[#DBFF00]">Ŀ {Number(offerAmount) * Number(numberOffers)}</span>
+            </div>
+            <div className="w-full flex gap-[20px] justify-between">
+              <div className="flex flex-col items-center">
+                <span className="text-[10px] font-[400] text-white">APY</span>
+                <span className="text-[14px] font-[400] text-[#DBFF00]">{collections[selectedLend].interest / 10 - 100}%</span>
+              </div>
+              <div className="flex flex-col items-center">
+                <span className="text-[10px] font-[400] text-white">DURATION</span>
+                <span className="text-[14px] font-[400] text-white">{(collections[selectedLend].duration / 86400).toFixed(2)}d</span>
+              </div>
+              <div className="flex flex-col items-center">
+                <span className="text-[10px] font-[400] text-white">FLOOR</span>
+                <span className="text-[14px] font-[400] text-white">Ŀ {loans.loans.filter((loan) => loan.nftAddress.toLowerCase() == collections[selectedLend].address.toLowerCase() && loan.amount != 0 && !loan.accepted && !loan.paid && !loan.liquidated).length == 0 ? 0 : formatUnits(loans.loans.filter((loan) => loan.nftAddress.toLowerCase() == collections[selectedLend].address.toLowerCase() && loan.amount != 0 && !loan.accepted && !loan.paid && !loan.liquidated).sort((a, b) => a.amount - b.amount).at(0).amount, 18)}</span>
+              </div>
+            </div>
+            <div className="w-full flex justify-center">
+              <button onClick={(e) => { setSelectedLend(-1) }} className="bg-gradient-to-r from-[#159F2C] text-black px-6 py-2 max-sm:text-[11px] max-sm:px-4 rounded-lg to-[#DBFF00]">OK</button>
             </div>
           </div>
         </div>
