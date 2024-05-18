@@ -185,45 +185,52 @@ function Offers() {
             </div>
           }
           {!isLoadingCollection && loans.loans.filter((loan) => account.address && loan.lender.toLowerCase() == account.address.toLowerCase() && loan.amount != 0 && !loan.accepted && !loan.paid && !loan.liquidated).length != 0 &&
-            <div className="font-superLagendBoy flex flex-col gap-[20px] rounded-[30px] bg-[#383D7257] backdrop-blur-sm p-[30px]">
-              <div className="flex items-center gap-[10px]">
-                <span className="w-3/12 text-[16px] font-bold text-white">COLLECTION</span>
-                <span className="w-2/12 text-[16px] font-bold text-white">Offer</span>
-                <span className="w-2/12 text-[16px] font-bold text-white">Reward</span>
-                <span className="w-1/12 text-[16px] font-bold text-white">APY</span>
-                <span className="w-2/12 text-[16px] font-bold text-white">Status</span>
-                <span className="w-2/12 text-[16px] font-bold text-white"></span>
-              </div>
-              <div className="flex flex-col gap-[10px]">
-                {loans.loans.map((item, index) => (
-                  account.address && item.lender.toLowerCase() == account.address.toLowerCase() && item.amount != 0 && !item.accepted && !item.paid && !item.liquidated && <div className="flex items-center gap-[10px]">
-                    <div className="w-3/12 flex gap-[20px] items-center">
-                      <img className="w-[40px] h-[40px] object-contain rounded-full" src={collections.find((collection) => collection.address.toLowerCase() == item.nftAddress.toLowerCase()).avatar} alt="loan" />
-                      <span className="text-[11px] font-bold text-white">{collections.find((collection) => collection.address.toLowerCase() == item.nftAddress.toLowerCase()).name}</span>
-                    </div>
-                    <div className="w-2/12 flex gap-[5px] items-center">
-                      <span className="text-[12px] font-bold text-white">Ŀ</span>
-                      <span className="text-[12px] font-bold text-[#DBFF00]">{formatUnits(item.amount, 18)}</span>
-                    </div>
-                    <div className="w-2/12 flex gap-[5px] items-center">
-                      <span className="text-[12px] font-bold text-white">Ŀ</span>
-                      <span className="text-[12px] font-bold text-white">{formatUnits(item.amount * item.interest / 1000, 18)}</span>
-                    </div>
-                    <div className="w-1/12 flex gap-[5px] items-center">
-                      <span className="text-[12px] font-bold text-white">{item.interest / 10 - 100}</span>
-                      <span className="text-[12px] font-bold text-white">%</span>
-                    </div>
-                    <div className="w-2/12 flex gap-[5px] items-center">
-                      <span className="text-[12px] font-bold text-white">Seeking Borrower</span>
-                    </div>
-                    <div className="w-2/12 flex gap-[5px] items-center">
-                      <button onClick={(e) => { onRevokeOffer(index) }} className="bg-gradient-to-r from-[#159F2C] text-black px-6 py-2 max-sm:text-[11px] max-sm:px-4 rounded-lg to-[#DBFF00]">REVOKE</button>
-                    </div>
-                  </div>
-                )
-                )}
-              </div>
-            </div>}
+            <div className="px-6 overflow-x-auto bg-[#45291D50] backdrop-blur-xl text-left font-superLagendBoy text-[#FFFFFF] my-12 rounded-xl border-none">
+              <table className="w-full p-10">
+                <thead>
+                  <tr className="max-sm:text-[11px]">
+                    <th className="p-6">Collection</th>
+                    <th className="pl-4 max-sm:px-4">Offer</th>
+                    <th className="pl-4 max-sm:px-4">Reward</th>
+                    <th className="pl-4 max-sm:px-4">APY</th>
+                    <th className="pl-4 max-sm:px-4">Status</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {loans.loans.map((item, index) => (
+                    account.address && item.lender.toLowerCase() == account.address.toLowerCase() && item.amount != 0 && !item.accepted && !item.paid && !item.liquidated && <tr className=" py-10 border-b-[1px] max-sm:px-4 border-[#a9a9a9d8]">
+                      <td className="p-4 pl-4 max-sm:px-4 flex gap-2 items-center max-sm:text-[11px]">
+                        <span className="max-sm:w-6">
+                          <img className="w-[40px] h-[40px] object-contain rounded-full" src={collections.find((collection) => collection.address.toLowerCase() == item.nftAddress.toLowerCase()).avatar} alt="" />
+                        </span>
+                        {collections.find((collection) => collection.address.toLowerCase() == item.nftAddress.toLowerCase()).name}
+                      </td>
+                      <td className=" pl-4 max-sm:text-[11px] max-sm:px-4">
+                        <span className="text-[12px] font-bold text-white">Ŀ</span>
+                        <span className="text-[12px] font-bold text-[#DBFF00]">{formatUnits(item.amount, 18)}</span>
+                      </td>
+                      <td className="max-sm:text-[11px] pl-4 max-sm:px-4">
+                        <span className="text-[12px] font-bold text-white">Ŀ</span>
+                        <span className="text-[12px] font-bold text-white">{formatUnits(item.amount * item.interest / 1000, 18)}</span>
+                      </td>
+                      <td className="max-sm:text-[11px] pl-4 max-sm:px-4">
+                        <span className="text-[12px] font-bold text-white">{item.interest / 10 - 100}</span>
+                        <span className="text-[12px] font-bold text-white">%</span>
+                      </td>
+                      <td className="ml-6 max-sm:text-[11px] pl-4 max-sm:px-4">
+                        <span className="text-[12px] font-bold text-white">Seeking Borrower</span>
+                      </td>
+                      <td>
+                        <button onClick={(e) => { onRevokeOffer(index) }} className="bg-gradient-to-r from-[#159F2C] text-black px-6 py-2 max-sm:text-[11px] max-sm:px-4 rounded-lg to-[#DBFF00]">REVOKE</button>
+                      </td>
+                    </tr>
+                  )
+                  )}
+                </tbody>
+              </table>
+            </div>
+          }
         </div>
       </div>
       {selectedLend != -1 && !confirmed &&

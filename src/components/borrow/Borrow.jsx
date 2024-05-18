@@ -206,7 +206,13 @@ function Borrow() {
                   </button>
                 </div> */}
               </div>
-              <div className="px-6 overflow-x-auto bg-[#45291D50] backdrop-blur-xl text-left font-superLagendBoy text-[#FFFFFF] my-12 rounded-xl border-none">
+              {isLoadingCollection &&
+                <div className="flex gap-[20px] justify-center items-center text-white">
+                  <FontAwesomeIcon icon={faSpinner} size="md" className="animate-spin" />
+                  <span>Loading</span>
+                </div>
+              }
+              {!isLoadingCollection && <div className="px-6 overflow-x-auto bg-[#45291D50] backdrop-blur-xl text-left font-superLagendBoy text-[#FFFFFF] my-12 rounded-xl border-none">
                 <table className="w-full p-10">
                   <thead>
                     <tr className="max-sm:text-[11px] max-sm:px-4">
@@ -219,13 +225,7 @@ function Borrow() {
                     </tr>
                   </thead>
                   <tbody>
-                    {isLoadingCollection &&
-                      <div className="flex gap-[20px] justify-center items-center text-white">
-                        <FontAwesomeIcon icon={faSpinner} size="md" className="animate-spin" />
-                        <span>Loading</span>
-                      </div>
-                    }
-                    {!isLoadingCollection && loans.loans.map((item, index) => (
+                    {loans.loans.map((item, index) => (
                       item.amount != 0 && !item.accepted && !item.paid && !item.liquidated && collections.find((collection) => collection.address.toLowerCase() == item.nftAddress.toLowerCase()) && collections.find((collection) => collection.address.toLowerCase() == item.nftAddress.toLowerCase()).name.toLowerCase().includes(searchValue.toLowerCase()) &&
                       <tr className=" py-10 border-b-[1px] border-[#a9a9a9d8] max-sm:px-4  ">
                         <td className="p-4 pl-4 flex gap-2 items-center max-sm:text-[11px] max-sm:px-4">
@@ -256,6 +256,7 @@ function Borrow() {
                   </tbody>
                 </table>
               </div>
+              }
             </div>
           </div>
         </div>
@@ -336,7 +337,7 @@ function Borrow() {
           />
           <div className="min-w-[300px] max-w-[400px] bg-[#D9D9D930] backdrop-blur-sm flex gap-[20px] flex-col rounded-[10px] p-[20px]" >
             <div className="w-full flex gap-[20px] justify-between items-center">
-              <div className="w-[65px] h-[65px] flex justify-center items-center rounded-full border-[0.25px] border-[#DBFF00] -mt-[53px] bg-[#000]">
+              <div className="w-[65px] h-[65px] flex justify-center items-center rounded-full border-[0.25px] border-[#DBFF00] bg-[#000]">
                 <svg width="37" height="28" viewBox="0 0 37 28" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M1 17.25L10.5212 27L36 1" stroke="#DBFF00" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                 </svg>
@@ -378,13 +379,6 @@ function Borrow() {
                   )
                 }
               })}
-            </div>
-            <div className="w-full flex justify-center">
-              {isApproved ? <button disabled={acceptPending} onClick={(e) => { acceptOffer() }} className="bg-gradient-to-r from-[#159F2C] text-black px-6 py-2 max-sm:text-[11px] max-sm:px-4 rounded-lg to-[#DBFF00]">
-                BORROW {formatUnits(loans.loans[selectedLend].amount, 18)} {acceptPending ? <FontAwesomeIcon icon={faSpinner} size="sm" className="animate-spin" /> : <></>}</button> :
-                <button disabled={approvePending} onClick={(e) => { authorizeLSP8() }} className="bg-gradient-to-r from-[#159F2C] text-black px-6 py-2 max-sm:text-[11px] max-sm:px-4 rounded-lg to-[#DBFF00]">
-                  APPROVE {approvePending ? <FontAwesomeIcon icon={faSpinner} size="sm" className="animate-spin" /> : <></>}</button>
-              }
             </div>
             <div className="w-full flex justify-center">
               <button onClick={(e) => { setSelectedLend(-1) }} className="bg-gradient-to-r from-[#159F2C] text-black px-6 py-2 max-sm:text-[11px] max-sm:px-4 rounded-lg to-[#DBFF00]">OK</button>

@@ -144,7 +144,13 @@ function Lend() {
                   </button>
                 </div> */}
               </div>
-              <div className="px-6 overflow-x-auto bg-[#45291D50] backdrop-blur-xl text-left font-superLagendBoy text-[#FFFFFF] my-12 rounded-xl border-none">
+              {isLoadingCollection &&
+                <div className="flex gap-[20px] justify-center items-center text-white">
+                  <FontAwesomeIcon icon={faSpinner} size="md" className="animate-spin" />
+                  <span>Loading</span>
+                </div>
+              }
+              {!isLoadingCollection && <div className="px-6 overflow-x-auto bg-[#45291D50] backdrop-blur-xl text-left font-superLagendBoy text-[#FFFFFF] my-12 rounded-xl border-none">
                 <table className="w-full p-10">
                   <thead>
                     <tr className="max-sm:text-[11px]">
@@ -156,15 +162,8 @@ function Lend() {
                       <th></th>
                     </tr>
                   </thead>
-
                   <tbody>
-                    {isLoadingCollection &&
-                      <div className="flex gap-[20px] justify-center items-center text-white">
-                        <FontAwesomeIcon icon={faSpinner} size="md" className="animate-spin" />
-                        <span>Loading</span>
-                      </div>
-                    }
-                    {!isLoadingCollection && collections.map((item, index) => {
+                    {collections.map((item, index) => {
                       return (
                         item.name.toLowerCase().includes(searchValue.toLowerCase()) && <tr className=" py-10 border-b-[1px] max-sm:px-4 border-[#a9a9a9d8]">
                           <td className="p-4 pl-4 max-sm:px-4 flex gap-2 items-center max-sm:text-[11px]">
@@ -196,6 +195,7 @@ function Lend() {
                   </tbody>
                 </table>
               </div>
+              }
             </div>
           </div>
         </div>
