@@ -47,11 +47,12 @@ function Offers() {
         })
         await loans.waitForTransaction(result);
         console.log("revokeLoan:", result);
+        setConfirmed(true);
       } catch (error) {
         console.log(error);
+        setSelectedLend(-1);
       }
       setRevokePending(false);
-      setConfirmed(true);
     }
   }
 

@@ -54,11 +54,12 @@ function Loans() {
         })
         await loans.waitForTransaction(result);
         console.log("extendLoan:", result);
+        setConfirmed(true);
       } catch (error) {
         console.log(error);
+        setSelectedLend(-1);
       }
       setExtendPending(false);
-      setConfirmed(true);
     }
   }
 
@@ -79,11 +80,12 @@ function Loans() {
         })
         await loans.waitForTransaction(result);
         console.log("repayLoan:", result);
+        setConfirmed(true);
       } catch (error) {
         console.log(error);
+        setSelectedLend(-1);
       }
       setRepayPending(false);
-      setConfirmed(true);
     }
   }
 
@@ -98,9 +100,9 @@ function Loans() {
         console.log("liquidateLoan:", result);
       } catch (error) {
         console.log(error);
+        setSelectedLend(-1);
       }
       setRepayPending(false);
-      setSelectedLend(-1);
     }
   }
 

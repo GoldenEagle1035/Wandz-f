@@ -95,11 +95,12 @@ function Lend() {
         })
         await loans.waitForTransaction(result);
         console.log("offerLoan:", result);
+        setConfirmed(true);
       } catch (error) {
         console.log(error);
+        setSelectedLend(-1);
       }
       setPlaceOfferPending(false);
-      setConfirmed(true);
     }
   }
 
