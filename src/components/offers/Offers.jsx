@@ -60,18 +60,20 @@ function Offers() {
   }
 
   useEffect(() => {
-    let data = [];
-    loans.loans.filter((loan) => account.address && loan.lender.toLowerCase() == account.address.toLowerCase() && loan.amount != 0 && !loan.accepted && !loan.paid && !loan.liquidated).map((loan) => {
-      data.push({
-        COLLECTION: collections.find((collection) => collection.address.toLowerCase() == loan.nftAddress.toLowerCase()).name,
-        Offer: 'Ŀ' + formatUnits(loan.amount, 18),
-        Reward: 'Ŀ' + formatUnits(loan.amount * loan.interest / 1000, 18),
-        APY: (loan.interest / 10 - 100) + "%",
-        Status: 'Seeking Borrower'
+    if (!isLoadingCollection) {
+      let data = [];
+      loans.loans.filter((loan) => account.address && loan.lender.toLowerCase() == account.address.toLowerCase() && loan.amount != 0 && !loan.accepted && !loan.paid && !loan.liquidated).map((loan) => {
+        data.push({
+          COLLECTION: collections.find((collection) => collection.address.toLowerCase() == loan.nftAddress.toLowerCase()).name,
+          Offer: 'Ŀ' + formatUnits(loan.amount, 18),
+          Reward: 'Ŀ' + formatUnits(loan.amount * loan.interest / 1000, 18),
+          APY: (loan.interest / 10 - 100) + "%",
+          Status: 'Seeking Borrower'
+        })
       })
-    })
-    setDownloadData(data);
-  }, [loans.loans])
+      setDownloadData(data);
+    }
+  }, [loans.loans, isLoadingCollection])
 
   return (
     <>
