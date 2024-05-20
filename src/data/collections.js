@@ -405,13 +405,13 @@ import UniversalSwapsV1_banner from "../assets/banners/default.webp";
 
 export const collection_preinfo = [
     {
-        name: "DWOOBz",
+        name: "DWOOBz-16d",
         address: "0x7c6118ba719a62d40ce6c9580f96306a558cda6f",
         interest: 2600,
         duration: 1382400
     },
     {
-        name: "DWOOBz",
+        name: "DWOOBz-3d",
         address: "0x7c6118ba719a62d40ce6c9580f96306a558cda6f",
         interest: 3200,
         duration: 259200

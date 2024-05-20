@@ -162,7 +162,6 @@ function Borrow() {
   }
 
   useEffect(() => {
-    fetchTokenIdMetadata("0x7c6118ba719a62d40ce6c9580f96306a558cda6f", "0x0000000000000000000000000000000000000000000000000000000000000001")
 
     if (selectedLend != -1) {
       fetchTokenIds();
