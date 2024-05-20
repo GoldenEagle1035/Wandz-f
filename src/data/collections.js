@@ -458,18 +458,18 @@ export const collection_preinfo = [
         interest: 2200,
         duration: 604800
     },
-    {
-        name: "DJ Pigs",
-        address: "0xa78a3611602ca3345b8dce25c38a784ab64300ff",
-        interest: 2200,
-        duration: 604800
-    },
-    {
-        name: "Deep Jackin Lukso Fam",
-        address: "0x81382873862adea987ed0a303c3abb33cf9a7867",
-        interest: 2200,
-        duration: 604800
-    },
+    // {
+    //     name: "DJ Pigs",
+    //     address: "0xa78a3611602ca3345b8dce25c38a784ab64300ff",
+    //     interest: 2200,
+    //     duration: 604800
+    // },
+    // {
+    //     name: "Deep Jackin Lukso Fam",
+    //     address: "0x81382873862adea987ed0a303c3abb33cf9a7867",
+    //     interest: 2200,
+    //     duration: 604800
+    // },
     {
         name: "GM Beans",
         address: "0x33517e5fedec388da59125fbabea6e2f6395c510",
@@ -488,12 +488,12 @@ export const collection_preinfo = [
         interest: 2200,
         duration: 604800
     },
-    {
-        name: "L.U.X Bots",
-        address: "0xe4732d3ff9a85abb6fcb274108375994a14d972c",
-        interest: 2200,
-        duration: 604800
-    },
+    // {
+    //     name: "L.U.X Bots",
+    //     address: "0xe4732d3ff9a85abb6fcb274108375994a14d972c",
+    //     interest: 2200,
+    //     duration: 604800
+    // },
     {
         name: "LUKSO CITIES",
         address: "0xe776b6cdeb394f03ec86578f8544b8e34a69bb2c",
@@ -554,12 +554,12 @@ export const collection_preinfo = [
         interest: 2200,
         duration: 604800
     },
-    {
-        name: "Meta Ears",
-        address: "0xfecc2bcc7d406b0f66228eac24bca1e7cfce0b72",
-        interest: 2200,
-        duration: 604800
-    },
+    // {
+    //     name: "Meta Ears",
+    //     address: "0xfecc2bcc7d406b0f66228eac24bca1e7cfce0b72",
+    //     interest: 2200,
+    //     duration: 604800
+    // },
     {
         name: "ONER",
         address: "0x156d7d4a7fdf5f5d4d7d3988b68057eda883b35f",
@@ -578,12 +578,12 @@ export const collection_preinfo = [
         interest: 2200,
         duration: 604800
     },
-    {
-        name: "Pangolyx",
-        address: "0xcdd480a4d3a9961be62ef40b01bf86175b341fbb",
-        interest: 2200,
-        duration: 604800
-    },
+    // {
+    //     name: "Pangolyx",
+    //     address: "0xcdd480a4d3a9961be62ef40b01bf86175b341fbb",
+    //     interest: 2200,
+    //     duration: 604800
+    // },
     {
         name: "Platties",
         address: "0x5021e9ed50d8c71e3d74c0de7964342aaa1a0f62",
@@ -596,12 +596,12 @@ export const collection_preinfo = [
         interest: 2200,
         duration: 604800
     },
-    {
-        name: "Shattered Sigils",
-        address: "0xf236c96898ca99c18fea7096436c8a0d062f56de",
-        interest: 2200,
-        duration: 604800
-    },
+    // {
+    //     name: "Shattered Sigils",
+    //     address: "0xf236c96898ca99c18fea7096436c8a0d062f56de",
+    //     interest: 2200,
+    //     duration: 604800
+    // },
     {
         name: "THE KEEZ RING",
         address: "0xfd3bc42ab7c15b91dabba5966cbb6e519d798588",
