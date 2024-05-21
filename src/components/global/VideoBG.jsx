@@ -21,17 +21,17 @@ function VideoBG() {
 
   return (
     <div className='main-page'>
-      <div className="video-docker  fixed left-0 top-0 h-full w-full overflow-hidden">
-        <img src={Bg2} className='opacity-80 z-[1] absolute left-0 top-0 h-full w-full overflow-hidden' alt="bg-image" />
+      <div className="fixed left-0 top-0 h-full w-full overflow-hidden">
+        <img src={Bg2} className='opacity-80 z-[1] absolute left-0 top-0 h-full w-full object-cover' alt="bg-image" />
         <video
-          className="absolute min-h-full min-w-full object-cover "
+          className="absolute left-0 top-0 h-full w-full object-cover"
           src={Bg}
           type="video/webm"
           autoPlay
           muted
           loop
         ></video>
-        {!isLandpage && <div className="absolute min-h-full min-w-full bg-[#00000030] backdrop-blur-md" />}
+        {!isLandpage && <div className="absolute left-0 top-0 h-full w-full bg-[#00000030] backdrop-blur-md" />}
       </div>
 
       {isLandpage && <div className="fixed z-10 bottom-[6rem] max-sm:bottom-[4rem] right-[6rem] max-sm:right-[4rem] flex justify-end">
