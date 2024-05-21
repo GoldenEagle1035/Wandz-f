@@ -74,6 +74,8 @@
   background: url("../../assets/background/video.webp");
   background-size: cover;
   background-clip: text;
+  color: transparent;
+  -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   animation: slideBackground 5s steps(1) infinite;
 }
