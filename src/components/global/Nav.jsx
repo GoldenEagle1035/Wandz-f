@@ -32,15 +32,15 @@ function Nav({ btnText }) {
     },
     {
       id: 2,
-      link: "OFFERS",
-    },
-    {
-      id: 3,
       link: "BORROW",
     },
     {
-      id: 4,
+      id: 3,
       link: "LOANS",
+    },
+    {
+      id: 4,
+      link: "OFFERS",
     },
   ];
 
