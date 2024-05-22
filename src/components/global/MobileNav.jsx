@@ -34,7 +34,6 @@ function MobileNav({ showMenu }) {
               </div>
             </div>
           </div>
-
         </ul>
       </div>
     </div>
