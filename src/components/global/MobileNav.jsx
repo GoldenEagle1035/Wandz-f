@@ -20,14 +20,14 @@ function MobileNav({ showMenu }) {
               <NavLink to={"/lend"}>
                 <h1 className="text-lg">LEND</h1>
               </NavLink>
-              <NavLink to={"/offers"}>
-                <h1 className="text-lg">OFFERS</h1>
-              </NavLink>
               <NavLink to={"/borrow"}>
                 <h1 className="text-lg">BORROW</h1>
               </NavLink>
               <NavLink to={"/loans"}>
                 <h1 className="text-lg">LOANS</h1>
+              </NavLink>
+              <NavLink to={"/offers"}>
+                <h1 className="text-lg">OFFERS</h1>
               </NavLink>
               <div style={{ position: "relative", width: "fit-content" }}>
                 <RainbowKitCustomConnectButton />
