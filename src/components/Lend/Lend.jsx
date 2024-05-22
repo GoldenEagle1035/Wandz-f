@@ -171,30 +171,30 @@ function Lend() {
                     </tr>
                   </thead>
                   <tbody>
-                    {collections.map((item, index) => {
+                    {collections.map((collection, index) => {
                       return (
-                        item.name.toLowerCase().includes(searchValue.toLowerCase()) && <tr className=" py-10 border-b-[1px] max-sm:px-4 border-[#a9a9a9d8]">
+                        collection.name.toLowerCase().includes(searchValue.toLowerCase()) && <tr className=" py-10 border-b-[1px] max-sm:px-4 border-[#a9a9a9d8]">
                           <td className="p-4 pl-4 max-sm:px-4 flex gap-2 items-center max-sm:text-[11px]">
                             <span className="max-sm:w-6">
-                              <img className="w-[40px] h-[40px] object-contain rounded-full" src={item.avatar} alt="" />
+                              <img className="w-[40px] h-[40px] object-contain rounded-full" src={collection.avatar} alt="" />
                             </span>
-                            {item.name}
+                            {collection.name}
                           </td>
                           <td className=" pl-4 max-sm:text-[11px] max-sm:px-4">
-                            <span className="text-lg mr-1">Ŀ {formatUnits(loans.loans.filter((loan) => loan.nftAddress.toLowerCase() == item.address.toLowerCase() && loan.amount != 0 && !loan.accepted && !loan.paid && !loan.liquidated).reduce((total, loan) => total + loan.amount, 0), 18)}</span>
+                            <span className="text-lg mr-1">Ŀ {formatUnits(loans.loans.filter((loan) => loan.nftAddress.toLowerCase() == collection.address.toLowerCase() && loan.duration == collection.duration && loan.amount != 0 && !loan.accepted && !loan.paid && !loan.liquidated).reduce((total, loan) => total + loan.amount, 0), 18)}</span>
                             <br />
                             <span className="text-[9px]  max-sm:text-[8px] text-[#B5B5B5]">
-                              {loans.loans.filter((loan) => loan.nftAddress.toLowerCase() == item.address.toLowerCase() && loan.accepted).length} of {loans.loans.filter((loan) => loan.nftAddress.toLowerCase() == item.address.toLowerCase()).length} offer(s) taken
+                              {loans.loans.filter((loan) => loan.nftAddress.toLowerCase() == collection.address.toLowerCase() && loan.duration == collection.duration && loan.accepted).length} of {loans.loans.filter((loan) => loan.nftAddress.toLowerCase() == collection.address.toLowerCase() && loan.duration == collection.duration).length} offer(s) taken
                             </span>
                           </td>
                           <td className="max-sm:text-[11px] pl-4 max-sm:px-4">
-                            <span className="text-lg mr-1">Ŀ</span>{loans.loans.filter((loan) => loan.nftAddress.toLowerCase() == item.address.toLowerCase() && loan.amount != 0 && !loan.accepted && !loan.paid && !loan.liquidated).length == 0 ? 0 : formatUnits(loans.loans.filter((loan) => loan.nftAddress.toLowerCase() == item.address.toLowerCase() && loan.amount != 0 && !loan.accepted && !loan.paid && !loan.liquidated).sort((a, b) => a.amount - b.amount).at(0).amount, 18)} <br />
+                            <span className="text-lg mr-1">Ŀ</span>{loans.loans.filter((loan) => loan.nftAddress.toLowerCase() == collection.address.toLowerCase() && loan.duration == collection.duration && loan.amount != 0 && !loan.accepted && !loan.paid && !loan.liquidated).length == 0 ? 0 : formatUnits(loans.loans.filter((loan) => loan.nftAddress.toLowerCase() == collection.address.toLowerCase() && loan.duration == collection.duration && loan.amount != 0 && !loan.accepted && !loan.paid && !loan.liquidated).sort((a, b) => a.amount - b.amount).at(0).amount, 18)} <br />
                             <span className="text-[9px] max-sm:text-[8px] text-[#B5B5B5]">
-                              Ŀ {loans.loans.filter((loan) => loan.nftAddress.toLowerCase() == item.address.toLowerCase() && loan.amount != 0 && !loan.accepted && !loan.paid && !loan.liquidated).length == 0 ? 0 : formatUnits(loans.loans.filter((loan) => loan.nftAddress.toLowerCase() == item.address.toLowerCase() && loan.amount != 0 && !loan.accepted && !loan.paid && !loan.liquidated).at(loans.loans.filter((loan) => loan.nftAddress.toLowerCase() == item.address.toLowerCase() && loan.amount != 0 && !loan.accepted && !loan.paid && !loan.liquidated).length - 1).amount, 18)} last loan
+                              Ŀ {loans.loans.filter((loan) => loan.nftAddress.toLowerCase() == collection.address.toLowerCase() && loan.duration == collection.duration && loan.amount != 0 && !loan.accepted && !loan.paid && !loan.liquidated).length == 0 ? 0 : formatUnits(loans.loans.filter((loan) => loan.nftAddress.toLowerCase() == collection.address.toLowerCase() && loan.duration == collection.duration && loan.amount != 0 && !loan.accepted && !loan.paid && !loan.liquidated).at(loans.loans.filter((loan) => loan.nftAddress.toLowerCase() == collection.address.toLowerCase() && loan.duration == collection.duration && loan.amount != 0 && !loan.accepted && !loan.paid && !loan.liquidated).length - 1).amount, 18)} last loan
                             </span>{" "}
                           </td>
-                          <td className="max-sm:text-[11px] pl-4 max-sm:px-4">{item.interest / 10 - 100}%</td>
-                          <td className="ml-6 max-sm:text-[11px] pl-4 max-sm:px-4">{(item.duration / 86400).toFixed(2)}d</td>
+                          <td className="max-sm:text-[11px] pl-4 max-sm:px-4">{collection.interest / 10 - 100}%</td>
+                          <td className="ml-6 max-sm:text-[11px] pl-4 max-sm:px-4">{(collection.duration / 86400).toFixed(2)}d</td>
                           <td><button disabled={!account.address} onClick={(e) => { onPlaceOffer(index) }} className="bg-gradient-to-r from-[#159F2C] text-black px-6 py-2 max-sm:text-[11px] max-sm:px-4 rounded-lg to-[#DBFF00]">LEND</button></td>
                           <br />
                         </tr>
