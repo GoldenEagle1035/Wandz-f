@@ -108,7 +108,7 @@ function Lend() {
 
   const valuetext = (value) => {
     setNumberOffers(value);
-    setTotalInvest((Number(offerAmount) * value).toString());
+    setTotalInvest((Number(offerAmount) * Number(value.toFixed(0))).toString());
     return `${value}`;
   }
 
