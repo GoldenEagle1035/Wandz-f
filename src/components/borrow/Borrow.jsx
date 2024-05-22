@@ -234,16 +234,16 @@ function Borrow() {
                           {collections.find((collection) => collection.address.toLowerCase() == loan.nftAddress.toLowerCase() && collection.duration == loan.duration).name}
                         </td>
                         <td className=" max-sm:px-4 pl-4 max-sm:text-[11px]">
-                          <span className="text-lg mr-1">Ŀ</span>{formatUnits(loans.loans.filter((t_item) => t_item.nftAddress.toLowerCase() == loan.nftAddress.toLowerCase() && t_item.amount != 0 && !t_item.accepted && !t_item.paid && !t_item.liquidated).reduce(((total, tt_item) => total + tt_item.amount), 0), 18)}
+                          <span className="text-lg mr-1">Ŀ</span>{formatUnits(loans.loans.filter((t_item) => t_item.nftAddress.toLowerCase() == loan.nftAddress.toLowerCase() && t_item.duration == loan.duration && t_item.amount != 0 && !t_item.accepted && !t_item.paid && !t_item.liquidated).reduce(((total, tt_item) => total + tt_item.amount), 0), 18)}
                           <br />
                           <span className="text-[9px]  max-sm:text-[8px] text-[#B5B5B5]">
-                            {loans.loans.filter((t_item) => t_item.nftAddress.toLowerCase() == loan.nftAddress.toLowerCase() && t_item.amount != 0 && !t_item.accepted && !t_item.paid && !t_item.liquidated).length} of {loans.loans.filter((t_item) => t_item.nftAddress.toLowerCase() == loan.nftAddress.toLowerCase()).length} offers taken
+                            {loans.loans.filter((t_item) => t_item.nftAddress.toLowerCase() == loan.nftAddress.toLowerCase() && t_item.duration == loan.duration && t_item.amount != 0 && !t_item.accepted && !t_item.paid && !t_item.liquidated).length} of {loans.loans.filter((t_item) => t_item.nftAddress.toLowerCase() == loan.nftAddress.toLowerCase() && t_item.duration == loan.duration).length} offers taken
                           </span>
                         </td>
                         <td className="max-sm:text-[11px] pl-4 max-sm:px-4">
-                          <span className="text-lg mr-1">Ŀ</span>{formatUnits(loans.loans.filter((t_item) => t_item.nftAddress.toLowerCase() == loan.nftAddress.toLowerCase() && t_item.amount != 0 && !t_item.accepted && !t_item.paid && !t_item.liquidated).sort((a, b) => a.amount - b.amount).at(0).amount, 18)} <br />
+                          <span className="text-lg mr-1">Ŀ</span>{formatUnits(loans.loans.filter((t_item) => t_item.nftAddress.toLowerCase() == loan.nftAddress.toLowerCase() && t_item.duration == loan.duration && t_item.amount != 0 && !t_item.accepted && !t_item.paid && !t_item.liquidated).sort((a, b) => a.amount - b.amount).at(0).amount, 18)} <br />
                           <span className="text-[9px] max-sm:text-[8px] text-[#B5B5B5]">
-                            Ŀ {formatUnits(loans.loans.filter((t_item) => t_item.nftAddress.toLowerCase() == loan.nftAddress.toLowerCase() && t_item.amount != 0 && !t_item.accepted && !t_item.paid && !t_item.liquidated).at(loans.loans.filter((t_item) => t_item.nftAddress.toLowerCase() == loan.nftAddress.toLowerCase() && t_item.amount != 0 && !t_item.accepted && !t_item.paid && !t_item.liquidated).length - 1).amount, 18)} last loan taken
+                            Ŀ {formatUnits(loans.loans.filter((t_item) => t_item.nftAddress.toLowerCase() == loan.nftAddress.toLowerCase() && t_item.duration == loan.duration && t_item.amount != 0 && !t_item.accepted && !t_item.paid && !t_item.liquidated).at(loans.loans.filter((t_item) => t_item.nftAddress.toLowerCase() == loan.nftAddress.toLowerCase() && t_item.duration == loan.duration && t_item.amount != 0 && !t_item.accepted && !t_item.paid && !t_item.liquidated).length - 1).amount, 18)} last loan taken
                           </span>{" "}
                         </td>
                         <td className="max-sm:text-[11px] max-sm:px-4 pl-4">{loan.interest / 10 - 100} %</td>
