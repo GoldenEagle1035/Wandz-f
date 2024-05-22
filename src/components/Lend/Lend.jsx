@@ -107,7 +107,8 @@ function Lend() {
   }
 
   const valuetext = (value) => {
-    console.log(value);
+    setNumberOffers(value);
+    setTotalInvest((Number(value)).toString());
     return `${value}`;
   }
 
@@ -285,7 +286,7 @@ function Lend() {
                   defaultValue={1}
                   getAriaValueText={valuetext}
                   step={1}
-                  min={0}
+                  min={1}
                   max={10}
                   valueLabelDisplay="on"
                 />
