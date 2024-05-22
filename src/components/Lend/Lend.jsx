@@ -16,6 +16,8 @@ import { CollectionsContext } from "../../context/collection-context";
 
 // import { collections } from "../../data/collections";
 
+import Slider from '@mui/material/Slider';
+
 function Lend() {
 
   const [showAddDlg, setShowAddDlg] = useState(false);
@@ -102,6 +104,10 @@ function Lend() {
       }
       setPlaceOfferPending(false);
     }
+  }
+
+  const valuetext = (value) => {
+    return `${value}`;
   }
 
   return (
@@ -270,9 +276,18 @@ function Lend() {
             <div className="w-full flex flex-col">
               <span className="text-[14px] font-bold text-white">Number of offers</span>
               <div className="flex gap-[10px] justify-between">
-                <button onClick={(e) => { setNumberOffers(1); setTotalInvest((Number(offerAmount)).toString()); }} className={`text-[14px] ${numberOffers == 1 ? "text-[#DBFF00]" : "text-white"} bg-[#D9D9D930] border ${numberOffers == 1 ? "border-[#DBFF00]" : "border-[#DBFF0030]"} rounded-[10px] focus:outline-none px-[20px] py-[5px]`}>1</button>
+                {/* <button onClick={(e) => { setNumberOffers(1); setTotalInvest((Number(offerAmount)).toString()); }} className={`text-[14px] ${numberOffers == 1 ? "text-[#DBFF00]" : "text-white"} bg-[#D9D9D930] border ${numberOffers == 1 ? "border-[#DBFF00]" : "border-[#DBFF0030]"} rounded-[10px] focus:outline-none px-[20px] py-[5px]`}>1</button>
                 <button onClick={(e) => { setNumberOffers(2); setTotalInvest((Number(offerAmount) * 2).toString()); }} className={`text-[14px] ${numberOffers == 2 ? "text-[#DBFF00]" : "text-white"} bg-[#D9D9D930] border ${numberOffers == 2 ? "border-[#DBFF00]" : "border-[#DBFF0030]"} rounded-[10px] focus:outline-none px-[20px] py-[5px]`}>2</button>
-                <button onClick={(e) => { setNumberOffers(4); setTotalInvest((Number(offerAmount) * 4).toString()); }} className={`text-[14px] ${numberOffers == 4 ? "text-[#DBFF00]" : "text-white"} bg-[#D9D9D930] border ${numberOffers == 4 ? "border-[#DBFF00]" : "border-[#DBFF0030]"} rounded-[10px] focus:outline-none px-[20px] py-[5px]`}>4</button>
+                <button onClick={(e) => { setNumberOffers(4); setTotalInvest((Number(offerAmount) * 4).toString()); }} className={`text-[14px] ${numberOffers == 4 ? "text-[#DBFF00]" : "text-white"} bg-[#D9D9D930] border ${numberOffers == 4 ? "border-[#DBFF00]" : "border-[#DBFF0030]"} rounded-[10px] focus:outline-none px-[20px] py-[5px]`}>4</button> */}
+                <Slider
+                  aria-label="Always visible"
+                  defaultValue={1}
+                  getAriaValueText={valuetext}
+                  step={1}
+                  min={0}
+                  max={10}
+                  valueLabelDisplay="on"
+                />
               </div>
             </div>
             <div className="w-full flex justify-center">
