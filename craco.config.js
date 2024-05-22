@@ -6,7 +6,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
   devServer: {
-    port: 3200
+    port: 3000
   },
   plugins: [
     new NodePolyfillPlugin(),

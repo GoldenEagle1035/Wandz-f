@@ -292,10 +292,10 @@ function Offers() {
               </div>
             </div>
             <span className="text-[14px] font-[400] text-white text-center">You have Successfully Revoke</span>
-            <div className="flex gap-[10px] justify-center items-center">
+            {/* <div className="flex gap-[10px] justify-center items-center">
               <span className="text-[14px] font-[400] text-white">your offer of</span>
               <span className="text-[14px] font-[400] text-[#DBFF00]">Ŀ {formatUnits(loans.loans[selectedLend].amount, 18)}</span>
-            </div>
+            </div> */}
             <div className="w-full flex gap-[20px] justify-between">
               <div className="flex flex-col items-center">
                 <span className="text-[10px] font-[400] text-white">APY</span>
