@@ -65,7 +65,7 @@ function Offers() {
       let data = [];
       loans.loans.filter((loan) => account.address && loan.lender.toLowerCase() == account.address.toLowerCase() && loan.amount != 0 && !loan.accepted && !loan.paid && !loan.liquidated).map((loan) => {
         data.push({
-          COLLECTION: collections.find((collection) => collection.address.toLowerCase() == loan.nftAddress.toLowerCase()).name,
+          COLLECTION: collections.find((collection) => collection.address.toLowerCase() == loan.nftAddress.toLowerCase() && collection.duration == loan.duration).name,
           Offer: 'Ŀ' + formatUnits(loan.amount, 18),
           Reward: 'Ŀ' + formatUnits(loan.amount * loan.interest / 1000, 18),
           APY: (loan.interest / 10 - 100) + "%",
@@ -198,24 +198,24 @@ function Offers() {
                   </tr>
                 </thead>
                 <tbody>
-                  {loans.loans.map((item, index) => (
-                    account.address && item.lender.toLowerCase() == account.address.toLowerCase() && item.amount != 0 && !item.accepted && !item.paid && !item.liquidated && <tr className=" py-10 border-b-[1px] max-sm:px-4 border-[#a9a9a9d8]">
+                  {loans.loans.map((loan, index) => (
+                    account.address && loan.lender.toLowerCase() == account.address.toLowerCase() && loan.amount != 0 && !loan.accepted && !loan.paid && !loan.liquidated && <tr className=" py-10 border-b-[1px] max-sm:px-4 border-[#a9a9a9d8]">
                       <td className="p-4 pl-4 max-sm:px-4 flex gap-2 items-center max-sm:text-[11px]">
                         <span className="max-sm:w-6">
-                          <img className="w-[40px] h-[40px] object-contain rounded-full" src={collections.find((collection) => collection.address.toLowerCase() == item.nftAddress.toLowerCase()).avatar} alt="" />
+                          <img className="w-[40px] h-[40px] object-contain rounded-full" src={collections.find((collection) => collection.address.toLowerCase() == loan.nftAddress.toLowerCase() && collection.duration == loan.duration).avatar} alt="" />
                         </span>
-                        {collections.find((collection) => collection.address.toLowerCase() == item.nftAddress.toLowerCase()).name}
+                        {collections.find((collection) => collection.address.toLowerCase() == loan.nftAddress.toLowerCase() && collection.duration == loan.duration).name}
                       </td>
                       <td className=" pl-4 max-sm:text-[11px] max-sm:px-4">
                         <span className="text-[12px] font-bold text-white">Ŀ</span>
-                        <span className="text-[12px] font-bold text-[#DBFF00]">{formatUnits(item.amount, 18)}</span>
+                        <span className="text-[12px] font-bold text-[#DBFF00]">{formatUnits(loan.amount, 18)}</span>
                       </td>
                       <td className="max-sm:text-[11px] pl-4 max-sm:px-4">
                         <span className="text-[12px] font-bold text-white">Ŀ</span>
-                        <span className="text-[12px] font-bold text-white">{formatUnits(item.amount * item.interest / 1000, 18)}</span>
+                        <span className="text-[12px] font-bold text-white">{formatUnits(loan.amount * loan.interest / 1000, 18)}</span>
                       </td>
                       <td className="max-sm:text-[11px] pl-4 max-sm:px-4">
-                        <span className="text-[12px] font-bold text-white">{item.interest / 10 - 100}</span>
+                        <span className="text-[12px] font-bold text-white">{loan.interest / 10 - 100}</span>
                         <span className="text-[12px] font-bold text-white">%</span>
                       </td>
                       <td className="ml-6 max-sm:text-[11px] pl-4 max-sm:px-4">
@@ -240,10 +240,10 @@ function Offers() {
             onClick={() => { if (!revokePending) setSelectedLend(-1) }}
           />
           <div className="min-w-[300px] max-w-[400px] bg-[#D9D9D930] backdrop-blur-sm flex gap-[20px] flex-col rounded-[10px] p-[10px]" >
-            <img className="w-full h-[125px] object-center" src={collections.find((collection) => collection.address.toLowerCase() == loans.loans[selectedLend].nftAddress.toLowerCase()).banner} alt="banner" />
+            <img className="w-full h-[125px] object-center" src={collections.find((collection) => collection.address.toLowerCase() == loans.loans[selectedLend].nftAddress.toLowerCase() && collection.duration == loans.loans[selectedLend].duration).banner} alt="banner" />
             <div className="w-full flex flex-col gap-[10px] items-center">
-              <img className="w-[65px] h-[65px] object-contain rounded-full -mt-[53px]" src={collections.find((collection) => collection.address.toLowerCase() == loans.loans[selectedLend].nftAddress.toLowerCase()).avatar} alt="avatar" />
-              <span className="text-[14px] font-[400] text-white">{collections.find((collection) => collection.address.toLowerCase() == loans.loans[selectedLend].nftAddress.toLowerCase()).name}</span>
+              <img className="w-[65px] h-[65px] object-contain rounded-full -mt-[53px]" src={collections.find((collection) => collection.address.toLowerCase() == loans.loans[selectedLend].nftAddress.toLowerCase() && collection.duration == loans.loans[selectedLend].duration).avatar} alt="avatar" />
+              <span className="text-[14px] font-[400] text-white">{collections.find((collection) => collection.address.toLowerCase() == loans.loans[selectedLend].nftAddress.toLowerCase() && collection.duration == loans.loans[selectedLend].duration).name}</span>
             </div>
             <div className="w-full flex gap-[20px] justify-between">
               <div className="flex flex-col items-center">
@@ -283,7 +283,7 @@ function Offers() {
             onClick={() => { setSelectedLend(-1) }}
           />
           <div className="min-w-[300px] max-w-[400px] bg-[#D9D9D930] backdrop-blur-sm flex gap-[20px] flex-col rounded-[10px] p-[10px]" >
-            <img className="w-full h-[125px] object-center" src={collections.find((collection) => collection.address.toLowerCase() == loans.loans[selectedLend].nftAddress.toLowerCase()).banner} alt="banner" />
+            <img className="w-full h-[125px] object-center" src={collections.find((collection) => collection.address.toLowerCase() == loans.loans[selectedLend].nftAddress.toLowerCase() && collection.duration == loans.loans[selectedLend].duration).banner} alt="banner" />
             <div className="w-full flex flex-col gap-[10px] items-center">
               <div className="w-[65px] h-[65px] flex justify-center items-center rounded-full border-[0.25px] border-[#DBFF00] -mt-[53px] bg-[#000]">
                 <svg width="37" height="28" viewBox="0 0 37 28" fill="none" xmlns="http://www.w3.org/2000/svg">
