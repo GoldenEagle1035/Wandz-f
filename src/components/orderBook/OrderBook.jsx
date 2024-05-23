@@ -133,32 +133,31 @@ function OrderBook() {
               </button>
             </div> */}
               </div>
-              <div className="px-6  overflow-x-auto backdrop-blur-xl text-left font-superLagendBoy text-[#FFFFFF] my-12 rounded-xl border-none">
+              {isLoadingCollection &&
+                <div className="flex gap-[20px] justify-center items-center text-white">
+                  <FontAwesomeIcon icon={faSpinner} size="md" className="animate-spin" />
+                  <span>Loading</span>
+                </div>
+              }
+              {!isLoadingCollection && <div className="max-sm:hidden px-6 overflow-x-auto backdrop-blur-xl text-left font-superLagendBoy text-[#FFFFFF] my-12 rounded-xl border-none">
                 <table className="w-full">
                   <thead>
                     <tr className="max-sm:text-[11px] text-[12px]">
-                      <th className="px-4 py-2">IMAGE</th>
-                      <th className="px-4 py-2">NAME</th>
-                      <th className="px-4 py-2">ACTIVE LOANS</th>
+                      <th className="px-4 py-2">Image</th>
+                      <th className="px-4 py-2">Name</th>
+                      <th className="px-4 py-2">Active Loans</th>
                       {/* <th className="px-4 py-2">LOANS in 24H</th> */}
-                      <th className="px-4 py-2">OFFERS</th>
-                      <th className="px-4 py-2">FLOOR</th>
+                      <th className="px-4 py-2">Offers</th>
+                      <th className="px-4 py-2">Floor</th>
                       <th className="px-4 py-2">LTV</th>
-                      <th className="px-4 py-2">FORECLOSURES</th>
+                      <th className="px-4 py-2">Force Closures</th>
                       <th className="px-4 py-2">APY</th>
-                      <th className="px-4 py-2">DURATION</th>
+                      <th className="px-4 py-2">Duration</th>
                       <th></th>
                     </tr>
                   </thead>
-
                   <tbody>
-                    {isLoadingCollection &&
-                      <div className="flex gap-[20px] justify-center items-center text-white">
-                        <FontAwesomeIcon icon={faSpinner} size="md" className="animate-spin" />
-                        <span>Loading</span>
-                      </div>
-                    }
-                    {!isLoadingCollection && collections.map((collection, index) => {
+                    {collections.map((collection, index) => {
                       return (
                         collection.name.toLowerCase().includes(searchValue.toLowerCase()) && <tr className=" py-10 border-b-[1px] border-[#a9a9a9d8]  ">
                           <td className="p-4 px-4 flex gap-2 items-center">
@@ -224,6 +223,37 @@ function OrderBook() {
                   </tbody>
                 </table>
               </div>
+              }
+              {!isLoadingCollection && <div className="hidden max-sm:flex px-3 bg-[#45291D50] backdrop-blur-xl font-superLagendBoy my-12 rounded-xl border-none flex-col gap-[10px] p-10">
+                <div className="flex gap-[5px] items-center text-white text-[11px]">
+                  <span className="w-1/4 text-center">Active Loans</span>
+                  <span className="w-1/4 text-center">Offers</span>
+                  <span className="w-1/4 text-center">APY</span>
+                  <span className="w-1/4 text-center">Duration</span>
+                </div>
+                <div className="flex flex-col">
+                  {collections.map((collection, index) => (
+                    collection.name.toLowerCase().includes(searchValue.toLowerCase()) &&
+                    <div className="py-4 border-b-[1px] border-[#a9a9a9d8] flex flex-col gap-[5px]">
+                      <div className="flex gap-[10px] justify-between items-center">
+                        <div className="flex gap-[5px] items-center">
+                          <img className="w-[40px] h-[40px] object-contain rounded-full" src={collection.avatar} alt="" />
+                          <span className="text-[11px] text-white">{collection.name}</span>
+                        </div>
+                        <button disabled={!account.address} onClick={(e) => onPlaceOffer(index)} className="bg-gradient-to-r from-[#159F2C] text-black px-4 py-2 rounded-lg to-[#DBFF00] text-[10px]">LEND</button>
+                      </div>
+                      <div className="flex gap-[5px] text-white text-[11px]">
+                        <span className="w-1/4 text-center">{loans.loans.filter((loan) => loan.nftAddress.toLowerCase() == collection.address.toLowerCase() && loan.duration == collection.duration && loan.accepted).length} loans</span>
+                        <span className="w-1/4 text-center">{loans.loans.filter((loan, index) => (
+                          loan.nftAddress.toLowerCase() == collection.address.toLowerCase() && loan.duration == collection.duration && loan.amount != 0 && !loan.accepted && !loan.paid && !loan.liquidated)).length} offer(s)</span>
+                        <span className="w-1/4 text-center">{collection.interest / 10 - 100} %</span>
+                        <span className="w-1/4 text-center">{(collection.duration / 86400).toFixed(2)}d</span>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+              }
             </div>
           </div>
         </div>

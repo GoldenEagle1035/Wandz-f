@@ -214,7 +214,7 @@ function Borrow() {
                   <span>Loading</span>
                 </div>
               }
-              {!isLoadingCollection && <div className="px-6 overflow-x-auto bg-[#45291D50] backdrop-blur-xl text-left font-superLagendBoy text-[#FFFFFF] my-12 rounded-xl border-none">
+              {!isLoadingCollection && <div className="max-sm:hidden px-6 overflow-x-auto bg-[#45291D50] backdrop-blur-xl text-left font-superLagendBoy text-[#FFFFFF] my-12 rounded-xl border-none">
                 <table className="w-full p-10">
                   <thead>
                     <tr className="max-sm:text-[11px] max-sm:px-4">
@@ -286,6 +286,35 @@ function Borrow() {
                 </table>
               </div>
               }
+              {!isLoadingCollection && <div className="hidden max-sm:flex px-3 bg-[#45291D50] backdrop-blur-xl font-superLagendBoy my-12 rounded-xl border-none flex-col gap-[10px] p-10">
+                <div className="flex gap-[5px] items-center text-white text-[11px]">
+                  <span className="w-1/4 text-center">Available Pool</span>
+                  <span className="w-1/4 text-center">Best Offer</span>
+                  <span className="w-1/4 text-center">APY</span>
+                  <span className="w-1/4 text-center">Duration</span>
+                </div>
+                <div className="flex flex-col">
+                  {collections.map((collection, index) => (
+                    collection.name.toLowerCase().includes(searchValue.toLowerCase()) && loans.loans.filter((loan) => loan.nftAddress.toLowerCase() == collection.address.toLowerCase() && loan.duration == collection.duration && loan.amount != 0 && !loan.accepted && !loan.paid && !loan.liquidated).length != 0 &&
+                    <div className="py-4 border-b-[1px] border-[#a9a9a9d8] flex flex-col gap-[5px]">
+                      <div className="flex gap-[10px] justify-between items-center">
+                        <div className="flex gap-[5px] items-center">
+                          <img className="w-[40px] h-[40px] object-contain rounded-full" src={collection.avatar} alt="" />
+                          <span className="text-[11px] text-white">{collection.name}</span>
+                        </div>
+                        <button disabled={!account.address} onClick={(e) => setSelectedCollection(index)} className="bg-gradient-to-r from-[#159F2C] text-black px-4 py-2 rounded-lg to-[#DBFF00] text-[10px]">BORROW</button>
+                      </div>
+                      <div className="flex gap-[5px] text-white text-[11px]">
+                        <span className="w-1/4 text-center">Ŀ{formatUnits(loans.loans.filter((loan) => loan.nftAddress.toLowerCase() == collection.address.toLowerCase() && loan.duration == collection.duration && loan.amount != 0 && !loan.accepted && !loan.paid && !loan.liquidated).reduce(((total, loan) => total + loan.amount), 0), 18)}</span>
+                        <span className="w-1/4 text-center">Ŀ{formatUnits(loans.loans.filter((loan) => loan.nftAddress.toLowerCase() == collection.address.toLowerCase() && loan.duration == collection.duration && loan.amount != 0 && !loan.accepted && !loan.paid && !loan.liquidated).length != 0 ? loans.loans.filter((loan) => loan.nftAddress.toLowerCase() == collection.address.toLowerCase() && loan.duration == collection.duration && loan.amount != 0 && !loan.accepted && !loan.paid && !loan.liquidated).sort((a, b) => a.amount - b.amount).at(0).amount : 0, 18)}</span>
+                        <span className="w-1/4 text-center">{collection.interest / 10 - 100} %</span>
+                        <span className="w-1/4 text-center">{(collection.duration / 86400).toFixed(2)}d</span>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+              }
             </div>
           </div>
         </div>
@@ -349,7 +378,7 @@ function Borrow() {
             <div className="w-full flex gap-[20px] justify-between">
               <div className="flex flex-col items-center">
                 <span className="text-[10px] font-[400] text-white">INTEREST</span>
-                <span className="text-[14px] font-[400] text-[#DBFF00]">Ŀ {formatUnits(loans.loans[selectedLend].amount * (collections.find((collection) => collection.address.toLowerCase() == loans.loans[selectedLend].nftAddress.toLowerCase() && collection.duration == loans.loans[selectedLend].duration).interest) / 1000, 18).toFixed(2)}</span>
+                <span className="text-[14px] font-[400] text-[#DBFF00]">Ŀ {Number(formatUnits(loans.loans[selectedLend].amount * (collections.find((collection) => collection.address.toLowerCase() == loans.loans[selectedLend].nftAddress.toLowerCase() && collection.duration == loans.loans[selectedLend].duration).interest) / 1000, 18)).toFixed(2)}</span>
               </div>
               <div className="flex flex-col items-center">
                 <span className="text-[10px] font-[400] text-white">DURATION</span>
@@ -423,7 +452,7 @@ function Borrow() {
             <div className="w-full flex gap-[20px] justify-between">
               <div className="flex flex-col items-center">
                 <span className="text-[10px] font-[400] text-white">INTEREST</span>
-                <span className="text-[14px] font-[400] text-[#DBFF00]">Ŀ {formatUnits(loans.loans[selectedLend].amount * (collections.find((collection) => collection.address.toLowerCase() == loans.loans[selectedLend].nftAddress.toLowerCase() && collection.duration == loans.loans[selectedLend].duration).interest) / 1000, 18).toFixed(2)}</span>
+                <span className="text-[14px] font-[400] text-[#DBFF00]">Ŀ {Number(formatUnits(loans.loans[selectedLend].amount * (collections.find((collection) => collection.address.toLowerCase() == loans.loans[selectedLend].nftAddress.toLowerCase() && collection.duration == loans.loans[selectedLend].duration).interest) / 1000, 18)).toFixed(2)}</span>
               </div>
               <div className="flex flex-col items-center">
                 <span className="text-[10px] font-[400] text-white">DURATION</span>

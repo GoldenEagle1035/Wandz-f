@@ -207,14 +207,14 @@ function Loans() {
             </div>
           }
           {!isLoadingCollection && loans.loans.filter((loan) => account.address && loan.borrower.toLowerCase() == account.address.toLowerCase() && loan.accepted && !loan.paid && !loan.liquidated).length != 0 &&
-            <div className="px-6 overflow-x-auto bg-[#45291D50] backdrop-blur-xl text-left font-superLagendBoy text-[#FFFFFF] my-12 rounded-xl border-none">
+            <div className="max-sm:hidden px-6 overflow-x-auto bg-[#45291D50] backdrop-blur-xl text-left font-superLagendBoy text-[#FFFFFF] my-12 rounded-xl border-none">
               <table className="w-full p-10">
                 <thead>
                   <tr className="max-sm:text-[11px]">
                     <th className="p-6">Collection</th>
-                    <th className="pl-4 max-sm:px-4">Available Pool</th>
-                    <th className="pl-4 max-sm:px-4">Best offer</th>
-                    <th className="pl-4 max-sm:px-4">APY</th>
+                    <th className="pl-4 max-sm:px-4">Offer</th>
+                    <th className="pl-4 max-sm:px-4">Status</th>
+                    <th className="pl-4 max-sm:px-4">Reward</th>
                     <th className="pl-4 max-sm:px-4">Duration</th>
                     <th></th>
                   </tr>
@@ -252,6 +252,38 @@ function Loans() {
                 </tbody>
               </table>
             </div>
+          }
+          {!isLoadingCollection && <div className="hidden max-sm:flex px-3 bg-[#45291D50] backdrop-blur-xl font-superLagendBoy my-12 rounded-xl border-none flex-col gap-[10px] p-10">
+            <div className="flex gap-[5px] items-center text-white text-[11px]">
+              <span className="w-1/4 text-center">Offer</span>
+              <span className="w-1/4 text-center">Status</span>
+              <span className="w-1/4 text-center">Reward</span>
+              <span className="w-1/4 text-center">Duration</span>
+            </div>
+            <div className="flex flex-col">
+              {loans.loans.map((loan, index) => (
+                account.address && loan.borrower.toLowerCase() == account.address.toLowerCase() && loan.accepted && !loan.paid && !loan.liquidated &&
+                <div className="py-4 border-b-[1px] border-[#a9a9a9d8] flex flex-col gap-[5px]">
+                  <div className="flex gap-[10px] justify-between items-center">
+                    <div className="flex gap-[5px] items-center">
+                      <img className="w-[40px] h-[40px] object-contain rounded-full" src={collections.find((collection) => collection.address.toLowerCase() == loan.nftAddress.toLowerCase() && collection.duration == loan.duration).avatar} alt="" />
+                      <span className="text-[11px] text-white">{collections.find((collection) => collection.address.toLowerCase() == loan.nftAddress.toLowerCase() && collection.duration == loan.duration).name}</span>
+                    </div>
+                    <div className="flex gap-[5px] items-center">
+                      <button onClick={(e) => { onRepayOffer(index) }} className="bg-gradient-to-r from-[#159F2C] text-black py-2 text-[11px] px-4 rounded-lg to-[#DBFF00]">{(loan.durationCounter - Date.now() / 1000) / 86400 >= 0 ? "REPAY" : "LIQUIDATE"}</button>
+                      <button disabled={loan.extends > 2} onClick={(e) => onExtendOffer(index)} className="bg-gradient-to-r from-[#159F2C] text-black px-4 py-2 rounded-lg to-[#DBFF00] text-[11px]">EXTEND</button>
+                    </div>
+                  </div>
+                  <div className="flex gap-[5px] text-white text-[11px]">
+                    <span className="w-1/4 text-center">Ŀ{formatUnits(loan.amount, 18)}</span>
+                    <span className="w-1/4 text-center">{Math.abs((loan.durationCounter - Date.now() / 1000) / 86400).toFixed(2)} {(loan.durationCounter - Date.now() / 1000) / 86400 >= 0 ? "d Remaining" : "d Passed"}</span>
+                    <span className="w-1/4 text-center">Ŀ{formatUnits(loan.amount * loan.interest / 1000, 18)}</span>
+                    <span className="w-1/4 text-center">{(loan.duration / 86400).toFixed(2)}d</span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
           }
         </div>
       </div>
