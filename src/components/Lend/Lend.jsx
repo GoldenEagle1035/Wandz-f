@@ -139,7 +139,7 @@ function Lend() {
                   <p className="font-superLagendBoy text-xl max-sm:text-lg text-[#FFFFFF]">
                     Browse collections below, and name your price.
                   </p>
-                  <button onClick={(e) => setShowMore(true)} className="font-superLagendBoy text-xl max-sm:text-lg text-[#DBFF00] underline">ShowMore</button>
+                  <button onClick={(e) => setShowMore(true)} className="font-superLagendBoy text-xl max-sm:text-lg text-[#DBFF00] underline">Show More</button>
               </>}
             </div>
           </div>

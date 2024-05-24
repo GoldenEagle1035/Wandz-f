@@ -147,7 +147,7 @@ function Loans() {
                 <p className="font-superLagendBoy text-xl max-sm:text-lg text-[#FFFFFF]">
                   Here are the NFTs you borrowed against.
                 </p>
-                <button onClick={(e) => setShowMore(true)} className="font-superLagendBoy text-xl max-sm:text-lg text-[#DBFF00] underline">ShowMore</button>
+                <button onClick={(e) => setShowMore(true)} className="font-superLagendBoy text-xl max-sm:text-lg text-[#DBFF00] underline">Show More</button>
               </>}
             </div>
             {loans.loans.filter((loan) => account.address && loan.borrower.toLowerCase() == account.address.toLowerCase() && loan.accepted && !loan.paid && !loan.liquidated).length == 0 && <h1 className="mt-24 font-superLagendBoy text-4xl max-sm:text-lg text-[#FFFFFF]">No active or completed loans.</h1>}
