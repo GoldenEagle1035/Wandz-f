@@ -24,6 +24,8 @@ function Offers() {
   const [downloadData, setDownloadData] = useState([]);
   const [confirmed, setConfirmed] = useState(false);
 
+  const [showMore, setShowMore] = useState(false);
+
   const csvRef = useRef(null);
 
   const account = useAccount();
@@ -86,9 +88,19 @@ function Offers() {
             <h1 className="text-[2.5rem] sm:text-[2rem] max-sm:text-[1.5rem] sm:p-4 text-gradient-bg leading-loose">
               MY OFFERS AND CONTRACTS
             </h1>
-            <p className="font-superLagendBoy text-xl max-sm:text-lg text-[#FFFFFF]">
+            <p className="max-sm:hidden font-superLagendBoy text-xl max-sm:text-lg text-[#FFFFFF]">
               Once your offer is accepted by a borrower, a secure contract is created, freezing the NFT in their wallet. When the loan ends, you will get paid the total LYX (loan with interest). In the event of a default, you can foreclose, which transfers the collateral NFT to your wallet.
             </p>
+            <div className="hidden max-sm:flex flex-col gap-[10px] items-center">
+              {showMore ? <p className="font-superLagendBoy text-xl max-sm:text-lg text-[#FFFFFF]">
+                Once your offer is accepted by a borrower, a secure contract is created, freezing the NFT in their wallet. When the loan ends, you will get paid the total LYX (loan with interest). In the event of a default, you can foreclose, which transfers the collateral NFT to your wallet.
+              </p> : <>
+                <p className="font-superLagendBoy text-xl max-sm:text-lg text-[#FFFFFF]">
+                  Once your offer is accepted by a borrower, a secure contract is created, freezing the NFT in their wallet.
+                </p>
+                <button onClick={(e) => setShowMore(true)} className="font-superLagendBoy text-xl max-sm:text-lg text-[#DBFF00] underline">ShowMore</button>
+              </>}
+            </div>
             {loans.loans.filter((loan) => account.address && loan.lender.toLowerCase() == account.address.toLowerCase() && loan.amount != 0 && !loan.accepted && !loan.paid && !loan.liquidated).length == 0 && <h1 className="mt-24 font-superLagendBoy text-4xl max-sm:text-lg text-[#FFFFFF]">No active or completed offers.</h1>}
           </div>
           <div className="second-sec py-16 flex flex-col gap-24">

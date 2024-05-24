@@ -27,6 +27,8 @@ function Loans() {
   const [downloadData, setDownloadData] = useState([]);
   const [confirmed, setConfirmed] = useState(false);
 
+  const [showMore, setShowMore] = useState(false);
+
   const csvRef = useRef(null);
 
   const account = useAccount();
@@ -135,9 +137,19 @@ function Loans() {
             <h1 className="text-[2.5rem] sm:text-[2rem] max-sm:text-[1.5rem] sm:p-4 text-gradient-bg leading-loose">
               MY LOANS
             </h1>
-            <p className="font-superLagendBoy text-xl max-sm:text-lg text-[#FFFFFF]">
+            <p className="max-sm:hidden font-superLagendBoy text-xl max-sm:text-lg text-[#FFFFFF]">
               Here are the NFTs you borrowed against. You must pay these in full by the expiration date in order to keep your NFT.
             </p>
+            <div className="hidden max-sm:flex flex-col gap-[10px] items-center">
+              {showMore ? <p className="font-superLagendBoy text-xl max-sm:text-lg text-[#FFFFFF]">
+                Here are the NFTs you borrowed against. You must pay these in full by the expiration date in order to keep your NFT.
+              </p> : <>
+                <p className="font-superLagendBoy text-xl max-sm:text-lg text-[#FFFFFF]">
+                  Here are the NFTs you borrowed against.
+                </p>
+                <button onClick={(e) => setShowMore(true)} className="font-superLagendBoy text-xl max-sm:text-lg text-[#DBFF00] underline">ShowMore</button>
+              </>}
+            </div>
             {loans.loans.filter((loan) => account.address && loan.borrower.toLowerCase() == account.address.toLowerCase() && loan.accepted && !loan.paid && !loan.liquidated).length == 0 && <h1 className="mt-24 font-superLagendBoy text-4xl max-sm:text-lg text-[#FFFFFF]">No active or completed loans.</h1>}
           </div>
           <div className="second-sec py-16 flex flex-col gap-24">

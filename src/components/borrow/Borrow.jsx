@@ -41,6 +41,7 @@ function Borrow() {
   const [tokenImages, setTokenImages] = useState([]);
 
   const [searchValue, setSearchValue] = useState('');
+  const [showMore, setShowMore] = useState(false);
 
   const account = useAccount();
 
@@ -229,9 +230,19 @@ function Borrow() {
               <h1 className="text-[2.5rem] sm:text-[2rem] max-sm:text-[1.5rem] sm:p-4 text-gradient-bg leading-loose">
                 Borrow against my NFTs
               </h1>
-              <p className="font-superLagendBoy text-xl max-sm:text-lg text-[#FFFFFF]">
+              <p className="max-sm:hidden font-superLagendBoy text-xl max-sm:text-lg text-[#FFFFFF]">
                 Instantly take a loan against your NFTs. Escrow-free loans allows you to keep the collateral NFT in your wallet. When you accept a loan offer, a secure contract is created, freezing the NFT in-wallet. Not repaying by the due date means the lender can repossess your NFT. Successfully pay the loan in full by the expiration date to automatically thaw the NFT.
               </p>
+              <div className="hidden max-sm:flex flex-col gap-[10px] items-center">
+                {showMore ? <p className="font-superLagendBoy text-xl max-sm:text-lg text-[#FFFFFF]">
+                  Instantly take a loan against your NFTs. Escrow-free loans allows you to keep the collateral NFT in your wallet. When you accept a loan offer, a secure contract is created, freezing the NFT in-wallet. Not repaying by the due date means the lender can repossess your NFT. Successfully pay the loan in full by the expiration date to automatically thaw the NFT.
+                </p> : <>
+                  <p className="font-superLagendBoy text-xl max-sm:text-lg text-[#FFFFFF]">
+                    Instantly take a loan against your NFTs.
+                  </p>
+                  <button onClick={(e) => setShowMore(true)} className="font-superLagendBoy text-xl max-sm:text-lg text-[#DBFF00] underline">ShowMore</button>
+                </>}
+              </div>
             </div>
             <div className="table-sec">
               <div className="sf flex justify-start items-center max-sm:flex max-sm:flex-col max-sm:gap-2 max-sm:items-start">
