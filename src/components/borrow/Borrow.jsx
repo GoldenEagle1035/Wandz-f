@@ -39,6 +39,7 @@ function Borrow() {
   const [confirmed, setConfirmed] = useState(false);
 
   const [tokenImages, setTokenImages] = useState([]);
+  const [isLoadingTokens, setIsLoadingTokens] = useState(false);
 
   const [searchValue, setSearchValue] = useState('');
   const [showMore, setShowMore] = useState(false);
@@ -191,6 +192,7 @@ function Borrow() {
 
   const fetchTokenIds = async () => {
     if (account.address) {
+      setIsLoadingTokens(true);
       try {
         const tokenIds = await readContract({
           address: loans.loans[selectedLend].nftAddress,
@@ -209,6 +211,7 @@ function Borrow() {
       } catch (error) {
         console.log(error);
       }
+      setIsLoadingTokens(false);
     }
   }
 
@@ -447,7 +450,12 @@ function Borrow() {
                 <span className="text-[14px] font-[400] text-white">Ŀ {formatUnits(loans.loans[selectedLend].amount, 18)}</span>
               </div>
             </div>
-            {tokenIds.length != 0 ?
+            {isLoadingTokens &&
+              <div className="flex gap-[20px] justify-center items-center text-white">
+                <FontAwesomeIcon icon={faSpinner} size="md" className="animate-spin" />
+                <span>Loading</span>
+              </div>}
+            {!isLoadingTokens && (tokenIds.length != 0 ?
               <>
                 <div className="w-full h-[200px] flex flex-wrap gap-[20px] justify-center items-center overflow-y-auto p-[10px]">
                   {tokenIds.map((tokenId, index) => {
@@ -481,7 +489,7 @@ function Borrow() {
                 <div className="w-full flex justify-center">
                   <button onClick={(e) => { setSelectedLend(-1) }} className="bg-gradient-to-r from-[#159F2C] text-black px-6 py-2 max-sm:text-[11px] max-sm:px-4 rounded-lg to-[#DBFF00]">OK</button>
                 </div>
-              </>
+              </>)
             }
           </div>
         </div >
