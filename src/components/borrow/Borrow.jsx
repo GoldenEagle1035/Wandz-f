@@ -22,6 +22,7 @@ import lsp8Abi from '../../lukso/abis/lsp8_abi.json';
 
 import { ERC725 } from '@erc725/erc725.js';
 import lsp4Schema from '@erc725/erc725.js/schemas/LSP4DigitalAsset.json';
+import lsp8Schema from '@erc725/erc725.js/schemas/LSP8IdentifiableDigitalAsset.json';
 import { INTERFACE_IDS, ERC725YDataKeys } from '@lukso/lsp-smart-contracts';
 
 import axios from 'axios';
@@ -112,34 +113,80 @@ function Borrow() {
 
   const fetchTokenIdMetadata = async (nftAddress, tokenID) => {
     try {
-      // Get the encoded asset metadata
-      const tokenIdMetadata = await readContract({
+      // Retrieve the global Base URI
+      let tokenBaseURI = await readContract({
         address: nftAddress,
         abi: lsp8Abi,
-        functionName: 'getDataForTokenId',
-        args: [tokenID, ERC725YDataKeys.LSP4['LSP4Metadata']]
+        functionName: 'getData',
+        args: [ERC725YDataKeys.LSP8['LSP8TokenMetadataBaseURI']]
       });
-      const erc725js = new ERC725(lsp4Schema);
+      console.log(tokenID, Number(tokenID), tokenBaseURI)
 
-      // Decode the metadata
-      const decodedMetadata = erc725js.decodeData([
+      if (tokenBaseURI == '0x') {
+        console.log('BaseURI not set.');
+        return;
+      }
+
+      // if (Number(tokenID) >= 100) {
+      //   tokenBaseURI = await readContract({
+      //     address: nftAddress,
+      //     abi: lsp8Abi,
+      //     functionName: 'getData',
+      //     args: [tokenID, ERC725YDataKeys.LSP8['LSP8TokenIdFormat']]
+      //   });
+      // }
+
+      const erc725js = new ERC725(lsp8Schema);
+      // Decode the baseURI
+      const decodedBaseURI = erc725js.decodeData([
         {
-          keyName: 'LSP4Metadata',
-          value: tokenIdMetadata,
+          keyName: 'LSP8TokenMetadataBaseURI',
+          value: tokenBaseURI,
         },
       ]);
+      console.log(tokenID, decodedBaseURI)
 
-      const metadataUrl = decodedMetadata[0].value.url.replace("ipfs://", "https://api.universalprofile.cloud/ipfs/");
+      // Return Base URI
+      const metadataUrl = decodedBaseURI[0].value.url.replace("ipfs://", "https://api.universalprofile.cloud/ipfs/") + Number(tokenID).toFixed(0);
       const data = await axios.get(metadataUrl);
-      console.log(data.data.LSP4Metadata);
-      console.log(data.data.LSP4Metadata.images.at(0));
-      console.log(data.data.LSP4Metadata.images.at(0).at(0).url);
-      console.log(data.data.LSP4Metadata.images.at(0).at(0).url.replace("ipfs://", "https://api.universalprofile.cloud/ipfs/"));
+      console.log(data);
       return data.data.LSP4Metadata.images.at(0).at(0).url.replace("ipfs://", "https://api.universalprofile.cloud/ipfs/");
     } catch (error) {
       console.log(error);
     }
   }
+
+  // const fetchTokenIdMetadata = async (nftAddress, tokenID) => {
+  //   try {
+  //     // Get the encoded asset metadata
+  //     const tokenIdMetadata = await readContract({
+  //       address: nftAddress,
+  //       abi: lsp8Abi,
+  //       functionName: 'getDataForTokenId',
+  //       args: [tokenID, ERC725YDataKeys.LSP4['LSP4Metadata']]
+  //     });
+  //     console.log(tokenID, tokenIdMetadata)
+  //     const erc725js = new ERC725(lsp4Schema);
+
+  //     // Decode the metadata
+  //     const decodedMetadata = erc725js.decodeData([
+  //       {
+  //         keyName: 'LSP4Metadata',
+  //         value: tokenIdMetadata,
+  //       },
+  //     ]);
+  //     console.log(tokenID, decodedMetadata)
+  //     const metadataUrl = decodedMetadata[0].value.url.replace("ipfs://", "https://api.universalprofile.cloud/ipfs/");
+  //     const data = await axios.get(metadataUrl);
+  //     console.log(data.data.LSP4Metadata);
+  //     console.log(data.data.LSP4Metadata.images.at(0));
+  //     console.log(data.data.LSP4Metadata.images.at(0).at(0).url);
+  //     console.log(data.data.LSP4Metadata.images.at(0).at(0).url.replace("ipfs://", "https://api.universalprofile.cloud/ipfs/"));
+  //     return data.data.LSP4Metadata.images.at(0).at(0).url.replace("ipfs://", "https://api.universalprofile.cloud/ipfs/");
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // }
 
   const fetchTokenIds = async () => {
     if (account.address) {
