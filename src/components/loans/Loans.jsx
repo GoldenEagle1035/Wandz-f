@@ -326,7 +326,7 @@ function Loans() {
               </div>
             </div>
             <div className="w-full flex flex-col gap-[10px] px-[20px]">
-              <span className="text-[10px] text-white">Here are the NFTs you borrowed against. You must pay these in full by the expiration date in order to keep your NFT.</span>
+              <span className="text-[10px] text-white">{(loans.loans[selectedLend].durationCounter - Date.now() / 1000) / 86400 >= 0 ? "You'll pay back the LYX you owe and receive your NFT back" : "You'll keep the LYX you owe and lose your NFT"}</span>
             </div>
             <div className="w-full flex flex-col items-center">
               <span className="text-[14px] font-bold text-white">Amount Owed</span>
