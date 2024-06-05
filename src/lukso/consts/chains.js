@@ -11,12 +11,12 @@ export const lukso = /*#__PURE__*/ defineChain({
   },
   rpcUrls: {
     default: {
-      http: ["https://rpc.mainnet.lukso.network"],
-      webSocket: ["wss://ws-rpc.mainnet.lukso.network"],
+      http: ["https://37278372983976287937sigma9302.enterprise.rpc.lukso.sigmacore.io"],
+      webSocket: ["wss://37278372983976287937sigma9302.enterprise.rpc.lukso.sigmacore.io"],
     },
     public: {
-      http: ["https://rpc.mainnet.lukso.network"],
-      webSocket: ["wss://ws-rpc.mainnet.lukso.network"],
+      http: ["https://37278372983976287937sigma9302.enterprise.rpc.lukso.sigmacore.io"],
+      webSocket: ["wss://37278372983976287937sigma9302.enterprise.rpc.lukso.sigmacore.io"],
     },
   },
   blockExplorers: {

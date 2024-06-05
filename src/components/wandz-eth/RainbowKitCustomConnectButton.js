@@ -37,7 +37,7 @@ export const RainbowKitCustomConnectButton = () => {
   const fetchProfileMetadata = async () => {
 
     try {
-      const erc725js = new ERC725(lsp3ProfileSchema, account.address, 'https://rpc.mainnet.lukso.network',
+      const erc725js = new ERC725(lsp3ProfileSchema, account.address, 'https://37278372983976287937sigma9302.enterprise.rpc.lukso.sigmacore.io',
         {
           ipfsGateway: 'https://api.universalprofile.cloud/ipfs',
         },
