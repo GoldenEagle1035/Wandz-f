@@ -8,7 +8,6 @@ import { CSVLink } from "react-csv";
 import LendDlgBanner from "../../assets/background/lendDlgBanner.png";
 
 import { useAccount } from 'wagmi';
-import { readContract } from '@wagmi/core'
 import { parseEther, formatUnits } from 'viem';
 import { useAccountBalance } from "../../hooks/wandz-eth";
 

@@ -1,9 +1,10 @@
-import { luksoTestnet, lukso } from "./lukso/consts/chains";
+// import { luksoTestnet, lukso } from "./lukso/consts/chains";
+import * as chains from "viem/chains";
 
 const wandzConfig = {
   // The network where your DApp lives in
   //targetNetwork: chains.hardhat,
-  targetNetwork: lukso, // luksoTestnet || lukso
+  targetNetwork: chains.lukso, // luksoTestnet || lukso
 
   // The interval at which your front-end polls the RPC servers for new data
   // it has no effect on the local network

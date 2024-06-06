@@ -22,7 +22,7 @@ function useCollectionsContext() {
 
         for (let i = 0; i < collection_preinfo.length; i++) {
             try {
-                const myAsset = new ERC725(lsp4Schema, collection_preinfo[i].address, 'https://37278372983976287937sigma9302.enterprise.rpc.lukso.sigmacore.io',
+                const myAsset = new ERC725(lsp4Schema, collection_preinfo[i].address, 'https://rpc.lukso.sigmacore.io',
                     {
                         ipfsGateway: 'https://api.universalprofile.cloud/ipfs',
                     },

@@ -1,8 +1,10 @@
-import { createConfig } from "wagmi";
-import { appChains, wagmiConnectors } from "./wagmiConnectors";
+import { createConfig, http } from "wagmi";
+import { configuredNetwork, wagmiConnectors } from "./wagmiConnectors";
 
 export const wagmiConfig = createConfig({
-  autoConnect: false,
+  chains: [configuredNetwork],
   connectors: wagmiConnectors,
-  publicClient: appChains.publicClient,
+  transports: {
+    [configuredNetwork.id]: http()
+  }
 });

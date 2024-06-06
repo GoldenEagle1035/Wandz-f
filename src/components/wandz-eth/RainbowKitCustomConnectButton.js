@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 import { QRCodeSVG } from "qrcode.react";
 import CopyToClipboard from "react-copy-to-clipboard";
-import { useAccount, useDisconnect, useSwitchNetwork } from "wagmi";
+import { useAccount, useDisconnect, useSwitchChain } from "wagmi";
 import {
   ArrowLeftOnRectangleIcon,
   ArrowTopRightOnSquareIcon,
@@ -28,7 +28,7 @@ export const RainbowKitCustomConnectButton = () => {
   const configuredNetwork = getTargetNetwork();
   const { disconnect } = useDisconnect();
   const account = useAccount();
-  const { switchNetwork } = useSwitchNetwork();
+  const { switchChain } = useSwitchChain();
   const [addressCopied, setAddressCopied] = useState(false);
 
   const [profileInfo, setProfileInfo] = useState();
@@ -46,7 +46,7 @@ export const RainbowKitCustomConnectButton = () => {
       const profileMetaData = await erc725js.fetchData('LSP3Profile');
       console.log(profileMetaData);
 
-      for(let i = 0; i < profileMetaData.value.LSP3Profile.profileImage.length; i++) {
+      for (let i = 0; i < profileMetaData.value.LSP3Profile.profileImage.length; i++) {
         const image = new Image();
         const url = profileMetaData.value.LSP3Profile.profileImage[i].url.replace("ipfs://", "https://api.universalprofile.cloud/ipfs/");
         image.src = url;
@@ -94,7 +94,7 @@ export const RainbowKitCustomConnectButton = () => {
 
               if (chain.unsupported || chain.id !== configuredNetwork.id) {
                 return (
-                  <button onClick={() => switchNetwork?.(configuredNetwork.id)} className="relative button-style bg-gradient-to-t from-[#c6e3076e] to-[#ddff0000] border border-[#DBFF00] px-4 py-2 bor hs-dropdown-toggle"
+                  <button onClick={() => switchChain?.({ chainId: configuredNetwork.id })} className="relative button-style bg-gradient-to-t from-[#c6e3076e] to-[#ddff0000] border border-[#DBFF00] px-4 py-2 bor hs-dropdown-toggle"
                     style={{ position: "relative", overflow: "hidden" }}>
                     <span className="whitespace-nowrap">
                       SWITCH TO <span style={{ color: networkColor }}>{configuredNetwork.name}</span>

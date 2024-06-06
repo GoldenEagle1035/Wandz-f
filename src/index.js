@@ -3,35 +3,35 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import { BrowserRouter } from 'react-router-dom';
-import { WagmiConfig } from "wagmi";
-import { RainbowKitProvider, darkTheme, lightTheme } from "@rainbow-me/rainbowkit";
+
 import "@rainbow-me/rainbowkit/styles.css";
-import { BlockieAvatar } from "./components/wandz-eth";
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { WagmiProvider } from 'wagmi';
+import { RainbowKitProvider, darkTheme } from "@rainbow-me/rainbowkit";
+
 import { wagmiConfig } from "./services/web3/wagmiConfig";
-import { appChains } from "./services/web3/wagmiConnectors";
 
 import { LoansProvider } from "./context/loan-context";
 import { CollectionsProvider } from './context/collection-context';
 
+const queryClient = new QueryClient()
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <WagmiConfig config={wagmiConfig}>
-      <RainbowKitProvider
-        chains={appChains.chains}
-        avatar={BlockieAvatar}
-        modalSize="compact"
-        theme={darkTheme()}  // lightTheme()
-      >
-        <BrowserRouter>
-          <LoansProvider>
-            <CollectionsProvider>
-              <App />
-            </CollectionsProvider>
-          </LoansProvider>
-        </BrowserRouter>
-      </RainbowKitProvider>
-    </WagmiConfig>
-  </React.StrictMode>
+    <WagmiProvider config={wagmiConfig}>
+      <QueryClientProvider client={queryClient}>
+        <RainbowKitProvider theme={darkTheme()}>
+          <BrowserRouter>
+            <LoansProvider>
+              <CollectionsProvider>
+                <App />
+              </CollectionsProvider>
+            </LoansProvider>
+          </BrowserRouter>
+        </RainbowKitProvider>
+      </QueryClientProvider>
+    </WagmiProvider>
+  </React.StrictMode >
 );
 
