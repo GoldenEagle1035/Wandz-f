@@ -20,7 +20,9 @@ function Loans() {
 
   const [selectedLend, setSelectedLend] = useState(-1);
   const [isRepay, setIsRepay] = useState(false);
+  const [isLiquidate, setIsLiquidate] = useState(false);
   const [repayPending, setRepayPending] = useState(false);
+  const [liquidatePending, setLiquidatePending] = useState(false);
   const [extendPending, setExtendPending] = useState(false);
   const [extendDays, setExtendDays] = useState('');
   const [downloadData, setDownloadData] = useState([]);
@@ -40,6 +42,7 @@ function Loans() {
   const onExtendOffer = (lendIndex) => {
     setExtendDays('');
     setIsRepay(false);
+    setIsLiquidate(false);
     setSelectedLend(lendIndex);
     setConfirmed(false);
   }
@@ -66,6 +69,14 @@ function Loans() {
 
   const onRepayOffer = (lendIndex) => {
     setIsRepay(true);
+    setIsLiquidate(false);
+    setSelectedLend(lendIndex);
+    setConfirmed(false);
+  }
+
+  const onLiquidateOffer = (lendIndex) => {
+    setIsRepay(false);
+    setIsLiquidate(true);
     setSelectedLend(lendIndex);
     setConfirmed(false);
   }
@@ -92,7 +103,7 @@ function Loans() {
 
   const liquidateOffer = async () => {
     if (account.address) {
-      setRepayPending(true);
+      setLiquidatePending(true);
       try {
         const result = await loans.liquidateLoan({
           args: [loans.loans[selectedLend].loanId],
@@ -103,7 +114,7 @@ function Loans() {
         console.log(error);
         setSelectedLend(-1);
       }
-      setRepayPending(false);
+      setLiquidatePending(false);
     }
   }
 
@@ -252,8 +263,11 @@ function Loans() {
                       </td>
                       <td className="pl-4 max-sm:px-4 max-sm:text-[11px]">{(loan.duration / 86400).toFixed(2)}d</td>
                       <td>
-                        <button onClick={(e) => { onRepayOffer(index) }} className="bg-gradient-to-r from-[#159F2C] text-black px-6 py-2 max-sm:text-[11px] max-sm:px-4 rounded-lg to-[#DBFF00]">{(loan.durationCounter - Date.now() / 1000) / 86400 >= 0 ? "REPAY" : "LIQUIDATE"}</button>
+                        <button onClick={(e) => { onRepayOffer(index) }} className="bg-gradient-to-r from-[#159F2C] text-black px-6 py-2 max-sm:text-[11px] max-sm:px-4 rounded-lg to-[#DBFF00]">REPAY</button>
                       </td>
+                      {(loan.durationCounter - Date.now() / 1000) / 86400 >= 0 && <td>
+                        <button onClick={(e) => { onLiquidateOffer(index) }} className="bg-gradient-to-r from-[#159F2C] text-black px-6 py-2 max-sm:text-[11px] max-sm:px-4 rounded-lg to-[#DBFF00]">LIQUIDATE</button>
+                      </td>}
                       <td>
                         <button disabled={loan.extends > 2} onClick={(e) => { onExtendOffer(index) }} className={`bg-gradient-to-r from-[#159F2C] text-black px-6 py-2 max-sm:text-[11px] max-sm:px-4 rounded-lg to-[#DBFF00] disabled:opacity-50`}>EXTEND</button>
                       </td>
@@ -281,7 +295,9 @@ function Loans() {
                       <span className="text-[11px] text-white">{collections.find((collection) => collection.address.toLowerCase() == loan.nftAddress.toLowerCase() && collection.duration == loan.duration).name}</span>
                     </div>
                     <div className="flex gap-[5px] items-center">
-                      <button onClick={(e) => { onRepayOffer(index) }} className="bg-gradient-to-r from-[#159F2C] text-black py-2 text-[11px] px-4 rounded-lg to-[#DBFF00]">{(loan.durationCounter - Date.now() / 1000) / 86400 >= 0 ? "REPAY" : "LIQUIDATE"}</button>
+                      <button onClick={(e) => { onRepayOffer(index) }} className="bg-gradient-to-r from-[#159F2C] text-black py-2 text-[11px] px-4 rounded-lg to-[#DBFF00]">REPAY</button>
+                      {(loan.durationCounter - Date.now() / 1000) / 86400 >= 0 && <button onClick={(e) => { onLiquidateOffer(index) }} className="bg-gradient-to-r from-[#159F2C] text-black py-2 text-[11px] px-4 rounded-lg to-[#DBFF00]">LIQUIDATE</button>
+                      }
                       <button disabled={loan.extends > 2} onClick={(e) => onExtendOffer(index)} className="bg-gradient-to-r from-[#159F2C] text-black px-4 py-2 rounded-lg to-[#DBFF00] text-[11px]">EXTEND</button>
                     </div>
                   </div>
@@ -298,7 +314,7 @@ function Loans() {
           }
         </div>
       </div>
-      {selectedLend != -1 && isRepay && !confirmed &&
+      {selectedLend != -1 && isRepay && !isLiquidate && !confirmed &&
         <div className={`font-superLagendBoy fixed top-0 left-0 w-[100vw] h-[100vh] flex justify-center items-center bg-[#00000030] backdrop-blur-md p-[20px] z-10`}>
           <div
             className="fixed inset-0 transition-opacity"
@@ -335,13 +351,12 @@ function Loans() {
               <span className="text-[16px] font-[400] text-[#f00] text-center">{(loans.loans[selectedLend].durationCounter - Date.now() / 1000) / 86400 >= 0 ? "You will keep LYXs and won't receive your LSP8" : "You'll keep the LYX you owe and lose your NFT"}</span>
             </div>
             <div className="w-full flex justify-center">
-              <button disabled={repayPending} onClick={(e) => { if ((loans.loans[selectedLend].durationCounter - Date.now() / 1000) / 86400 >= 0) { repayOffer(); } else { liquidateOffer(); } }} className="bg-gradient-to-r from-[#159F2C] text-black px-6 py-2 max-sm:text-[11px] max-sm:px-4 rounded-lg to-[#DBFF00]">
-                {(loans.loans[selectedLend].durationCounter - Date.now() / 1000) / 86400 >= 0 ? "REPAY" : "LIQUIDATE"} {repayPending ? <FontAwesomeIcon icon={faSpinner} size="sm" className="animate-spin" /> : <></>}</button>
+              <button disabled={repayPending} onClick={(e) => { repayOffer(); }} className="bg-gradient-to-r from-[#159F2C] text-black px-6 py-2 max-sm:text-[11px] max-sm:px-4 rounded-lg to-[#DBFF00]">REPAY {repayPending ? <FontAwesomeIcon icon={faSpinner} size="sm" className="animate-spin" /> : <></>}</button>
             </div>
           </div>
         </div>
       }
-      {selectedLend != -1 && isRepay && confirmed &&
+      {selectedLend != -1 && isRepay && !isLiquidate && confirmed &&
         <div className={`font-superLagendBoy fixed top-0 left-0 w-[100vw] h-[100vh] flex justify-center items-center bg-[#00000030] backdrop-blur-md p-[20px] z-10`}>
           <div
             className="fixed inset-0 transition-opacity"
@@ -358,7 +373,7 @@ function Loans() {
             </div>
             <span className="text-[14px] font-[400] text-white text-center">You have Successfully Repaid</span>
             <div className="flex gap-[10px] justify-center items-center">
-              <span className="text-[14px] font-[400] text-white">your loan</span>
+              <span className="text-[14px] font-[400] text-white">Your loan</span>
               <span className="text-[14px] font-[400] text-[#DBFF00]">Ŀ {formatUnits(loans.loans[selectedLend].amount * loans.loans[selectedLend].interest / 1000, 18)}</span>
             </div>
             <div className="w-full flex justify-center">
@@ -367,7 +382,75 @@ function Loans() {
           </div>
         </div>
       }
-      {selectedLend != -1 && !isRepay && !confirmed &&
+      {selectedLend != -1 && !isRepay && isLiquidate && !confirmed &&
+        <div className={`font-superLagendBoy fixed top-0 left-0 w-[100vw] h-[100vh] flex justify-center items-center bg-[#00000030] backdrop-blur-md p-[20px] z-10`}>
+          <div
+            className="fixed inset-0 transition-opacity"
+            onClick={() => { if (!liquidatePending) setSelectedLend(-1) }}
+          />
+          <div className="min-w-[300px] max-w-[400px] bg-[#D9D9D930] backdrop-blur-sm flex gap-[20px] flex-col rounded-[10px] p-[10px]" >
+            <img className="w-full h-[125px] object-center" src={collections.find((collection) => collection.address.toLowerCase() == loans.loans[selectedLend].nftAddress.toLowerCase() && collection.duration == loans.loans[selectedLend].duration).banner} alt="banner" />
+            <div className="w-full flex flex-col gap-[10px] items-center">
+              <img className="w-[65px] h-[65px] object-contain rounded-full -mt-[53px]" src={collections.find((collection) => collection.address.toLowerCase() == loans.loans[selectedLend].nftAddress.toLowerCase() && collection.duration == loans.loans[selectedLend].duration).avatar} alt="avatar" />
+              <span className="text-[14px] font-[400] text-white">{collections.find((collection) => collection.address.toLowerCase() == loans.loans[selectedLend].nftAddress.toLowerCase() && collection.duration == loans.loans[selectedLend].duration).name}</span>
+            </div>
+            <div className="w-full flex gap-[20px] justify-between">
+              <div className="flex flex-col items-center">
+                <span className="text-[10px] font-[400] text-white">DAYS</span>
+                <span className="text-[14px] font-[400] text-[#DBFF00]">{((loans.loans[selectedLend].durationCounter - Date.now() / 1000) / 86400).toFixed(0)}</span>
+              </div>
+              <div className="flex flex-col items-center">
+                <span className="text-[10px] font-[400] text-white">HOURS</span>
+                <span className="text-[14px] font-[400] text-white">{(((loans.loans[selectedLend].durationCounter - Date.now() / 1000) % 86400) / 3600).toFixed(0)}</span>
+              </div>
+              <div className="flex flex-col items-center">
+                <span className="text-[10px] font-[400] text-white">MINUTES</span>
+                <span className="text-[14px] font-[400] text-white">{(((loans.loans[selectedLend].durationCounter - Date.now() / 1000) % 3600) / 60).toFixed(0)}</span>
+              </div>
+            </div>
+            <div className="w-full flex flex-col gap-[10px] px-[20px]">
+              <span className="text-[10px] text-white">{(loans.loans[selectedLend].durationCounter - Date.now() / 1000) / 86400 >= 0 ? "You'll pay back the LYX you owe and receive your NFT back" : "You'll keep the LYX you owe and lose your NFT"}</span>
+            </div>
+            <div className="w-full flex flex-col items-center">
+              <span className="text-[14px] font-bold text-white">Amount Owed</span>
+              <span className="text-[16px] font-bold text-white">Ŀ {formatUnits(loans.loans[selectedLend].amount * loans.loans[selectedLend].interest / 1000, 18)}</span>
+            </div>
+            <div className="w-full flex flex-col items-center">
+              <span className="text-[16px] font-[400] text-[#f00] text-center">{(loans.loans[selectedLend].durationCounter - Date.now() / 1000) / 86400 >= 0 ? "You will keep LYXs and won't receive your LSP8" : "You'll keep the LYX you owe and lose your NFT"}</span>
+            </div>
+            <div className="w-full flex justify-center">
+              <button disabled={liquidatePending} onClick={(e) => { liquidateOffer(); }} className="bg-gradient-to-r from-[#159F2C] text-black px-6 py-2 max-sm:text-[11px] max-sm:px-4 rounded-lg to-[#DBFF00]">LIQUIDATE {liquidatePending ? <FontAwesomeIcon icon={faSpinner} size="sm" className="animate-spin" /> : <></>}</button>
+            </div>
+          </div>
+        </div>
+      }
+      {selectedLend != -1 && !isRepay && isLiquidate && confirmed &&
+        <div className={`font-superLagendBoy fixed top-0 left-0 w-[100vw] h-[100vh] flex justify-center items-center bg-[#00000030] backdrop-blur-md p-[20px] z-10`}>
+          <div
+            className="fixed inset-0 transition-opacity"
+            onClick={() => { setSelectedLend(-1) }}
+          />
+          <div className="min-w-[300px] max-w-[400px] bg-[#D9D9D930] backdrop-blur-sm flex gap-[20px] flex-col rounded-[10px] p-[10px]" >
+            <img className="w-full h-[125px] object-center" src={collections.find((collection) => collection.address.toLowerCase() == loans.loans[selectedLend].nftAddress.toLowerCase() && collection.duration == loans.loans[selectedLend].duration).banner} alt="banner" />
+            <div className="w-full flex flex-col gap-[10px] items-center">
+              <div className="w-[65px] h-[65px] flex justify-center items-center rounded-full border-[0.25px] border-[#DBFF00] -mt-[53px] bg-[#000]">
+                <svg width="37" height="28" viewBox="0 0 37 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M1 17.25L10.5212 27L36 1" stroke="#DBFF00" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+              </div>
+            </div>
+            <span className="text-[14px] font-[400] text-white text-center">You have Successfully Liquidated</span>
+            <div className="flex gap-[10px] justify-center items-center">
+              <span className="text-[14px] font-[400] text-white">Your loan</span>
+              <span className="text-[14px] font-[400] text-[#DBFF00]">Ŀ {formatUnits(loans.loans[selectedLend].amount * loans.loans[selectedLend].interest / 1000, 18)}</span>
+            </div>
+            <div className="w-full flex justify-center">
+              <button onClick={(e) => { setSelectedLend(-1) }} className="bg-gradient-to-r from-[#159F2C] text-black px-6 py-2 max-sm:text-[11px] max-sm:px-4 rounded-lg to-[#DBFF00]">OK</button>
+            </div>
+          </div>
+        </div>
+      }
+      {selectedLend != -1 && !isRepay && !isLiquidate && !confirmed &&
         <div className={`font-superLagendBoy fixed top-0 left-0 w-[100vw] h-[100vh] flex justify-center items-center bg-[#00000030] backdrop-blur-md p-[20px] z-10`}>
           <div
             className="fixed inset-0 transition-opacity"
@@ -411,7 +494,7 @@ function Loans() {
           </div>
         </div>
       }
-      {selectedLend != -1 && !isRepay && confirmed &&
+      {selectedLend != -1 && !isRepay && !isLiquidate && confirmed &&
         <div className={`font-superLagendBoy fixed top-0 left-0 w-[100vw] h-[100vh] flex justify-center items-center bg-[#00000030] backdrop-blur-md p-[20px] z-10`}>
           <div
             className="fixed inset-0 transition-opacity"
@@ -428,7 +511,7 @@ function Loans() {
             </div>
             <span className="text-[14px] font-[400] text-white text-center">You have Successfully Extend</span>
             <div className="flex gap-[10px] justify-center items-center">
-              <span className="text-[14px] font-[400] text-white">your offer for</span>
+              <span className="text-[14px] font-[400] text-white">Your offer for</span>
               <span className="text-[14px] font-[400] text-[#DBFF00]">{extendDays}</span>
               <span className="text-[14px] font-[400] text-white">day(s)</span>
             </div>
