@@ -265,7 +265,7 @@ function Loans() {
                       <td>
                         <button onClick={(e) => { onRepayOffer(index) }} className="bg-gradient-to-r from-[#159F2C] text-black px-6 py-2 max-sm:text-[11px] max-sm:px-4 rounded-lg to-[#DBFF00]">REPAY</button>
                       </td>
-                      {(loan.durationCounter - Date.now() / 1000) / 86400 >= 0 && <td>
+                      {(loan.durationCounter - Date.now() / 1000) / 86400 < 0 && <td>
                         <button onClick={(e) => { onLiquidateOffer(index) }} className="bg-gradient-to-r from-[#159F2C] text-black px-6 py-2 max-sm:text-[11px] max-sm:px-4 rounded-lg to-[#DBFF00]">LIQUIDATE</button>
                       </td>}
                       <td>
@@ -296,7 +296,7 @@ function Loans() {
                     </div>
                     <div className="flex gap-[5px] items-center">
                       <button onClick={(e) => { onRepayOffer(index) }} className="bg-gradient-to-r from-[#159F2C] text-black py-2 text-[11px] px-4 rounded-lg to-[#DBFF00]">REPAY</button>
-                      {(loan.durationCounter - Date.now() / 1000) / 86400 >= 0 && <button onClick={(e) => { onLiquidateOffer(index) }} className="bg-gradient-to-r from-[#159F2C] text-black py-2 text-[11px] px-4 rounded-lg to-[#DBFF00]">LIQUIDATE</button>
+                      {(loan.durationCounter - Date.now() / 1000) / 86400 < 0 && <button onClick={(e) => { onLiquidateOffer(index) }} className="bg-gradient-to-r from-[#159F2C] text-black py-2 text-[11px] px-4 rounded-lg to-[#DBFF00]">LIQUIDATE</button>
                       }
                       <button disabled={loan.extends > 2} onClick={(e) => onExtendOffer(index)} className="bg-gradient-to-r from-[#159F2C] text-black px-4 py-2 rounded-lg to-[#DBFF00] text-[11px]">EXTEND</button>
                     </div>
