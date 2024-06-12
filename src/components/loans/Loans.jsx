@@ -340,15 +340,12 @@ function Loans() {
                 <span className="text-[14px] font-[400] text-white">{(((loans.loans[selectedLend].durationCounter - Date.now() / 1000) % 3600) / 60).toFixed(0)}</span>
               </div>
             </div>
-            <div className="w-full flex flex-col gap-[10px] px-[20px]">
-              <span className="text-[10px] text-white">{(loans.loans[selectedLend].durationCounter - Date.now() / 1000) / 86400 >= 0 ? "You'll pay back the LYX you owe and receive your NFT back" : "You'll keep the LYX you owe and lose your NFT"}</span>
-            </div>
             <div className="w-full flex flex-col items-center">
               <span className="text-[14px] font-bold text-white">Amount Owed</span>
               <span className="text-[16px] font-bold text-white">Ŀ {formatUnits(loans.loans[selectedLend].amount * loans.loans[selectedLend].interest / 1000, 18)}</span>
             </div>
             <div className="w-full flex flex-col items-center">
-              <span className="text-[16px] font-[400] text-[#f00] text-center">{(loans.loans[selectedLend].durationCounter - Date.now() / 1000) / 86400 >= 0 ? "You will keep LYXs and won't receive your LSP8" : "You'll keep the LYX you owe and lose your NFT"}</span>
+              <span className="text-[16px] font-[400] text-[#f00] text-center">You'll pay back the LYX you owe and receive your NFT back</span>
             </div>
             <div className="w-full flex justify-center">
               <button disabled={repayPending} onClick={(e) => { repayOffer(); }} className="bg-gradient-to-r from-[#159F2C] text-black px-6 py-2 max-sm:text-[11px] max-sm:px-4 rounded-lg to-[#DBFF00]">REPAY {repayPending ? <FontAwesomeIcon icon={faSpinner} size="sm" className="animate-spin" /> : <></>}</button>
@@ -408,15 +405,12 @@ function Loans() {
                 <span className="text-[14px] font-[400] text-white">{(((loans.loans[selectedLend].durationCounter - Date.now() / 1000) % 3600) / 60).toFixed(0)}</span>
               </div>
             </div>
-            <div className="w-full flex flex-col gap-[10px] px-[20px]">
-              <span className="text-[10px] text-white">{(loans.loans[selectedLend].durationCounter - Date.now() / 1000) / 86400 >= 0 ? "You'll pay back the LYX you owe and receive your NFT back" : "You'll keep the LYX you owe and lose your NFT"}</span>
-            </div>
             <div className="w-full flex flex-col items-center">
               <span className="text-[14px] font-bold text-white">Amount Owed</span>
               <span className="text-[16px] font-bold text-white">Ŀ {formatUnits(loans.loans[selectedLend].amount * loans.loans[selectedLend].interest / 1000, 18)}</span>
             </div>
             <div className="w-full flex flex-col items-center">
-              <span className="text-[16px] font-[400] text-[#f00] text-center">{(loans.loans[selectedLend].durationCounter - Date.now() / 1000) / 86400 >= 0 ? "You will keep LYXs and won't receive your LSP8" : "You'll keep the LYX you owe and lose your NFT"}</span>
+              <span className="text-[16px] font-[400] text-[#f00] text-center">You'll keep the LYX you owe and lose your NFT</span>
             </div>
             <div className="w-full flex justify-center">
               <button disabled={liquidatePending} onClick={(e) => { liquidateOffer(); }} className="bg-gradient-to-r from-[#159F2C] text-black px-6 py-2 max-sm:text-[11px] max-sm:px-4 rounded-lg to-[#DBFF00]">LIQUIDATE {liquidatePending ? <FontAwesomeIcon icon={faSpinner} size="sm" className="animate-spin" /> : <></>}</button>
