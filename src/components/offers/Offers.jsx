@@ -13,7 +13,7 @@ import { parseEther, formatUnits } from 'viem';
 
 import { LoansContext } from "../../context/loan-context";
 import { CollectionsContext } from "../../context/collection-context";
-
+import { wagmiConfig } from "../../services/web3/wagmiConfig";
 // import { collections } from "../../data/collections";
 
 function Offers() {
@@ -46,7 +46,7 @@ function Offers() {
           args: [loans.loans[selectedLend].loanId],
           from: account.address
         })
-        await loans.waitForTransaction(result);
+        await loans.waitForTransactionReceipt(wagmiConfig, { hash: result });
         console.log("revokeLoan:", result);
         setConfirmed(true);
       } catch (error) {

@@ -1,7 +1,7 @@
 import React, { createContext, useEffect, useState, useContext } from "react";
 
-import { useAccount, useReadContract, useWriteContract } from 'wagmi';
-import { readContracts, waitForTransaction } from '@wagmi/core'
+import { useAccount, useReadContract } from 'wagmi';
+import { readContracts, writeContract, waitForTransactionReceipt } from '@wagmi/core'
 
 import lendAbi from "../lukso/abis/lend_abi.json";
 import { wagmiConfig } from "../services/web3/wagmiConfig";
@@ -14,8 +14,6 @@ function useLoansContext() {
 
     const [loans, setLoans] = useState([]);
 
-    const { writeContract } = useWriteContract();
-
     const { data: loanIdCounter } = useReadContract({
         address: lendAddress,
         abi: lendAbi,
@@ -23,8 +21,8 @@ function useLoansContext() {
         args: [],
     })
 
-    const extendLoan = (param) => {
-        writeContract({
+    const extendLoan = async (param) => {
+        return await writeContract(wagmiConfig, {
             address: lendAddress,
             abi: lendAbi,
             functionName: 'extendLoan',
@@ -32,8 +30,8 @@ function useLoansContext() {
         })
     }
 
-    const liquidateLoan = (param) => {
-        writeContract({
+    const liquidateLoan = async (param) => {
+        return await writeContract(wagmiConfig, {
             address: lendAddress,
             abi: lendAbi,
             functionName: 'liquidateLoan',
@@ -41,8 +39,8 @@ function useLoansContext() {
         })
     }
 
-    const repayLoan = (param) => {
-        writeContract({
+    const repayLoan = async (param) => {
+        return await writeContract(wagmiConfig, {
             address: lendAddress,
             abi: lendAbi,
             functionName: 'repayLoan',
@@ -50,8 +48,8 @@ function useLoansContext() {
         })
     }
 
-    const acceptLoan = (param) => {
-        writeContract({
+    const acceptLoan = async (param) => {
+        return await writeContract(wagmiConfig, {
             address: lendAddress,
             abi: lendAbi,
             functionName: 'acceptLoan',
@@ -59,8 +57,8 @@ function useLoansContext() {
         })
     }
 
-    const revokeLoan = (param) => {
-        writeContract({
+    const revokeLoan = async (param) => {
+        return await writeContract(wagmiConfig, {
             address: lendAddress,
             abi: lendAbi,
             functionName: 'revokeLoan',
@@ -68,8 +66,8 @@ function useLoansContext() {
         })
     }
 
-    const offerLoan = (param) => {
-        writeContract({
+    const offerLoan = async (param) => {
+        return await writeContract(wagmiConfig, {
             address: lendAddress,
             abi: lendAbi,
             functionName: 'offerLoan',
@@ -150,7 +148,7 @@ function useLoansContext() {
         }
     }, [loanIdCounter, refetch])
 
-    return { lendAddress, adminAddress, loans, loanIdCounter, offerLoan, revokeLoan, acceptLoan, repayLoan, liquidateLoan, extendLoan, waitForTransaction };
+    return { lendAddress, adminAddress, loans, loanIdCounter, offerLoan, revokeLoan, acceptLoan, repayLoan, liquidateLoan, extendLoan, waitForTransactionReceipt };
 }
 export const LoansContext = createContext();
 

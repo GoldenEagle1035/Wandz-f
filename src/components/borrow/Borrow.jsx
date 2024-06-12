@@ -66,8 +66,9 @@ function Borrow() {
           args: [loans.loans[selectedLend].loanId, selectedTokenId],
           from: account.address
         })
-        await loans.waitForTransaction(result);
         console.log("acceptLoan:", result);
+        await loans.waitForTransactionReceipt(wagmiConfig, { hash: result });
+        
         setConfirmed(true);
       } catch (error) {
         console.log(error);

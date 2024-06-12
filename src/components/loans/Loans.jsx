@@ -13,7 +13,7 @@ import { useAccountBalance } from "../../hooks/wandz-eth";
 
 import { LoansContext } from "../../context/loan-context";
 import { CollectionsContext } from "../../context/collection-context";
-
+import { wagmiConfig } from "../../services/web3/wagmiConfig";
 // import { collections } from "../../data/collections";
 
 function Loans() {
@@ -56,7 +56,7 @@ function Loans() {
           value: parseEther(formatUnits(loans.loans[selectedLend].amount * loans.loans[selectedLend].interest / 1000 * (86400 * Number(extendDays) / loans.loans[selectedLend].duration), 18)),
           from: account.address
         })
-        await loans.waitForTransaction(result);
+        await loans.waitForTransactionReceipt(wagmiConfig, { hash: result });
         console.log("extendLoan:", result);
         setConfirmed(true);
       } catch (error) {
@@ -90,7 +90,7 @@ function Loans() {
           value: parseEther(formatUnits(loans.loans[selectedLend].amount * loans.loans[selectedLend].interest / 1000, 18)),
           from: account.address
         })
-        await loans.waitForTransaction(result);
+        await loans.waitForTransactionReceipt(wagmiConfig, { hash: result });
         console.log("repayLoan:", result);
         setConfirmed(true);
       } catch (error) {
@@ -109,6 +109,7 @@ function Loans() {
           args: [loans.loans[selectedLend].loanId],
           from: account.address
         })
+        await loans.waitForTransactionReceipt(wagmiConfig, { hash: result });
         console.log("liquidateLoan:", result);
       } catch (error) {
         console.log(error);
