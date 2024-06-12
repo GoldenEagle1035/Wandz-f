@@ -24,6 +24,7 @@ import { ERC725 } from '@erc725/erc725.js';
 import lsp4Schema from '@erc725/erc725.js/schemas/LSP4DigitalAsset.json';
 import lsp8Schema from '@erc725/erc725.js/schemas/LSP8IdentifiableDigitalAsset.json';
 import { INTERFACE_IDS, ERC725YDataKeys } from '@lukso/lsp-smart-contracts';
+import { wagmiConfig } from "../../services/web3/wagmiConfig";
 
 import axios from 'axios';
 
@@ -79,7 +80,7 @@ function Borrow() {
   const authorizeLSP8 = async () => {
     try {
       setApprovePending(true);
-      const result = await writeContract({
+      const result = await writeContract(wagmiConfig, {
         address: loans.loans[selectedLend].nftAddress,
         abi: lsp8Abi,
         functionName: 'authorizeOperator',
@@ -98,7 +99,7 @@ function Borrow() {
     try {
       setAcceptPending(true);
       setApprovePending(true);
-      const is_approved = await readContract({
+      const is_approved = await readContract(wagmiConfig, {
         address: loans.loans[selectedLend].nftAddress,
         abi: lsp8Abi,
         functionName: 'isOperatorFor',
@@ -116,7 +117,7 @@ function Borrow() {
   const fetchTokenIdMetadata = async (nftAddress, tokenID) => {
     try {
       // Retrieve the global Base URI
-      let tokenBaseURI = await readContract({
+      let tokenBaseURI = await readContract(wagmiConfig, {
         address: nftAddress,
         abi: lsp8Abi,
         functionName: 'getData',
@@ -194,7 +195,7 @@ function Borrow() {
     if (account.address) {
       setIsLoadingTokens(true);
       try {
-        const tokenIds = await readContract({
+        const tokenIds = await readContract(wagmiConfig, {
           address: loans.loans[selectedLend].nftAddress,
           abi: lsp8Abi,
           functionName: 'tokenIdsOf',
@@ -216,8 +217,7 @@ function Borrow() {
   }
 
   useEffect(() => {
-
-    if (selectedLend != -1) {
+    if (selectedLend != -1 && account.address.toLowerCase() != loans.loans[selectedLend].lender.toLowerCase()) {
       fetchTokenIds();
     }
   }, [selectedLend, account.address])
@@ -450,37 +450,49 @@ function Borrow() {
                 <span className="text-[14px] font-[400] text-white">Ŀ {formatUnits(loans.loans[selectedLend].amount, 18)}</span>
               </div>
             </div>
-            {isLoadingTokens &&
-              <div className="flex gap-[20px] justify-center items-center text-white">
-                <FontAwesomeIcon icon={faSpinner} size="md" className="animate-spin" />
-                <span>Loading</span>
-              </div>}
-            {!isLoadingTokens && (tokenIds.length != 0 ?
+            {account.address.toLowerCase() != loans.loans[selectedLend].lender.toLowerCase() ?
               <>
-                <div className="w-full h-[200px] flex flex-wrap gap-[20px] justify-center items-center overflow-y-auto p-[10px]">
-                  {tokenIds.map((tokenId, index) => {
-                    return (
-                      <div onClick={(e) => { onSelectToken(tokenId) }} className={`h-[180px] w-[130px] flex flex-col gap-[5px] items-center bg-[#D9D9D930] border ${Number(selectedTokenId) == Number(tokenId) ? "border-[#DBFF00]" : "border-[#DBFF0030]"}  rounded-[10px] p-[5px] cursor-pointer`}>
-                        {tokenImages[index] ?
-                          <img className="flex-1 w-full object-cover object-center" src={tokenImages[index]} alt="" /> :
-                          <img className="flex-1 w-full object-cover object-center" src={defaultBanner} alt="" />
-                        }
-                        <span className="text-[10px] text-white">{collections.find((collection) => collection.address.toLowerCase() == loans.loans[selectedLend].nftAddress.toLowerCase() && collection.duration == loans.loans[selectedLend].duration).name}</span>
-                        <span className="text-[10px] text-white">#{Number(tokenId)}</span>
-                      </div>
-                    )
-                  })}
-                </div>
-                <div className="w-full flex justify-center">
-                  <span className="text-[20px] font-[400] text-white">Ŀ {formatUnits(loans.loans[selectedLend].amount, 18)}</span>
-                </div>
-                <div className="w-full flex justify-center">
-                  {isApproved ? <button disabled={acceptPending} onClick={(e) => { acceptOffer() }} className="bg-gradient-to-r from-[#159F2C] text-black px-6 py-2 max-sm:text-[11px] max-sm:px-4 rounded-lg to-[#DBFF00]">
-                    BORROW {formatUnits(loans.loans[selectedLend].amount, 18)} {acceptPending ? <FontAwesomeIcon icon={faSpinner} size="sm" className="animate-spin" /> : <></>}</button> :
-                    <button disabled={approvePending} onClick={(e) => { authorizeLSP8() }} className="bg-gradient-to-r from-[#159F2C] text-black px-6 py-2 max-sm:text-[11px] max-sm:px-4 rounded-lg to-[#DBFF00]">
-                      APPROVE {approvePending ? <FontAwesomeIcon icon={faSpinner} size="sm" className="animate-spin" /> : <></>}</button>
-                  }
-                </div>
+                {isLoadingTokens &&
+                  <div className="flex gap-[20px] justify-center items-center text-white">
+                    <FontAwesomeIcon icon={faSpinner} size="md" className="animate-spin" />
+                    <span>Loading</span>
+                  </div>}
+                {!isLoadingTokens && (tokenIds.length != 0 ?
+                  <>
+                    <div className="w-full h-[200px] flex flex-wrap gap-[20px] justify-center items-center overflow-y-auto p-[10px]">
+                      {tokenIds.map((tokenId, index) => {
+                        return (
+                          <div onClick={(e) => { onSelectToken(tokenId) }} className={`h-[180px] w-[130px] flex flex-col gap-[5px] items-center bg-[#D9D9D930] border ${Number(selectedTokenId) == Number(tokenId) ? "border-[#DBFF00]" : "border-[#DBFF0030]"}  rounded-[10px] p-[5px] cursor-pointer`}>
+                            {tokenImages[index] ?
+                              <img className="flex-1 w-full object-cover object-center" src={tokenImages[index]} alt="" /> :
+                              <img className="flex-1 w-full object-cover object-center" src={defaultBanner} alt="" />
+                            }
+                            <span className="text-[10px] text-white">{collections.find((collection) => collection.address.toLowerCase() == loans.loans[selectedLend].nftAddress.toLowerCase() && collection.duration == loans.loans[selectedLend].duration).name}</span>
+                            <span className="text-[10px] text-white">#{Number(tokenId)}</span>
+                          </div>
+                        )
+                      })}
+                    </div>
+                    <div className="w-full flex justify-center">
+                      <span className="text-[20px] font-[400] text-white">Ŀ {formatUnits(loans.loans[selectedLend].amount, 18)}</span>
+                    </div>
+                    <div className="w-full flex justify-center">
+                      {isApproved ? <button disabled={acceptPending} onClick={(e) => { acceptOffer() }} className="bg-gradient-to-r from-[#159F2C] text-black px-6 py-2 max-sm:text-[11px] max-sm:px-4 rounded-lg to-[#DBFF00]">
+                        BORROW {formatUnits(loans.loans[selectedLend].amount, 18)} {acceptPending ? <FontAwesomeIcon icon={faSpinner} size="sm" className="animate-spin" /> : <></>}</button> :
+                        <button disabled={approvePending} onClick={(e) => { authorizeLSP8() }} className="bg-gradient-to-r from-[#159F2C] text-black px-6 py-2 max-sm:text-[11px] max-sm:px-4 rounded-lg to-[#DBFF00]">
+                          APPROVE {approvePending ? <FontAwesomeIcon icon={faSpinner} size="sm" className="animate-spin" /> : <></>}</button>
+                      }
+                    </div>
+                  </> :
+                  <>
+                    <div className="w-full flex justify-center">
+                      <span className="text-[20px] font-[400] text-[#f00] text-center">You don't own an NFT from this collection :)</span>
+                    </div>
+                    <div className="w-full flex justify-center">
+                      <button onClick={(e) => { setSelectedLend(-1) }} className="bg-gradient-to-r from-[#159F2C] text-black px-6 py-2 max-sm:text-[11px] max-sm:px-4 rounded-lg to-[#DBFF00]">OK</button>
+                    </div>
+                  </>)
+                }
               </> :
               <>
                 <div className="w-full flex justify-center">
@@ -489,7 +501,7 @@ function Borrow() {
                 <div className="w-full flex justify-center">
                   <button onClick={(e) => { setSelectedLend(-1) }} className="bg-gradient-to-r from-[#159F2C] text-black px-6 py-2 max-sm:text-[11px] max-sm:px-4 rounded-lg to-[#DBFF00]">OK</button>
                 </div>
-              </>)
+              </>
             }
           </div>
         </div >
