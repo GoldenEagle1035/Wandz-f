@@ -218,7 +218,7 @@ function Borrow() {
   }
 
   useEffect(() => {
-    if (selectedLend != -1 && account.address.toLowerCase() != loans.loans[selectedLend].lender.toLowerCase()) {
+    if (selectedLend != -1 && account.address && account.address.toLowerCase() != loans.loans[selectedLend].lender.toLowerCase()) {
       fetchTokenIds();
     }
   }, [selectedLend, account.address])
