@@ -19,6 +19,8 @@ import { getBlockExplorerAddressLink, getTargetNetwork } from "../../utils/wandz
 import { ERC725 } from '@erc725/erc725.js';
 import lsp3ProfileSchema from '@erc725/erc725.js/schemas/LSP3ProfileMetadata.json';
 
+import NonePFP from '../../assets/none_pfp.gif';
+
 /**
  * Custom Wagmi Connect Button (watch balance + custom design)
  */
@@ -85,10 +87,18 @@ export const RainbowKitCustomConnectButton = () => {
             {(() => {
               if (!connected) {
                 return (
-                  <button className="relative button-style bg-gradient-to-t from-[#c6e3076e] to-[#ddff0000] border border-[#DBFF00] px-4 py-2 bor"
-                    style={{ position: "relative", overflow: "hidden" }} onClick={openConnectModal} type="button">
-                    Select Profile
-                  </button>
+                  <div className="px-2 flex justify-end items-center">
+                    <button className="relative flex items-center button-style bg-gradient-to-t from-[#c6e3076e] to-[#ddff0000] border border-[#DBFF00] px-4 py-2"
+                      style={{ position: "relative", overflow: "hidden" }} onClick={openConnectModal} type="button">
+                      <img
+                        className="rounded-full"
+                        src={NonePFP}
+                        width={30}
+                        height={30}
+                        alt="None PFP"
+                      />
+                    </button>
+                  </div>
                 );
               }
 
@@ -124,7 +134,7 @@ export const RainbowKitCustomConnectButton = () => {
                     onClick={() => disconnect()}
                   >
                     <BlockieAvatar address={account.address} size={30} ensImage={profileImage ? profileImage : account.ensAvatar} />
-                    <span className="ml-2 mr-1">{profileInfo ? profileInfo.name : account.displayName}</span>
+                    {/* <span className="ml-2 mr-1">{profileInfo ? profileInfo.name : account.displayName}</span> */}
                   </button>
                   {/* <CopyToClipboard
                     text={account.address}
