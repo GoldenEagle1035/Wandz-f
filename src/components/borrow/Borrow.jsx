@@ -88,6 +88,8 @@ function Borrow() {
         args: [loans.lendAddress, selectedTokenId, "0x0"]
       })
       console.log("authorizeOperator:", result);
+      await loans.waitForTransactionReceipt(wagmiConfig, { hash: result });
+
       setIsApproved(true);
     } catch (error) {
       console.log(error);
