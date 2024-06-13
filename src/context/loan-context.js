@@ -5,7 +5,8 @@ import { readContracts, writeContract, waitForTransactionReceipt } from '@wagmi/
 
 import lendAbi from "../lukso/abis/lend_abi.json";
 import { wagmiConfig } from "../services/web3/wagmiConfig";
-
+// const lendAddress = '0xa08a897A86Fc50C7b37719c0088C69Cb85ac7A16'; //testnet
+// const lendAddress = '0x2fc0437A1B4D470D745c6896354EA88c48961fF2'; //mainnet v1
 const lendAddress = '0x2139c52Ae897F29689C73634Cf438e9C3BcC5e6E';
 const adminAddress = '0xa842a38CD758f8dE8537C5CBcB2006DB0250eC7C';
 
