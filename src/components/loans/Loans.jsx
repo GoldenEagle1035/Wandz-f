@@ -260,7 +260,7 @@ function Loans() {
                       </td>
                       <td className="max-sm:text-[11px] pl-4 max-sm:px-4">
                         <span className="text-[12px] font-bold text-white">Ŀ</span>
-                        <span className="text-[12px] font-bold text-[#DBFF00]">{formatUnits(loan.amount * loan.interest / 1000, 18)}</span>
+                        <span className="text-[12px] font-bold text-[#DBFF00]">{Number(formatUnits(loan.amount * loan.interest / 1000, 18)).toFixed(2)}</span>
                       </td>
                       <td className="pl-4 max-sm:px-4 max-sm:text-[11px]">{(loan.duration / 86400).toFixed(2)}d</td>
                       <td>
