@@ -287,7 +287,10 @@ function OrderBook() {
             <div className="w-full flex gap-[10px] justify-between">
               <div className="flex flex-col">
                 <span className="text-[14px] font-bold text-white">Offer Amount</span>
-                <input value={offerAmount} onChange={(e) => { setOfferAmount(e.target.value); setTotalInvest((Number(e.target.value) * numberOffers).toString()) }} placeholder="0" className="w-[120px] text-[14px] text-white bg-[#D9D9D930] border border-[#DBFF0030] rounded-[10px] focus:outline-none px-[20px] py-[5px]" />
+                <div className="flex gap-[10px] items-center">
+                  <input type="number" value={offerAmount} onChange={(e) => { setOfferAmount(e.target.value); setTotalInvest((Number(e.target.value) * numberOffers).toString()) }} placeholder="0" className="w-[120px] text-[14px] text-white bg-[#D9D9D930] border border-[#DBFF0030] rounded-[10px] focus:outline-none px-[20px] py-[5px]" />
+                  <span className="text-[14px] font-bold text-white">LYX</span>
+                </div>
               </div>
               <div className="flex flex-col">
                 <span className="text-[14px] font-bold text-white">Total Invest</span>

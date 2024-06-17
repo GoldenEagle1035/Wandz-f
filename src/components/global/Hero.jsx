@@ -15,7 +15,7 @@ function Hero() {
             <h1 className="text-[#CCCCCC] font-superLagendBoy text-[4.2rem] max-sm:text-[2rem] max-sm:p-2">
               <span className="text-gradient-bg">BORROW</span> &{" "}
               <span className="text-gradient-bg"> LEND </span>
-              AGAINST YOUR LSPs INSTANTLY
+              AGAINST YOUR NFTs INSTANTLY
             </h1>
           </div>
           <div className="buttons flex gap-10 max-sm:flex max-sm:flex-col max-sm:p-2 font-superLagendBoy">
