@@ -129,9 +129,9 @@ function Loans() {
       loans.loans.filter((loan) => account.address && loan.borrower.toLowerCase() == account.address.toLowerCase() && loan.accepted && !loan.paid && !loan.liquidated).map((loan) => {
         data.push({
           COLLECTION: collections.find((collection) => collection.address.toLowerCase() == loan.nftAddress.toLowerCase() && collection.duration == loan.duration).name,
-          BORROWED: 'Ŀ' + formatUnits(loan.amount, 18),
+          BORROWED: '⏣' + formatUnits(loan.amount, 18),
           TERM: Math.abs((loan.durationCounter - Date.now() / 1000) / 86400).toFixed(2) + (loan.durationCounter - Date.now() / 1000) / 86400 >= 0 ? "d Remaining" : "d Passed",
-          REPAYMENT: 'Ŀ' + formatUnits(loan.amount * loan.interest / 1000, 18),
+          REPAYMENT: '⏣' + formatUnits(loan.amount * loan.interest / 1000, 18),
         })
       })
       setDownloadData(data);
@@ -252,14 +252,14 @@ function Loans() {
                         {collections.find((collection) => collection.address.toLowerCase() == loan.nftAddress.toLowerCase() && collection.duration == loan.duration).name}
                       </td>
                       <td className=" pl-4 max-sm:text-[11px] max-sm:px-4">
-                        <span className="text-[12px] font-bold text-white">Ŀ</span>
+                        <span className="text-[12px] font-bold text-white">⏣</span>
                         <span className="text-[12px] font-bold text-[#DBFF00]">{formatUnits(loan.amount, 18)}</span>
                       </td>
                       <td className="max-sm:text-[11px] pl-4 max-sm:px-4">
                         <span className="text-[12px] font-bold text-white">{Math.abs((loan.durationCounter - Date.now() / 1000) / 86400).toFixed(2)} {(loan.durationCounter - Date.now() / 1000) / 86400 >= 0 ? "d Remaining" : "d Passed"}</span>
                       </td>
                       <td className="max-sm:text-[11px] pl-4 max-sm:px-4">
-                        <span className="text-[12px] font-bold text-white">Ŀ</span>
+                        <span className="text-[12px] font-bold text-white">⏣</span>
                         <span className="text-[12px] font-bold text-[#DBFF00]">{Number(formatUnits(loan.amount * loan.interest / 1000, 18)).toFixed(2)}</span>
                       </td>
                       <td className="pl-4 max-sm:px-4 max-sm:text-[11px]">{(loan.duration / 86400).toFixed(2)}d</td>
@@ -303,9 +303,9 @@ function Loans() {
                     </div>
                   </div>
                   <div className="flex gap-[5px] text-white text-[11px]">
-                    <span className="w-1/4 text-center">Ŀ {formatUnits(loan.amount, 18)}</span>
+                    <span className="w-1/4 text-center">⏣ {formatUnits(loan.amount, 18)}</span>
                     <span className="w-1/4 text-center">{Math.abs((loan.durationCounter - Date.now() / 1000) / 86400).toFixed(2)} {(loan.durationCounter - Date.now() / 1000) / 86400 >= 0 ? "d Remaining" : "d Passed"}</span>
-                    <span className="w-1/4 text-center">Ŀ {formatUnits(loan.amount * loan.interest / 1000, 18)}</span>
+                    <span className="w-1/4 text-center">⏣ {formatUnits(loan.amount * loan.interest / 1000, 18)}</span>
                     <span className="w-1/4 text-center">{(loan.duration / 86400).toFixed(2)}d</span>
                   </div>
                 </div>
@@ -343,7 +343,7 @@ function Loans() {
             </div>
             <div className="w-full flex flex-col items-center">
               <span className="text-[14px] font-bold text-white">Amount Owed</span>
-              <span className="text-[16px] font-bold text-white">Ŀ {formatUnits(loans.loans[selectedLend].amount * loans.loans[selectedLend].interest / 1000, 18)}</span>
+              <span className="text-[16px] font-bold text-white">⏣ {formatUnits(loans.loans[selectedLend].amount * loans.loans[selectedLend].interest / 1000, 18)}</span>
             </div>
             <div className="w-full flex flex-col items-center">
               <span className="text-[16px] font-[400] text-[#f00] text-center">You'll pay back the LYX you owe and receive your NFT back</span>
@@ -372,7 +372,7 @@ function Loans() {
             <span className="text-[14px] font-[400] text-white text-center">You have Successfully Repaid</span>
             <div className="flex gap-[10px] justify-center items-center">
               <span className="text-[14px] font-[400] text-white">Your loan</span>
-              <span className="text-[14px] font-[400] text-[#DBFF00]">Ŀ {formatUnits(loans.loans[selectedLend].amount * loans.loans[selectedLend].interest / 1000, 18)}</span>
+              <span className="text-[14px] font-[400] text-[#DBFF00]">⏣ {formatUnits(loans.loans[selectedLend].amount * loans.loans[selectedLend].interest / 1000, 18)}</span>
             </div>
             <div className="w-full flex justify-center">
               <button onClick={(e) => { setSelectedLend(-1) }} className="bg-gradient-to-r from-[#159F2C] text-black px-6 py-2 max-sm:text-[11px] max-sm:px-4 rounded-lg to-[#DBFF00]">OK</button>
@@ -408,7 +408,7 @@ function Loans() {
             </div>
             <div className="w-full flex flex-col items-center">
               <span className="text-[14px] font-bold text-white">Amount Owed</span>
-              <span className="text-[16px] font-bold text-white">Ŀ {formatUnits(loans.loans[selectedLend].amount * loans.loans[selectedLend].interest / 1000, 18)}</span>
+              <span className="text-[16px] font-bold text-white">⏣ {formatUnits(loans.loans[selectedLend].amount * loans.loans[selectedLend].interest / 1000, 18)}</span>
             </div>
             <div className="w-full flex flex-col items-center">
               <span className="text-[16px] font-[400] text-[#f00] text-center">You'll keep the LYX you owe and lose your NFT</span>
@@ -437,7 +437,7 @@ function Loans() {
             <span className="text-[14px] font-[400] text-white text-center">You have Successfully Liquidated</span>
             <div className="flex gap-[10px] justify-center items-center">
               <span className="text-[14px] font-[400] text-white">Your loan</span>
-              <span className="text-[14px] font-[400] text-[#DBFF00]">Ŀ {formatUnits(loans.loans[selectedLend].amount * loans.loans[selectedLend].interest / 1000, 18)}</span>
+              <span className="text-[14px] font-[400] text-[#DBFF00]">⏣ {formatUnits(loans.loans[selectedLend].amount * loans.loans[selectedLend].interest / 1000, 18)}</span>
             </div>
             <div className="w-full flex justify-center">
               <button onClick={(e) => { setSelectedLend(-1) }} className="bg-gradient-to-r from-[#159F2C] text-black px-6 py-2 max-sm:text-[11px] max-sm:px-4 rounded-lg to-[#DBFF00]">OK</button>
@@ -476,7 +476,7 @@ function Loans() {
             </div>
             <div className="w-full flex flex-col items-center">
               <span className="text-[14px] font-bold text-white">Amount Owed</span>
-              <span className="text-[16px] font-bold text-white">Ŀ {formatUnits(loans.loans[selectedLend].amount * loans.loans[selectedLend].interest / 1000, 18)}</span>
+              <span className="text-[16px] font-bold text-white">⏣ {formatUnits(loans.loans[selectedLend].amount * loans.loans[selectedLend].interest / 1000, 18)}</span>
             </div>
             <div className="w-full flex flex-col items-center">
               <span className="text-[14px] font-bold text-white">Extend Days (min 1 day, max 7 days)</span>
