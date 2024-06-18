@@ -369,8 +369,8 @@ function Borrow() {
                         <button disabled={!account.address} onClick={(e) => setSelectedCollection(index)} className="bg-gradient-to-r from-[#159F2C] text-black px-4 py-2 rounded-lg to-[#DBFF00] text-[10px]">BORROW</button>
                       </div>
                       <div className="flex gap-[5px] text-white text-[11px]">
-                        <span className="w-1/4 text-center">Ŀ{formatUnits(loans.loans.filter((loan) => loan.nftAddress.toLowerCase() == collection.address.toLowerCase() && loan.duration == collection.duration && loan.amount != 0 && !loan.accepted && !loan.paid && !loan.liquidated).reduce(((total, loan) => total + loan.amount), 0), 18)}</span>
-                        <span className="w-1/4 text-center">Ŀ{formatUnits(loans.loans.filter((loan) => loan.nftAddress.toLowerCase() == collection.address.toLowerCase() && loan.duration == collection.duration && loan.amount != 0 && !loan.accepted && !loan.paid && !loan.liquidated).length != 0 ? loans.loans.filter((loan) => loan.nftAddress.toLowerCase() == collection.address.toLowerCase() && loan.duration == collection.duration && loan.amount != 0 && !loan.accepted && !loan.paid && !loan.liquidated).sort((a, b) => a.amount - b.amount).at(0).amount : 0, 18)}</span>
+                        <span className="w-1/4 text-center">Ŀ {formatUnits(loans.loans.filter((loan) => loan.nftAddress.toLowerCase() == collection.address.toLowerCase() && loan.duration == collection.duration && loan.amount != 0 && !loan.accepted && !loan.paid && !loan.liquidated).reduce(((total, loan) => total + loan.amount), 0), 18)}</span>
+                        <span className="w-1/4 text-center">Ŀ {formatUnits(loans.loans.filter((loan) => loan.nftAddress.toLowerCase() == collection.address.toLowerCase() && loan.duration == collection.duration && loan.amount != 0 && !loan.accepted && !loan.paid && !loan.liquidated).length != 0 ? loans.loans.filter((loan) => loan.nftAddress.toLowerCase() == collection.address.toLowerCase() && loan.duration == collection.duration && loan.amount != 0 && !loan.accepted && !loan.paid && !loan.liquidated).sort((a, b) => a.amount - b.amount).at(0).amount : 0, 18)}</span>
                         <span className="w-1/4 text-center">{collection.interest / 10 - 100} %</span>
                         <span className="w-1/4 text-center">{(collection.duration / 86400).toFixed(2)}d</span>
                       </div>
@@ -398,7 +398,7 @@ function Borrow() {
             <div className="w-full flex gap-[20px] justify-between">
               <div className="flex flex-col items-center">
                 <span className="text-[10px] font-[400] text-white">Pool</span>
-                <span className="text-[14px] font-[400] text-[#DBFF00]">Ŀ{formatUnits(loans.loans.filter((loan) => loan.nftAddress.toLowerCase() == collections[selectedCollection].address.toLowerCase() && loan.duration == collections[selectedCollection].duration && loan.amount != 0 && !loan.accepted && !loan.paid && !loan.liquidated).reduce(((total, loan) => total + loan.amount), 0), 18)}</span>
+                <span className="text-[14px] font-[400] text-[#DBFF00]">Ŀ {formatUnits(loans.loans.filter((loan) => loan.nftAddress.toLowerCase() == collections[selectedCollection].address.toLowerCase() && loan.duration == collections[selectedCollection].duration && loan.amount != 0 && !loan.accepted && !loan.paid && !loan.liquidated).reduce(((total, loan) => total + loan.amount), 0), 18)}</span>
               </div>
               <div className="flex flex-col items-center">
                 <span className="text-[10px] font-[400] text-white">APY</span>
@@ -417,7 +417,7 @@ function Borrow() {
                     <img className="w-[40px] h-[40px] object-contain rounded-full" src={collections[selectedCollection].avatar} alt="" />
                     <span className="max-sm:text-[11px] text-[14px] text-white">{collections[selectedCollection].name}</span>
                   </div>
-                  <span className="w-1/2 p-4 pl-4 max-sm:text-[11px] text-[14px] text-center text-white max-sm:px-4">Ŀ{formatUnits(loan.amount, 18)}</span>
+                  <span className="w-1/2 p-4 pl-4 max-sm:text-[11px] text-[14px] text-center text-white max-sm:px-4">Ŀ {formatUnits(loan.amount, 18)}</span>
                 </div>
               ))}
             </div>

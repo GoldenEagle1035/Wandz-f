@@ -303,9 +303,9 @@ function Loans() {
                     </div>
                   </div>
                   <div className="flex gap-[5px] text-white text-[11px]">
-                    <span className="w-1/4 text-center">Ŀ{formatUnits(loan.amount, 18)}</span>
+                    <span className="w-1/4 text-center">Ŀ {formatUnits(loan.amount, 18)}</span>
                     <span className="w-1/4 text-center">{Math.abs((loan.durationCounter - Date.now() / 1000) / 86400).toFixed(2)} {(loan.durationCounter - Date.now() / 1000) / 86400 >= 0 ? "d Remaining" : "d Passed"}</span>
-                    <span className="w-1/4 text-center">Ŀ{formatUnits(loan.amount * loan.interest / 1000, 18)}</span>
+                    <span className="w-1/4 text-center">Ŀ {formatUnits(loan.amount * loan.interest / 1000, 18)}</span>
                     <span className="w-1/4 text-center">{(loan.duration / 86400).toFixed(2)}d</span>
                   </div>
                 </div>

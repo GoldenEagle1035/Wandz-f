@@ -261,8 +261,8 @@ function Offers() {
                     <button onClick={(e) => onRevokeOffer(index)} className="bg-gradient-to-r from-[#159F2C] text-black px-4 py-2 rounded-lg to-[#DBFF00] text-[11px]">REVOKE</button>
                   </div>
                   <div className="flex gap-[5px] text-white text-[11px]">
-                    <span className="w-1/4 text-center">Ŀ{formatUnits(loan.amount, 18)}</span>
-                    <span className="w-1/4 text-center">Ŀ{formatUnits(loan.amount * loan.interest / 1000, 18)}</span>
+                    <span className="w-1/4 text-center">Ŀ {formatUnits(loan.amount, 18)}</span>
+                    <span className="w-1/4 text-center">Ŀ {formatUnits(loan.amount * loan.interest / 1000, 18)}</span>
                     <span className="w-1/4 text-center">{loan.interest / 10 - 100} %</span>
                     <span className="w-1/4 text-center">Seeking Borrower</span>
                   </div>
