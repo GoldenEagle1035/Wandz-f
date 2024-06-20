@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import Bg from "../../assets/background/pearl.mp4";
+// import Bg from "../../assets/background/pearl.mp4";
+import Bg from "../../assets/background/background.png";
 import globe from "../../assets/logo/globe.gif"
 import Bg2 from "../../assets/background/image.png"
 import { NavLink, useLocation } from "react-router-dom";
@@ -23,15 +24,16 @@ function VideoBG() {
     <div className='main-page'>
       <div className="fixed left-0 top-0 h-full w-full overflow-hidden">
         <img src={Bg2} className='opacity-80 z-[1] absolute left-0 top-0 h-full w-full object-cover' alt="bg-image" />
-        <video
+        <img src={Bg} className='absolute left-0 top-0 h-full w-full object-cover' alt="background" />
+        {/* <video
           className="absolute left-0 top-0 h-full w-full object-cover"
           src={Bg}
           type="video/webm"
           autoPlay
           muted
           loop
-        ></video>
-        {!isLandpage && <div className="absolute left-0 top-0 h-full w-full bg-[#00000030] backdrop-blur-md" />}
+        ></video> */}
+        {/* {!isLandpage && <div className="absolute left-0 top-0 h-full w-full bg-[#00000030] backdrop-blur-md" />} */}
       </div>
 
       {isLandpage && <div className="fixed z-10 bottom-[6rem] max-sm:bottom-[4rem] right-[6rem] max-sm:right-[4rem] flex justify-end">
