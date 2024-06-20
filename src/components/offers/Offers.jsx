@@ -67,8 +67,8 @@ function Offers() {
       loans.loans.filter((loan) => account.address && loan.lender.toLowerCase() == account.address.toLowerCase() && loan.amount != 0 && !loan.accepted && !loan.paid && !loan.liquidated).map((loan) => {
         data.push({
           COLLECTION: collections.find((collection) => collection.address.toLowerCase() == loan.nftAddress.toLowerCase() && collection.duration == loan.duration).name,
-          Offer: '⏣' + formatUnits(loan.amount, 18),
-          Reward: '⏣' + formatUnits(loan.amount * loan.interest / 1000, 18),
+          Offer: 'θ' + formatUnits(loan.amount, 18),
+          Reward: 'θ' + formatUnits(loan.amount * loan.interest / 1000, 18),
           APY: (loan.interest / 10 - 100) + "%",
           Status: 'Seeking Borrower'
         })
@@ -166,7 +166,7 @@ function Offers() {
                   </h1>
                   <div className="flex flex-col justify-between mt-4">
                     <h1 className="flex gap-2 items-center">
-                      <span className="text-3xl">⏣</span>
+                      <span className="text-3xl">θ</span>
                       <span className="text-xl">0</span>
                     </h1>
                     <span className="text-[10px]">0 active loans</span>
@@ -218,12 +218,10 @@ function Offers() {
                         {collections.find((collection) => collection.address.toLowerCase() == loan.nftAddress.toLowerCase() && collection.duration == loan.duration).name}
                       </td>
                       <td className=" pl-4 max-sm:text-[11px] max-sm:px-4">
-                        <span className="text-[12px] font-bold text-white">⏣</span>
-                        <span className="text-[12px] font-bold text-[#DBFF00]">{formatUnits(loan.amount, 18)}</span>
+                        <span className="text-[12px] font-bold text-white text-nowrap">θ {formatUnits(loan.amount, 18)}</span>
                       </td>
                       <td className="max-sm:text-[11px] pl-4 max-sm:px-4">
-                        <span className="text-[12px] font-bold text-white">⏣</span>
-                        <span className="text-[12px] font-bold text-white">{formatUnits(loan.amount * loan.interest / 1000, 18)}</span>
+                        <span className="text-[12px] font-bold text-white text-nowrap">θ {formatUnits(loan.amount * loan.interest / 1000, 18)}</span>
                       </td>
                       <td className="max-sm:text-[11px] pl-4 max-sm:px-4">
                         <span className="text-[12px] font-bold text-white">{loan.interest / 10 - 100}</span>
@@ -261,8 +259,8 @@ function Offers() {
                     <button onClick={(e) => onRevokeOffer(index)} className="bg-gradient-to-r from-[#159F2C] text-black px-4 py-2 rounded-lg to-[#DBFF00] text-[11px]">REVOKE</button>
                   </div>
                   <div className="flex gap-[5px] text-white text-[11px]">
-                    <span className="w-1/4 text-center">⏣ {formatUnits(loan.amount, 18)}</span>
-                    <span className="w-1/4 text-center">⏣ {formatUnits(loan.amount * loan.interest / 1000, 18)}</span>
+                    <span className="w-1/4 text-center">θ {formatUnits(loan.amount, 18)}</span>
+                    <span className="w-1/4 text-center">θ {formatUnits(loan.amount * loan.interest / 1000, 18)}</span>
                     <span className="w-1/4 text-center">{loan.interest / 10 - 100} %</span>
                     <span className="w-1/4 text-center">Seeking Borrower</span>
                   </div>
@@ -296,7 +294,7 @@ function Offers() {
               </div>
               <div className="flex flex-col items-center">
                 <span className="text-[10px] font-[400] text-white">FLOOR</span>
-                <span className="text-[14px] font-[400] text-white"><span className="text-[14px] font-[400] text-white">⏣ {loans.loans.filter((loan) => loan.nftAddress.toLowerCase() == loans.loans[selectedLend].nftAddress.toLowerCase() && loan.amount != 0 && !loan.accepted && !loan.paid && !loan.liquidated).length == 0 ? 0 : formatUnits(loans.loans.filter((loan) => loan.nftAddress.toLowerCase() == loans.loans[selectedLend].nftAddress.toLowerCase() && loan.amount != 0 && !loan.accepted && !loan.paid && !loan.liquidated).sort((a, b) => a.amount - b.amount).at(0).amount, 18)}</span></span>
+                <span className="text-[14px] font-[400] text-white"><span className="text-[14px] font-[400] text-white">θ {loans.loans.filter((loan) => loan.nftAddress.toLowerCase() == loans.loans[selectedLend].nftAddress.toLowerCase() && loan.amount != 0 && !loan.accepted && !loan.paid && !loan.liquidated).length == 0 ? 0 : formatUnits(loans.loans.filter((loan) => loan.nftAddress.toLowerCase() == loans.loans[selectedLend].nftAddress.toLowerCase() && loan.amount != 0 && !loan.accepted && !loan.paid && !loan.liquidated).sort((a, b) => a.amount - b.amount).at(0).amount, 18)}</span></span>
               </div>
             </div>
             <div className="w-full flex flex-col gap-[10px]">
@@ -306,7 +304,7 @@ function Offers() {
             <div className="w-full flex justify-between items-center">
               <span className="text-[14px] font-bold text-white">Offer Amount</span>
               <div className="flex flex-col items-center">
-                <span className="text-[16px] font-bold text-white">⏣ {formatUnits(loans.loans[selectedLend].amount, 18)}</span>
+                <span className="text-[16px] font-bold text-white">θ {formatUnits(loans.loans[selectedLend].amount, 18)}</span>
               </div>
             </div>
             <div className="w-full flex justify-center">
@@ -334,7 +332,7 @@ function Offers() {
             <span className="text-[14px] font-[400] text-white text-center">You have Successfully Revoke</span>
             {/* <div className="flex gap-[10px] justify-center items-center">
               <span className="text-[14px] font-[400] text-white">your offer of</span>
-              <span className="text-[14px] font-[400] text-[#DBFF00]">⏣ {formatUnits(loans.loans[selectedLend].amount, 18)}</span>
+              <span className="text-[14px] font-[400] text-[#DBFF00]">θ {formatUnits(loans.loans[selectedLend].amount, 18)}</span>
             </div> */}
             <div className="w-full flex gap-[20px] justify-between">
               <div className="flex flex-col items-center">
@@ -347,7 +345,7 @@ function Offers() {
               </div>
               <div className="flex flex-col items-center">
                 <span className="text-[10px] font-[400] text-white">FLOOR</span>
-                <span className="text-[14px] font-[400] text-white"><span className="text-[14px] font-[400] text-white">⏣ {loans.loans.filter((loan) => loan.nftAddress.toLowerCase() == loans.loans[selectedLend].nftAddress.toLowerCase() && loan.amount != 0 && !loan.accepted && !loan.paid && !loan.liquidated).length == 0 ? 0 : formatUnits(loans.loans.filter((loan) => loan.nftAddress.toLowerCase() == loans.loans[selectedLend].nftAddress.toLowerCase() && loan.amount != 0 && !loan.accepted && !loan.paid && !loan.liquidated).sort((a, b) => a.amount - b.amount).at(0).amount, 18)}</span></span>
+                <span className="text-[14px] font-[400] text-white"><span className="text-[14px] font-[400] text-white">θ {loans.loans.filter((loan) => loan.nftAddress.toLowerCase() == loans.loans[selectedLend].nftAddress.toLowerCase() && loan.amount != 0 && !loan.accepted && !loan.paid && !loan.liquidated).length == 0 ? 0 : formatUnits(loans.loans.filter((loan) => loan.nftAddress.toLowerCase() == loans.loans[selectedLend].nftAddress.toLowerCase() && loan.amount != 0 && !loan.accepted && !loan.paid && !loan.liquidated).sort((a, b) => a.amount - b.amount).at(0).amount, 18)}</span></span>
               </div>
             </div>
             <div className="w-full flex justify-center">
